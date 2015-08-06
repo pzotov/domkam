@@ -1,0 +1,27 @@
+.search__button {
+	background-image: url(../images/png/search__button.png);
+}
+.header__email:before {
+	background-image: url(../images/png/header__email.png);
+}
+.header__phones:before {
+	background-image: url(../images/png/header__phones.png);
+}
+.header__phone800:before {
+	background-image: url(../images/png/header__phone800.png);
+}
+.social_google svg {
+	background: url(../images/png/social_google.png) 50% 50% no-repeat;
+}
+.social_twitter svg {
+	background: url(../images/png/social_twitter.png) 50% 50% no-repeat;
+}
+.social_facebook svg {
+	background: url(../images/png/social_facebook.png) 50% 50% no-repeat;
+}
+.social_instagram svg {
+	background: url(../images/png/social_instagram.png) 50% 50% no-repeat;
+}
+.cat-info__benefit {
+	background-image: url(../images/png/cat-info__benefit.png);
+}
