@@ -273,10 +273,11 @@ $(function(){
 	 * а также настроить поля для ввода телефона
 	 */
 	$(".fancybox").fancybox({
-		afterLoad:function(){
+		padding: 0,
+		afterLoad: function(){
 			if(this.type=='ajax') this.content = this.content.replace(/\?isNaked=1/,'');
 		},
-		afterShow:function(){
+		afterShow: function(){
 			$(".fancybox-inner .phone-input").mask("+7 (999) 999-99-99");
 			$(".fancybox-inner .form").append('<input type="hidden" name="posting" value="1">');
 		},
@@ -303,8 +304,8 @@ function initSwiper(prefix){
 		};
 		if($(this).data("arrows")){
 			var p = $(this).parent();
-			options.prevButton = p.find(".swiper-prev");
-			options.nextButton = p.find(".swiper-next");
+			options.prevButton = p.find(".swiper-arrow--prev");
+			options.nextButton = p.find(".swiper-arrow--next");
 		}
 		$(this).swiper(options);
 	});

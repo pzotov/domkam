@@ -488,6 +488,31 @@ img {
 	overflow: hidden;
 	z-index: 1;
 }
+.swiper-arrow {
+	display: block;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	left: -23px;
+	top: 50%;
+	margin-top: -20px;
+	border: 2px solid #f4ae8f;
+	background-color: #fff;
+	line-height: 32px;
+	text-align: center;
+	text-decoration: none;
+}
+.swiper-arrow:before {
+	content: '‹';
+	font-size: 36px;
+	color: #000;
+}
+.swiper-arrow--next {
+	left: auto;
+	right: -23px;
+	transform: scaleX(-1);
+}
+
 
 .slider {
 	margin: 0 auto;
@@ -796,10 +821,15 @@ img {
 
 .stones {
 	padding: 45px 0 0;
+	position: relative;
 }
 .stones_catalog {
 	padding-bottom: 15px;
 }
+.stones_in-projects {
+	padding-top: 8px;
+}
+
 .stones__box-wrap {
 	width: 100%;
 	float: left;
@@ -822,6 +852,9 @@ img {
 	padding: 45px 30px 30px;
 	text-align: center;
 }
+.stones_in-projects .stones__box {
+	padding-bottom: 20px;
+}
 .stones__header {
 	display: table;
 	margin: -55px auto 40px;
@@ -831,6 +864,10 @@ img {
 	padding: 0 20px;
 	background-color: #fff;
 }
+.stones_in-projects .stones__header {
+	margin-bottom: 35px;
+}
+
 .stones__slider {
 
 }
@@ -903,7 +940,12 @@ img {
 	background-color: #fff;
 	margin: -67px auto 25px;
 }
-
+.stones__arrow {
+}
+.stones__arrow:before {
+}
+.stones__arrow_next {
+}
 
 .cat-info {
 	width: 34%;
@@ -1153,27 +1195,10 @@ img {
 	width: 100%;
 }
 .related__arrow {
-	display: block;
-	width: 40px;
-	height: 40px;
-	position: absolute;
-	left: -23px;
-	top: 73px;
-	border: 2px solid #f4ae8f;
-	background-color: #fff;
-	line-height: 32px;
-	text-align: center;
-	text-decoration: none;
 }
 .related__arrow:before {
-	content: '‹';
-	font-size: 36px;
-	color: #000;
 }
 .related__arrow_next {
-	left: auto;
-	right: -23px;
-	transform: scaleX(-1);
 }
 
 .stone__image .related__item {
@@ -1183,10 +1208,6 @@ img {
 	z-index: 2;
 	width: 50%;
 	height: 50%;
-}
-
-.related_projects {
-	width: 100%;
 }
 
 .application {
@@ -1256,28 +1277,10 @@ img {
 	text-align: center;
 }
 .clients__arrow {
-	display: block;
-	width: 40px;
-	height: 40px;
-	position: absolute;
-	left: 0;
-	top: 25px;
-	border: 2px solid #f4ae8f;
-	background-color: #fff;
-	line-height: 32px;
-	text-align: center;
-	text-decoration: none;
-	z-index: 2;
 }
 .clients__arrow:before {
-	content: '‹';
-	font-size: 36px;
-	color: #000;
 }
 .clients__arrow_next {
-	left: auto;
-	right: 0;
-	transform: scaleX(-1);
 }
 
 .subs {
@@ -1317,13 +1320,25 @@ img {
 .projects {
 }
 .projects__item {
+	padding-bottom: 40px;
+	margin-bottom: 40px;
+	border-bottom: 1px solid #e6e6e6;
 }
 .projects__title {
+	display: block;
+	font-size: 18px;
+	line-height: 1.5;
+	font-weight: bold;
+	margin-bottom: 1.5em;
+	text-transform: uppercase;
+	text-decoration: none;
 }
 .projects__image-box {
 	float: left;
 	width: 34%;
 	padding-right: 30px;
+	height: 245px;
+	overflow: hidden;
 }
 .projects_image img {
 	max-width: 100%;

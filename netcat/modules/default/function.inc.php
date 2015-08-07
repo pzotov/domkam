@@ -16,6 +16,23 @@ $ru_monthes = array(
 );
 $day_of_week = array( "воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота" );
 
+function __log($text){
+	global $__log, $nc_core;
+	if(!$__log) $__log = fopen($nc_core->DOCUMENT_ROOT.'/x/log.txt', "a");
+	if($__log) fwrite($__log, date("[Y-m-d H:i:s] ").$text."\n");
+}
+
+function saveStonesInProject($message){
+	global $db;
+	$db->query("DELETE FROM Project_Stone_Rel WHERE Project_ID=".$message);
+	foreach($_POST['stones'] as $s){
+		insert_row("Project_Stone_Rel", array(
+			"Project_ID" => $message,
+			"Stone_ID" => $s
+		));
+	}
+}
+
 function quickSubscribe($email){
 
 }
