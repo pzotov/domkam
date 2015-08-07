@@ -273,7 +273,7 @@ $(function(){
 	 * а также настроить поля для ввода телефона
 	 */
 	$(".fancybox").fancybox({
-		padding: 0,
+		padding: 2,
 		afterLoad: function(){
 			if(this.type=='ajax') this.content = this.content.replace(/\?isNaked=1/,'');
 		},

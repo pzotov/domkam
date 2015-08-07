@@ -501,11 +501,15 @@ img {
 	line-height: 32px;
 	text-align: center;
 	text-decoration: none;
+	color: #000;
 }
 .swiper-arrow:before {
 	content: '‹';
 	font-size: 36px;
-	color: #000;
+}
+.swiper-arrow:hover {
+	background-color: #f4ae8f;
+	color: #fff;
 }
 .swiper-arrow--next {
 	left: auto;
@@ -944,7 +948,11 @@ img {
 }
 .stones__arrow:before {
 }
+.stones__arrow_prev {
+	left: -19px;
+}
 .stones__arrow_next {
+	right: -19px;
 }
 
 .cat-info {
