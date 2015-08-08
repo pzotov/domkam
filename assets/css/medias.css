@@ -186,6 +186,42 @@
 	.zayavka__left {
 		margin-bottom: 40px;
 	}
+
+	.projects {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.projects__image-box,
+	.projects__stones-box {
+		width: 50%;
+	}
+
+	.swiper-arrow {
+		display: none;
+	}
+
+	.project {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.project__left,
+	.project__right {
+		float: none;
+		width: 100%;
+	}
+	.project__left {
+		padding-right: 0;
+	}
+	.project__right {
+		padding-top: 35px;
+	}
+	.project__image-box {
+		max-width: 546px;
+		margin: 0 auto;
+	}
+	.project__arrow {
+		display: none;
+	}
 }
 
 /* мобильные */
@@ -369,5 +405,32 @@
 	}
 	.zayavka__box {
 		padding: 45px 30px;
+	}
+
+	.projects__image-box,
+	.projects__stones-box {
+		width: 100%;
+		float: none;
+	}
+
+	.project__left {
+		padding-top: 21px;
+	}
+	.project__header {
+		margin-top: -61px;
+	}
+	.stones_in-project .stones__item {
+		width: 50%;
+	}
+
+	.project__back-button,
+	.project__order-button.project__order-button {
+		display: table;
+		float: none;
+		height: auto;
+		line-height: 18px;
+		padding-top: 9px;
+		padding-bottom: 9px;
+		margin: 10px auto;
 	}
 }

@@ -238,6 +238,19 @@ $(function(){
 	});
 
 	/**
+	 *
+	 */
+	$(".project__order-button").click(function(e){
+		var zayavka = $(".zayavka");
+		if(zayavka.length){
+			e.preventDefault();
+			$("html, body").animate({
+				scrollTop: zayavka.offset().top
+			}, 500);
+		}
+	});
+
+	/**
 	 * Во всех полях, где нужно вводить телефон, даем пользователю вводить только цифры
 	 */
 	$(".phone-input").mask("+7 (999) 999-99-99");
@@ -293,17 +306,17 @@ function initSwiper(prefix){
 	var prefix = prefix || "";
 	$(prefix + " .swiper").each(function() {
 		if($(".swiper-slide", this).length<2) return;
+		var p = $(this).parent();
 		var options = {
 			autoplay: $(this).data("autoplay"),
 			slidesPerView: 'auto',
 			centeredSlides: $(this).data("centered"),
 			//loopedSlides: $(".swiper-slide", this).length,
 			loop: !$(this).data('noloop'),
-			pagination: $('.bullets',this),
+			pagination: p.find('.bullets'),
 			paginationClickable: true
 		};
 		if($(this).data("arrows")){
-			var p = $(this).parent();
 			options.prevButton = p.find(".swiper-arrow--prev");
 			options.nextButton = p.find(".swiper-arrow--next");
 		}

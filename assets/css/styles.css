@@ -508,7 +508,8 @@ img {
 	font-size: 36px;
 }
 .swiper-arrow:hover {
-	background-color: #f4ae8f;
+	background-color: #f26522;
+	border-color: #f26522;
 	color: #fff;
 }
 .swiper-arrow--next {
@@ -833,7 +834,9 @@ img {
 .stones_in-projects {
 	padding-top: 8px;
 }
-
+.stones_in-project {
+	padding: 0 0 15px 0;
+}
 .stones__box-wrap {
 	width: 100%;
 	float: left;
@@ -859,6 +862,10 @@ img {
 .stones_in-projects .stones__box {
 	padding-bottom: 20px;
 }
+.stones_in-project .stones__box {
+	padding: 0;
+	border: 0 none;
+}
 .stones__header {
 	display: table;
 	margin: -55px auto 40px;
@@ -870,6 +877,10 @@ img {
 }
 .stones_in-projects .stones__header {
 	margin-bottom: 35px;
+}
+.stones_in-project .stones__header {
+	margin: 0 0 15px;
+	padding: 0;
 }
 
 .stones__slider {
@@ -899,6 +910,10 @@ img {
 	color: #000;
 	text-decoration: none;
 	padding: 10px 10px 0;
+}
+.stones_in-project .stones__item {
+	float: left;
+	width: 25%;
 }
 .stones__image {
 	display: block;
@@ -1162,7 +1177,7 @@ img {
 }
 .related_analogs {
 }
-.related_objects {
+.related_projects {
 	float: right;
 }
 
@@ -1354,4 +1369,81 @@ img {
 .projects__stones-box {
 	float: left;
 	width: 66%;
+}
+
+
+.project {
+	padding-bottom: 50px;
+}
+.project__info {
+}
+.project__left {
+	float: left;
+	width: 52%;
+	padding: 9px 30px 0 0;
+}
+.project__image-box {
+	position: relative;
+	padding: 35px 40px 25px;
+	border: 3px solid #e6e6e6;
+}
+.project__header {
+	display: table;
+	margin: -49px auto 23px;
+	font-size: 18px;
+	line-height: 24px;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 0 20px;
+	background-color: #fff;
+	text-align: center;
+}
+.project__slider {
+}
+.project__images {
+}
+.project__image {
+	width: 100%;
+}
+.project__image img {
+	width: 100%;
+}
+.project__bullets {
+	display: table;
+	margin: 0 auto;
+	text-align: center;
+	padding: 0 20px;
+	background-color: #fff;
+	position: relative;
+	top: 35px;
+}
+.project__bullets .swiper-pagination-bullet {
+	background-color: #d9d9d9;
+	margin: 0 10px;
+}
+.project__bullets .swiper-pagination-bullet-active {
+	background-color: #76747e;
+}
+.project__arrow {
+}
+.project__arrow_prev {
+}
+.project__arrow_next {
+}
+.project__right {
+	float: left;
+	width: 48%;
+}
+.project__description {
+}
+.project__buttons {
+	padding-top: 35px;
+}
+.project__back-button {
+	float: left;
+}
+.project__order-button.project__order-button {
+	float: right;
+	background-color: #f4ae8f;
+	color: #fff;
 }
