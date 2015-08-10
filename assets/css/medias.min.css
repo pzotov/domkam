@@ -226,6 +226,14 @@
     margin-bottom: 40px;
   }
 
+  .subs__item {
+    width: 33.33%;
+  }
+
+  .subs__image {
+    width: 100%;
+  }
+
   .projects {
     padding-left: 15px;
     padding-right: 15px;
@@ -234,6 +242,7 @@
   .projects__image-box,
   .projects__stones-box {
     width: 50%;
+    padding-right: 0;
   }
 
   .swiper-arrow {
@@ -266,6 +275,10 @@
 
   .project__arrow {
     display: none;
+  }
+
+  .clients__bullets {
+    display: block;
   }
 }
 
@@ -470,6 +483,10 @@
     padding: 0;
     float: none;
     width: 100%;
+  }
+
+  .subs__item {
+    width: 50%;
   }
 
   .zayavka {

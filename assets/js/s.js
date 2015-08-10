@@ -313,7 +313,7 @@ function initSwiper(prefix){
 			centeredSlides: $(this).data("centered"),
 			//loopedSlides: $(".swiper-slide", this).length,
 			loop: !$(this).data('noloop'),
-			pagination: p.find('.bullets'),
+			pagination: p.find('.swiper-bullets'),
 			paginationClickable: true
 		};
 		if($(this).data("arrows")){
