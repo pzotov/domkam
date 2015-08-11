@@ -986,10 +986,12 @@ img {
 	width: 34%;
 	float: left;
 	padding-right: 30px;
+	min-height: 1px;
 }
 .cat-info__box {
 	padding: 35px 30px;
 	background-color: #fff;
+	display: none;
 }
 .cat-info__image {
 	text-align: center;
@@ -1037,7 +1039,7 @@ img {
 	margin-bottom: 8px;
 	line-height: 100px;
 }
-.cat__image img {
+.cats__image img {
 	max-width: 100%;
 	max-height: 100%;
 }

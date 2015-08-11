@@ -57,7 +57,10 @@ $(function(){
 		if(ww<=480){
 			$(".cats__items-wrap").each(function(){
 				$(".cats__items", this).addClass("swiper-wrapper");
-				$(".cats__item", this).addClass("swiper-slide");
+				$(".cats__item", this)
+					.addClass("swiper-slide")
+					.off("click")
+				;
 				$(this).swiper({
 					loop: true,
 //					centeredSlides: true,
@@ -67,9 +70,21 @@ $(function(){
 			});
 		} else {
 			$(".cats__items-wrap").each(function(){
-				var swiper = $(this).data("swiper");
+				var swiper = $(this).data("swiper"),
+					cat_info = $(this).siblings(".cat-info").find(".cat-info__box"),
+					cat_info_title = cat_info.find(".cat-info__title"),
+					cat_info_img = cat_info.find(".cat-info__image img"),
+					cat_info_benefits = cat_info.find(".cat-info__benefits");
 				if(swiper) swiper.destroy(true, true);
 				$(".cats__items", this).removeClass("swiper-wrapper");
+				$(".cats__item", this).on("click", function(e){
+					e.preventDefault();
+					cat_info.hide();
+					cat_info_title.html($(this).find(".cats__title").html());
+					cat_info_img.attr("src", $(this).find(".cats__image img").attr("src"));
+					cat_info_benefits.html($(this).data("benefits"));
+					cat_info.show();
+				})
 			});
 		}
 	}).trigger("resize");
