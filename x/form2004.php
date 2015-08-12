@@ -13,6 +13,8 @@
 
 <div class='nc-field'><?= nc_file_field('Picture', "size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
 
+<div class='nc-field'><?= nc_string_field('Video', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+
 <div class='nc-field image--box'>
 	<img class="image--field" src="<?= $nc_core->HTTP_FILES_PATH . explode(":", $cc_settings['Bg'])[3] ?>" />
 	<div class="image--marker"></div>

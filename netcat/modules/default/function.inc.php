@@ -33,6 +33,39 @@ function saveStonesInProject($message){
 	}
 }
 
+function makeStoneApplications(){
+	global $nc_core, $sub, $cc;
+	require_once $nc_core->INCLUDE_FOLDER.'classes/nc_imagetransform.class.php';
+
+	if(is_array($_POST['apps'])){
+		$apps = $_POST['apps'];
+
+		foreach($apps as $index => $app){
+			if($app['Kill']){
+				if($app['Picture_old'])	@unlink($nc_core->DOCUMENT_ROOT.$app['Picture_old']);
+				unset($apps[$index]);
+				continue;
+			}
+			if(isset($_FILES['apps']['error'][$index]['Picture']) && !$_FILES['apps']['error'][$index]['Picture']){
+				if($app['Picture_old'])	@unlink($nc_core->DOCUMENT_ROOT.$app['Picture_old']);
+				$filename = $nc_core->HTTP_FILES_PATH.$sub.'/'.$cc.'/'.translit($app['Name']).'.jpg';
+				$fi = 0;
+				while(file_exists($nc_core->DOCUMENT_ROOT.$filename)){
+					$fi++;
+					$filename = $nc_core->HTTP_FILES_PATH.$sub.'/'.$cc.'/'.translit($app['Name']).'_'.$fi.'.jpg';
+				}
+				nc_ImageTransform::imgResize($_FILES['apps']['tmp_name'][$index]['Picture'], $nc_core->DOCUMENT_ROOT.$filename, 100, 100, 1, 'jpeg');
+				$apps[$index]['Picture'] = $filename;
+			} else if($app['Picture_old']){
+				$apps[$index]['Picture'] = $app['Picture_old'];
+			}
+		}
+
+		return addslashes(json_encode($apps));
+	}
+	return NULL;
+}
+
 function quickSubscribe($email){
 
 }
@@ -51,10 +84,41 @@ function processTextColumns($text){
 	} else return $text;
 }
 
+function saveAnalogs(){
+	global $message, $db;
+	$db->query("DELETE FROM Stone_Analogs WHERE Stone1_ID={$message} OR Stone2_ID={$message}");
+	if(is_array($_POST['analogs'])){
+		foreach($_POST['analogs'] as $a){
+			insert_row("Stone_Analogs", array(
+				"Stone1_ID" => $message,
+				"Stone2_ID" => $a
+			));
+			insert_row("Stone_Analogs", array(
+				"Stone2_ID" => $message,
+				"Stone1_ID" => $a
+			));
+		}
+	}
+}
+
 function imageWatermarked($f_Article){
 	global $nc_core, $classID, $message, $db;
 	require_once $nc_core->INCLUDE_FOLDER.'classes/nc_imagetransform.class.php';
 	nc_ImageTransform::createThumb("Picture", "Watermarked", 500, 345, 1, NULL, 100);
+
+	$src_file = $nc_core->DOCUMENT_ROOT.nc_file_path($classID, $message, "Watermarked");
+	$src = imagecreatefromstring(file_get_contents($src_file));
+	$dst = imagecreatetruecolor(500, 345);
+	imagealphablending($dst, true);
+	$white = imagecolorallocatealpha($dst, 255, 255, 255, 40);
+	$black = imagecolorallocatealpha($dst, 0, 0, 0, 0);
+
+	imagecopyresampled($dst, $src, 0, 0, 0, 0, 500, 345, 500, 345);
+	$size = imagettfbbox(36, 0, $nc_core->DOCUMENT_ROOT.'/x/OpenSans-Semibold.ttf', $f_Article);
+	imagefilledrectangle($dst, 15, 15, 15+$size[2] + 10, 15-$size[7] + 10, $white);
+	imagettftext($dst, 36, 0, 20, 20-$size[7], $black, $nc_core->DOCUMENT_ROOT.'/x/OpenSans-Semibold.ttf', $f_Article);
+
+	imagejpeg($dst, $src_file);
 }
 
 function imageResize( $field, $width, $height, $mode=0, $sys_table=NULL ){

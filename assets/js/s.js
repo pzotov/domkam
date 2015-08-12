@@ -1,20 +1,22 @@
+/*
 var proizv__video = null;
 
 var iframe = $("#proizv-info__video");
-/*
+/!*
 Включаем кеширование по-умолчанию, для getScript
- */
+ *!/
 $.ajaxSetup({cache: true});
 if(iframe.length) {
 	//Загружаем Youtube API только на тех страницах, где оно нужно
 	$.getScript("https://www.youtube.com/iframe_api");
 }
-/**
+/!**
  * Функция вызывается после загрузки Youtube API
- */
+ *!/
 function onYouTubePlayerAPIReady() {
 	proizv__video = new YT.Player('proizv-info__video', {});
 }
+*/
 
 $(function(){
 	var $menu = $(".menu"),
@@ -84,7 +86,7 @@ $(function(){
 					cat_info_img.attr("src", $(this).find(".cats__image img").attr("src"));
 					cat_info_benefits.html($(this).data("benefits"));
 					cat_info.show();
-				})
+				}).first().trigger("click");
 			});
 		}
 	}).trigger("resize");
@@ -161,7 +163,8 @@ $(function(){
 			hi = $info.outerHeight(),
 			$info_title = $(".proizv-info__title", this),
 			$info_descr = $(".proizv-info__descr", this),
-			$info_image = $(".proizv-info__image img", this)
+			$info_image = $(".proizv-info__image img", this),
+			$info_video = $(".proizv-info__video iframe", this)
 			;
 
 		$markers.click(function(e){
@@ -177,6 +180,7 @@ $(function(){
 			$info_title.html($(this).attr("title"));
 			$info_descr.html($(this).data("descr"));
 			$info_image.attr("src", $(this).data("image"));
+			$info_video.attr("src", $(this).data("video"));
 			var l = $(this).position().left,
 				t = $(this).position().top;
 
@@ -196,19 +200,21 @@ $(function(){
 				top: t
 			}).slideDown();
 
-			if(proizv__video){
-				proizv__video.seekTo(time);
-				proizv__video.playVideo();
-			}
+			//if(proizv__video){
+			//	proizv__video.seekTo(time);
+			//	proizv__video.playVideo();
+			//}
 		});
 
 		$bg.click(function(){
 			$info.hide();
 			$markers.removeClass("proizv__marker_active");
 
-			if(proizv__video){
-				proizv__video.pauseVideo();
-			}
+			//if(proizv__video){
+			//	proizv__video.pauseVideo();
+			//}
+
+			$info_video.attr("src", "about:blank");
 		}).load(function(){
 			w = $(".proizv__wrapper",proizv).width();
 			h = $(".proizv__wrapper",proizv).height();
@@ -255,10 +261,13 @@ $(function(){
 	/**
 	 *
 	 */
-	$(".project__order-button").click(function(e){
+	$(".project__order-button, .application__title").click(function(e){
 		var zayavka = $(".zayavka");
 		if(zayavka.length){
 			e.preventDefault();
+			var comment = $(this).data('comment');
+			if(!comment) comment = 'Интересует: ' + $(this).html();
+			$("[name=f_Text]", zayavka).val(comment);
 			$("html, body").animate({
 				scrollTop: zayavka.offset().top
 			}, 500);
