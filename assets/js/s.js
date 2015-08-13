@@ -280,6 +280,21 @@ $(function(){
 	});
 
 	/**
+	 * Шаги производства должны показываться по клику на стрелку рядом
+	 */
+	$(".steps__item")
+		.addClass("steps__item_hidden")
+		.first()
+		.removeClass("steps__item_hidden")
+	;
+	$(".steps__arrow").click(function(e){
+		e.preventDefault();
+		if($(this).closest(".steps__item").hasClass("steps__item_hidden")) return;
+		$(this).parent().next(".steps__item").removeClass("steps__item_hidden");
+	});
+
+
+	/**
 	 * Во всех полях, где нужно вводить телефон, даем пользователю вводить только цифры
 	 */
 	$(".phone-input").mask("+7 (999) 999-99-99");

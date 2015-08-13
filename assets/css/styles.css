@@ -1076,8 +1076,12 @@ img {
 	clear: both;
 }
 .text__image {
+	display: block;
 	float: left;
 	margin: 0 30px 30px 0;
+}
+.text__image img {
+	max-width: 100%;
 }
 
 .zayavka {
@@ -1470,3 +1474,62 @@ img {
 	background-color: #f4ae8f;
 	color: #fff;
 }
+
+.steps {
+	padding: 45px 0 20px;
+	background-color: #f1f1f3;
+	text-align: center;
+}
+.steps__header {
+	display: block;
+	font-size: 18px;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-bottom: 35px;
+}
+.steps__items {
+}
+.steps__item {
+	display: inline-block;
+	width: 173px;
+	height: 225px;
+	vertical-align: top;
+	margin: 0;
+	opacity: 1;
+	transition: opacity .3s;
+}
+.steps__item_with-arrow {
+	width: 243px;
+	position: relative;
+	padding-right: 75px;
+}
+.steps__item_hidden {
+	opacity: .1;
+	transition: opacity 0s;
+}
+.steps__image {
+	margin-bottom: 10px;
+}
+.steps__step {
+	font-weight: bold;
+	line-height: 22px;
+}
+.steps__title {
+	line-height: 18px;
+}
+.steps__arrow {
+	display: block;
+	width: 70px;
+	height: 130px;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAYCAYAAAAPtVbGAAAAlUlEQVR42sXVoQ6AIBSFYavRSqQaqUaTG5tPYCS5Gak+upfALqPp+PFup1C+cOEwvJl9OyeJG5BRJEjuBFGAlcSE0JCpoJWErgLyFDRKQgmlMwo6CihkiMD8H9AlMRTkCij2h3R5WFwPxOfHZRtlqYCFrhzXGphJgL+6ugMF6DoxTYuR6ysFAglMChCflSKxBgjIfgEe1zXwcgh+1dQAAAAASUVORK5CYII=) 50% 50% no-repeat;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.steps__arrow:hover {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAYCAYAAAAPtVbGAAAAmUlEQVR42sXVQRGAIBCFYStYgQpUoIIRpAIVrEAWK1DBChwsoMuBWYabDr/uzLtw+Q4Lj+nJnKsxEj8ho0iSXAWiACfJBaEh20EbCR0NFClolqQWKmcUtDdQqhCBxT+gQ2IpyDdQ/h7S5WHxXyCxPi43KKEDAl05fjSwkAB/dXUHCtB1YocWI9dXCiQSMAoQn5UiuQcIyL0Bbt0jfI399Mk+AAAAAElFTkSuQmCC);
+}
+.steps__arrow_open {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAYCAYAAAAPtVbGAAAAm0lEQVR42sXVsQ2AIBCFYVZwBVdgBSorG1egsmcFV2AWV2AFV2AFPQpzhE7Dr5e8huYrDh7myczTOkq8QUaRJDkLRAFOkgtCQ7aBNhI6KihS0CBJNVTOKGivoHRDBBb/gA6JpSBfQfl7SJeHxX+BxPtxuU4JDRDoyvG9gYUE+KurO1CArhPbtRi5vlIgkcCoAPFZKZJbgIDcG+ACK08uYxKMeaEAAAAASUVORK5CYII=);
+}
+
