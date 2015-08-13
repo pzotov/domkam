@@ -1075,6 +1075,10 @@ img {
 .text__column_4:nth-child(4n+1) {
 	clear: both;
 }
+.text__image {
+	float: left;
+	margin: 0 30px 30px 0;
+}
 
 .zayavka {
 	background-color: #f1f1f3;

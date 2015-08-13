@@ -42,9 +42,9 @@
 <br>
 <h3>Блок &laquo;Применение камня&raquo;</h3>
 
-<div class='nc-field'><?= nc_string_field('ApplicationHeader', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
+<div class='nc-field'><?= nc_string_field('Application_Header', "maxlength='255' size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
 
-<div class='nc-field'><?= nc_text_field('ApplicationText', "", ($class_id ? $class_id : $classID), 1) ?></div>
+<div class='nc-field'><?= nc_text_field('Application_Text', "", ($class_id ? $class_id : $classID), 1) ?></div>
 
 <style>
 	.app-block {

@@ -234,6 +234,21 @@
 	.clients__bullets {
 		display: block;
 	}
+
+	.application {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.application__item {
+		width: 100%;
+		float: none;
+		padding: 0;
+	}
+
+	.stone {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
 }
 
 /* мобильные */
@@ -449,4 +464,31 @@
 		padding-bottom: 9px;
 		margin: 10px auto;
 	}
+
+	.stone {}
+	.stone__image-box {
+		width: auto;
+		float: none;
+		padding-left: 15px;
+		padding-right: 15px;
+		margin: 0 -15px;
+	}
+	.stone__params-box {
+		width: 100%;
+		float: none;
+		margin-top: 40px;
+	}
+	.related
+	{
+		width: 100%;
+		float: none;
+	}
+	.stone__image:after {
+		border-width: 8px;
+	}
+	.stone .application {
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+
 }

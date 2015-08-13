@@ -70,6 +70,8 @@ $(function(){
 					loopedSlides: $(".swiper-slide", this).length,
 				});
 			});
+			//В мобильной версии параметры камня должны находиться после аналогов и объектов
+			$(".stone__params-box").appendTo(".stone__info .container");
 		} else {
 			$(".cats__items-wrap").each(function(){
 				var swiper = $(this).data("swiper"),
@@ -88,6 +90,9 @@ $(function(){
 					cat_info.show();
 				}).first().trigger("click");
 			});
+
+			//На десктопах и планшетах параметры камня должны быть справа от картинки
+			$(".stone__params-box").insertAfter(".stone__image-box");
 		}
 	}).trigger("resize");
 
