@@ -334,8 +334,11 @@ $(function(){
 function initSwiper(prefix){
 	var prefix = prefix || "";
 	$(prefix + " .swiper").each(function() {
-		if($(".swiper-slide", this).length<2) return;
 		var p = $(this).parent();
+		if($(".swiper-slide", this).length<2) {
+			p.find(".swiper-arrow").hide();
+			return;
+		}
 		var options = {
 			autoplay: $(this).data("autoplay"),
 			slidesPerView: 'auto',
