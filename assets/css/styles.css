@@ -1549,9 +1549,10 @@ img {
 .dostavka__box {
 	border: 3px solid #e6e6e6;
 	padding: 0 47px 40px;
+	position: relative;
 }
 .dostavka__box-wrap_right .dostavka__box {
-	padding: 0 40px 30px;
+	padding: 0 40px 20px;
 }
 .dostavka__header {
 	display: table;
@@ -1563,7 +1564,9 @@ img {
 	font-weight: bold;
 	text-transform: uppercase;
 }
-
+.dostavka__box-wrap_right .dostavka__header {
+	margin-bottom: 30px;
+}
 .dostavka__text {
 }
 .dostavka__slider {
@@ -1576,4 +1579,9 @@ img {
 	max-width: 100%;
 }
 .dostavka__bullets {
+	position: relative;
+	top: 28px;
+	background-color: #fff;
+	display: table;
+	margin: 0 auto;
 }

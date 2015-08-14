@@ -363,10 +363,10 @@ function initSwiper(prefix){
 			pagination: p.find('.swiper-bullets'),
 			paginationClickable: true
 		};
-		if($(this).data("arrows")){
+		//if($(this).data("arrows")){
 			options.prevButton = p.find(".swiper-arrow--prev");
 			options.nextButton = p.find(".swiper-arrow--next");
-		}
+		//}
 		$(this).swiper(options);
 	});
 }
