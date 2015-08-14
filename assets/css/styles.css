@@ -1533,3 +1533,47 @@ img {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAYCAYAAAAPtVbGAAAAm0lEQVR42sXVsQ2AIBCFYVZwBVdgBSorG1egsmcFV2AWV2AFV2AFPQpzhE7Dr5e8huYrDh7myczTOkq8QUaRJDkLRAFOkgtCQ7aBNhI6KihS0CBJNVTOKGivoHRDBBb/gA6JpSBfQfl7SJeHxX+BxPtxuU4JDRDoyvG9gYUE+KurO1CArhPbtRi5vlIgkcCoAPFZKZJbgIDcG+ACK08uYxKMeaEAAAAASUVORK5CYII=);
 }
 
+.dostavka {
+	padding: 50px 0;
+}
+.dostavka__box-wrap {
+	float: left;
+	width: 50%;
+}
+.dostavka__box-wrap_left {
+	padding-right: 15px;
+}
+.dostavka__box-wrap_right {
+	padding-left: 15px;
+}
+.dostavka__box {
+	border: 3px solid #e6e6e6;
+	padding: 0 47px 40px;
+}
+.dostavka__box-wrap_right .dostavka__box {
+	padding: 0 40px 30px;
+}
+.dostavka__header {
+	display: table;
+	padding: 0 20px;
+	margin: -14px auto 35px;
+	background-color: #fff;
+	font-size: 18px;
+	line-height: 24px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.dostavka__text {
+}
+.dostavka__slider {
+}
+.dostavka__slides {
+}
+.dostavka__slide {
+}
+.dostavka__slide img {
+	max-width: 100%;
+}
+.dostavka__bullets {
+}

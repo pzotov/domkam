@@ -130,19 +130,19 @@
 <br>
 <h3>Характеристики</h3>
 
-<div class="nc-field"><?= nc_float_field('Param1', 'size="10"', ($class_id ? $class_id : $classID), 1) ?></div>
+<div class="nc-field"><?= nc_string_field('Param1', 'maxlength="255" size="50"', ($class_id ? $class_id : $classID), 1) ?></div>
 
-<div class="nc-field"><?= nc_float_field('Param2', 'size="10"', ($class_id ? $class_id : $classID), 1) ?></div>
+<div class="nc-field"><?= nc_string_field('Param2', 'maxlength="255" size="50"', ($class_id ? $class_id : $classID), 1) ?></div>
 
-<div class="nc-field"><?= nc_float_field('Param3', 'size="10"', ($class_id ? $class_id : $classID), 1) ?></div>
+<div class="nc-field"><?= nc_string_field('Param3', 'maxlength="255" size="50"', ($class_id ? $class_id : $classID), 1) ?></div>
 
-<div class="nc-field"><?= nc_float_field('Param4', 'size="10"', ($class_id ? $class_id : $classID), 1) ?></div>
+<div class="nc-field"><?= nc_string_field('Param4', 'maxlength="255" size="50"', ($class_id ? $class_id : $classID), 1) ?></div>
 
-<div class="nc-field"><?= nc_float_field('Param5', 'size="10"', ($class_id ? $class_id : $classID), 1) ?></div>
+<div class="nc-field"><?= nc_string_field('Param5', 'maxlength="255" size="50"', ($class_id ? $class_id : $classID), 1) ?></div>
 
-<div class="nc-field"><?= nc_float_field('Param6', 'size="10"', ($class_id ? $class_id : $classID), 1) ?></div>
+<div class="nc-field"><?= nc_string_field('Param6', 'maxlength="255" size="50"', ($class_id ? $class_id : $classID), 1) ?></div>
 
-<div class="nc-field"><?= nc_float_field('Param7', 'size="10"', ($class_id ? $class_id : $classID), 1) ?></div>
+<div class="nc-field"><?= nc_string_field('Param7', 'maxlength="255" size="50"', ($class_id ? $class_id : $classID), 1) ?></div>
 
 <br>
 <h3>Аналоги камня</h3>
