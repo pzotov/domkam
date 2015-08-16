@@ -304,6 +304,34 @@
     padding-left: 15px;
     padding-right: 15px;
   }
+
+  .advantages {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .advantages__video,
+  .advantages__items {
+    float: none;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .dostavka {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .elements {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .elements__group-wrap.elements__group-wrap {
+    width: 100%;
+    padding: 0;
+  }
 }
 
 /* мобильные */
@@ -608,5 +636,15 @@
     bottom: 70px;
     left: 50%;
     margin-left: -86px;
+  }
+
+  .dostavka__box-wrap {
+    float: none;
+    width: 100%;
+    padding: 0;
+  }
+
+  .dostavka__box-wrap_left {
+    margin-bottom: 30px;
   }
 }

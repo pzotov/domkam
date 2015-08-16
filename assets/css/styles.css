@@ -961,6 +961,7 @@ img {
 	position: absolute;
 	left: 40px;
 	bottom: 0;
+	text-shadow: 0 0 2px #fff;
 }
 .stones__block:last-child .stones__block-title {
 	border-left: 1px solid #e1e1e6;
@@ -980,6 +981,17 @@ img {
 }
 .stones__arrow_next {
 	right: -19px;
+}
+.stones__item_preview {
+	position: relative;
+}
+.stones__popup {
+	position: absolute;
+	z-index: 3;
+	background-color: #fff;
+	padding: 40px;
+	max-width: 660px;
+	box-shadow: 0 2px 4px rgba(0,0,0,.35);
 }
 
 .cat-info {
@@ -1192,6 +1204,20 @@ img {
 .stone__text2 {
 	padding-bottom: 35px;
 }
+
+.stone__header {
+	font-size: 18px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 18px;
+}
+.stone_popup .stone__info {
+	padding: 0;
+}
+.stone_popup .container {
+	padding: 0;
+}
+
 .related {
 	width: 48%;
 	float: left;
@@ -1227,7 +1253,7 @@ img {
 .related__slides {
 }
 .related__slide {
-	width: 165px;
+	width: 166px;
 	padding: 0 10px;
 }
 .related__item {
@@ -1584,4 +1610,189 @@ img {
 	background-color: #fff;
 	display: table;
 	margin: 0 auto;
+}
+
+
+.advantages {
+	padding: 50px 0 20px;
+	background-color: #f1f1f3;
+}
+.advantages__header {
+	text-align: center;
+	font-size: 18px;
+	line-height: 24px;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-bottom: 25px;
+}
+.advantages__blocks {
+}
+.advantages__video {
+	float: left;
+	width: 50%;
+	padding-right: 15px;
+	margin-bottom: 30px;
+}
+.advantages__iframe {
+	width: 100%;
+}
+.advantages__items {
+	float: left;
+	width: 50%;
+	padding-left: 15px;
+	margin-bottom: 30px;
+}
+.advantages__item {
+	display: block;
+}
+.advantages__link {
+	display: block;
+	padding: 4px 0 20px 60px;
+	position: relative;
+	line-height: 18px;
+	text-decoration: none;
+	color: #000;
+}
+.advantages__image {
+	position: absolute;
+	left: 22px;
+	top: 8px;
+}
+
+.elements {
+	padding: 45px 0 10px;
+}
+.elements__header {
+	text-align: center;
+	font-size: 18px;
+	line-height: 24px;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-bottom: 55px;
+}
+.elements__groups {
+}
+.elements__group-wrap {
+	float: left;
+	width: 50%;
+	margin-bottom: 40px;
+}
+.elements__group-wrap:nth-child(2n+1){
+	padding-right: 15px;
+}
+.elements__group-wrap:nth-child(2n){
+	padding-left: 15px;
+}
+/* Торцевые профили для подоконников из натурального камня и каменных столешниц */
+.elements__group-wrap_1c8c4659509094c04fb8c6de076baac1 {
+	width: 67%;
+}
+/* Торцевые профили из мрамора */
+.elements__group-wrap_05aa02a173ed1a828b5f646831ed4973 {
+	width: 33%;
+}
+.elements__group {
+	padding: 0 15px 15px;
+	border: 3px solid #e6e6e6;
+}
+.elements__group-header {
+	display: table;
+	margin: -24px auto 30px;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 18px;
+	line-height: 24px;
+	padding: 0 20px;
+	background-color: #fff;
+	font-weight: bold;
+}
+.elements__slider {
+}
+.swiper {
+}
+.elements__slides {
+}
+.elements__pair {
+	width: 135px;
+	text-align: center;
+	height: 290px;
+}
+.elements__item {
+	display: block;
+	text-decoration: none;
+	height: 145px;
+}
+.elements__image {
+	display: block;
+	height: 100px;
+	margin-bottom: 10px;
+}
+.elements__image img {
+	max-width: 100px;
+	max-height: 100px;
+}
+.elements__title {
+	display: block;
+}
+.elements__item {
+}
+.elements__image {
+}
+.elements__title {
+}
+.elements__group-header {
+}
+.elements__slider {
+}
+.swiper {
+}
+.elements__slides {
+}
+.elements__pair {
+}
+.elements__item {
+}
+.elements__image {
+}
+.elements__title {
+}
+
+
+.selectlist {
+	max-height: 315px;
+	overflow: hidden;
+	overflow-y: auto;
+}
+.selectlist__items {
+
+}
+.selectlist__item {
+	height: 85px;
+	border-bottom: 1px solid #e6e6e6;
+	padding: 10px 0;
+}
+.selectlist__checkbox {
+	float: left;
+	width: 32px;
+	height: 65px;
+	line-height: 65px;
+}
+.selectlist__image {
+	float: left;
+	width: 90px;
+	height: 65px;
+	line-height: 65px;
+}
+.selectlist__image img {
+	max-width: 100%;
+	max-height: 65px;
+}
+.selectlist__name {
+	float: left;
+	width: 200px;
+	height: 65px;
+	font-weight: bold;
+	color: #504a6c;
+	line-height: 18px;
+	padding: 14px 0 0 20px;
 }

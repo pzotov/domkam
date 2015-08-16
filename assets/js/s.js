@@ -1,22 +1,22 @@
-/*
-var proizv__video = null;
+var youtube_iframes = $(".advantages__iframe");
 
-var iframe = $("#proizv-info__video");
-/!*
+/*
 Включаем кеширование по-умолчанию, для getScript
- *!/
+ */
 $.ajaxSetup({cache: true});
-if(iframe.length) {
+if(youtube_iframes.length) {
 	//Загружаем Youtube API только на тех страницах, где оно нужно
 	$.getScript("https://www.youtube.com/iframe_api");
 }
-/!**
+/**
  * Функция вызывается после загрузки Youtube API
- *!/
+ */
 function onYouTubePlayerAPIReady() {
-	proizv__video = new YT.Player('proizv-info__video', {});
+	youtube_iframes.each(function(){
+		var player = new YT.Player($(this).attr("id"), {});
+		$(this).data("player", player);
+	});
 }
-*/
 
 $(function(){
 	var $menu = $(".menu"),
@@ -232,7 +232,8 @@ $(function(){
 	 */
 	$(".stones_catalog").each(function(){
 		var blocks = $(".stones__blocks", this),
-			form = $(".stones__form", this);
+			form = $(".stones__form", this),
+			popup = $('<div class="stones__popup" />').appendTo("body").hide();
 
 		$("#s_sort, #s_color, #s_group").change(function(){
 			$.fancybox.showLoading();
@@ -241,6 +242,38 @@ $(function(){
 				initSwiper(".stones__blocks");
 				$.fancybox.hideLoading();
 			});
+		});
+
+		popup.mouseenter(function(){
+			$(this).addClass("stones__popup_hover");
+			//console.log("popup enter");
+		}).mouseleave(function(){
+			//console.log("popup leave");
+			$(this).removeClass("stones__popup_hover");
+			setTimeout(function(){
+				if(!popup.hasClass("stones__popup_hover")) popup.hide();
+			}, 500);
+		});
+		$(".stones__item_preview", this).mouseenter(function(e){
+			if($(window).width()<=768) return true;
+			//console.log("item enter");
+			popup
+				.css({
+					left: $(this).offset().left + 90, //e.pageX,
+					top: $(this).offset().top + 90
+				})
+				.addClass("stones__popup_hover")
+				.html('<p align="center"><img src="/assets/images/loading.gif" width="64" height="64" alt="Подождите..." /></p>')
+				//.appendTo(this)
+				.show()
+				.load($(this).attr("href")+"?isNaked=1&nc_ctpl=2030")
+			;
+		}).mouseleave(function(){
+			//console.log("item leave");
+			popup.removeClass("stones__popup_hover");
+			setTimeout(function(){
+				if(!popup.hasClass("stones__popup_hover")) popup.hide();
+			}, 500);
 		});
 	});
 
@@ -293,6 +326,22 @@ $(function(){
 		$(this).parent().next(".steps__item").removeClass("steps__item_hidden");
 	});
 
+	/**
+	 * Внутри каждого блока с преимуществами при клике по ссылке преимущества
+	 * видео в блоке должно проигрываться с определенного времени
+	 */
+	$(".advantages").each(function(){
+		var video = $(".advantages__iframe", this),
+			w = video.width();
+		video.height(Math.round(w/16*10));
+
+		$(".advantages__link", this).click(function(e){
+			e.preventDefault();
+			var player = video.data("player");
+			player.seekTo($(this).data("time"));
+			player.playVideo();
+		});
+	});
 
 	/**
 	 * Во всех полях, где нужно вводить телефон, даем пользователю вводить только цифры
@@ -304,6 +353,118 @@ $(function(){
 	 * так будет меньше спама
 	 */
 	$(".form").append('<input type="hidden" name="posting" value="1">');
+
+	/**
+	 * Специализированные формы заявки работают в два шага
+	 * нужно показать первый шаг, а второй и последующие по кнопке "Далее"
+	 */
+	$(".form__step").hide().filter(".form__step_1").show();
+	$(".form__button_next").click(function(e){
+		e.preventDefault();
+		var step = $(this).closest(".form__step"),
+			ok = true;
+		step.find("[required]").each(function(){
+			if($.trim($(this).val())==""){
+				$(this).select().focus();
+				ok = false;
+				return false;
+			}
+		});
+		if(ok) step.hide().next(".form__step").show();
+	});
+
+	/**
+	 * Специализированная форма заявки столешниц
+	 */
+	$(".form_tabletop").each(function(){
+		var material = $("[name=f_Material]", this),
+			profile = $("[name=f_Torets]", this);
+		$("#tabletop__material", this).click(function(e){
+			//e.preventDefault();
+			tabletopMaterial1(material.val());
+			$(this).prop("checked", "checked");
+		});
+
+		$("#tabletop__profile", this).click(function(){
+			$.fancybox({
+				href: '/x/tabletop_profile.php?profile=' + encodeURIComponent(profile.val()),
+				type: 'ajax',
+				padding: $(window).width()>480 ? 50 : 15,
+				afterShow: function(){
+					initSelectlist(".fancybox-inner");
+					$(".form_tabletop-profile").submit(function(e){
+						e.preventDefault();
+						var profiles = [];
+						$("input[type=checkbox]:checked", this).each(function(){
+							profiles.push($(this).val());
+						});
+						profile.val(profiles.join(', '));
+						profile.siblings("span").html('(' + profiles.join(', ') + ')');
+						$.fancybox.close();
+					});
+				},
+				helpers: {
+					overlay: {
+						locked: false
+					}
+				}
+			});
+			$(this).prop("checked", "checked");
+		});
+
+		function tabletopMaterial1(materials){
+			$.fancybox({
+				href: '/x/tabletop_material.php?material=' + encodeURIComponent(materials),
+				type: 'ajax',
+				padding: $(window).width()>480 ? 50 : 15,
+				afterShow: function(){
+					$(".form__select_material").click(function(e){
+						tabletopMaterial2($("#material_text").val());
+					});
+					$(".form_tabletop-material").submit(function(e){
+						e.preventDefault();
+						material.val($("#material_text").val());
+						material.siblings("span").html('(' + $("#material_text").val() + ')');
+						$.fancybox.close();
+					});
+				},
+				helpers: {
+					overlay: {
+						locked: false
+					}
+				}
+			});
+		}
+		function tabletopMaterial2(materials){
+			$.fancybox({
+				href: '/x/tabletop_material2.php?material=' + encodeURIComponent(materials),
+				type: 'ajax',
+				padding: $(window).width()>480 ? 50 : 15,
+				onCancel: function(){
+					tabletopMaterial1(materials);
+				},
+				tpl: {
+					closeBtn: ''
+				},
+				afterShow: function(){
+					initSelectlist(".fancybox-inner");
+					$(".form_tabletop-material2").submit(function(e){
+						e.preventDefault();
+						var materials = [];
+						$("input[type=checkbox]:checked", this).each(function(){
+							materials.push($(this).val());
+						});
+						tabletopMaterial1(materials.join(", "));
+					});
+				},
+				helpers: {
+					overlay: {
+						locked: false
+					}
+				}
+			});
+		}
+	});
 
 	/**
 	 * Стилизация поля [type=file]
@@ -349,7 +510,8 @@ $(function(){
 function initSwiper(prefix){
 	var prefix = prefix || "";
 	$(prefix + " .swiper").each(function() {
-		var p = $(this).parent();
+		var p = $(this).parent(),
+			slides = $(".swiper-slide", this);
 		if($(".swiper-slide", this).length<2) {
 			p.find(".swiper-arrow").hide();
 			return;
@@ -359,14 +521,32 @@ function initSwiper(prefix){
 			slidesPerView: 'auto',
 			centeredSlides: $(this).data("centered"),
 			//loopedSlides: $(".swiper-slide", this).length,
-			loop: !$(this).data('noloop'),
+			loop: true,
 			pagination: p.find('.swiper-bullets'),
 			paginationClickable: true
 		};
+		if($(this).data('noloop') || ($(this).data('minforloop') && slides.length<$(this).data('minforloop')) || ($(this).width()>1.2*slides.width()*slides.length)) options.loop = false;
+
 		//if($(this).data("arrows")){
 			options.prevButton = p.find(".swiper-arrow--prev");
 			options.nextButton = p.find(".swiper-arrow--next");
 		//}
 		$(this).swiper(options);
+	});
+}
+
+function initSelectlist(prefix){
+	var prefix = prefix || "";
+	$(prefix + " .selectlist").each(function() {
+		var list = this,
+			items = $(".selectlist__item", this),
+			checks = $("input[type=checkbox]", this);
+
+		items.click(function(){
+			$("input[type=checkbox]", this).trigger("click");
+		});
+		checks.click(function(e){
+			e.stopPropagation();
+		});
 	});
 }

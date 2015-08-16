@@ -3,6 +3,11 @@ input, textarea, button, select {
 	font-size:inherit;
 }
 ::placeholder {
+	color: #bfbfbf;
+	font-size: 13px;
+}
+
+.search ::placeholder {
 	color:#7f7f7f;
 	font-size:1em;
 	font-style: italic;
@@ -11,8 +16,11 @@ input, textarea, button, select {
 .form {
 }
 .form__row {
-	margin-bottom:15px;
+	margin-bottom:20px;
 	text-align: left;
+}
+.form__row:last-child {
+	margin-bottom: 0;
 }
 .form__row_submit {
 	text-align:right;
@@ -65,11 +73,14 @@ input, textarea, button, select {
 	background-color: #f4ae8f;
 	color: #fff;
 }
+.form__button_wide {
+	width: 100%;
+}
 
 .form__select {
 	overflow: hidden;
 	position: relative;
-	width: auto;
+	/*width: auto;*/
 }
 .form__select:before {
 	display: block;
@@ -184,4 +195,31 @@ input, textarea, button, select {
 .file__file input {
 	width: 100%;
 	font-size: 80px;
+}
+
+/*
+.form__step {
+	display: none;
+}
+.form__step_1 {
+	display: block;
+}
+*/
+
+.form_tabletop-material {
+	width: 250px;
+}
+.form_tabletop-material2 {
+	width: 350px;
+}
+.form__header {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 25px;
+	text-transform: uppercase;
+	text-align: center;
+}
+.form__select_material {
+	color: #bfbfbf;
+	font-size: 13px;
 }
