@@ -139,6 +139,19 @@
 		padding-left: 50px;
 	}
 
+	.slider_small {
+		height: auto;
+	}
+	.slider_small .slider__slide {
+		height: 100%;
+	}
+	.slider__text1 {
+		padding: 60px 15px;
+	}
+	.thumbs {
+		display: none;
+	}
+
 	.stones__box-wrap {
 		padding: 0 5px;
 	}
@@ -362,6 +375,20 @@
 	.swiper-pagination-bullet {
 		margin: 0 10px;
 	}
+
+	.slider_small {
+		height: auto;
+	}
+	.slider__text1,
+	.slider__image {
+		width: 100%;
+		float: none;
+	}
+	.slider_small .slider__bullets {
+		top: 0;
+		margin: 10px auto;
+	}
+
 
 	.actions__wrapper {
 		padding-bottom: 17px;

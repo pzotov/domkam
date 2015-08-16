@@ -526,6 +526,7 @@ function initSwiper(prefix){
 			paginationClickable: true
 		};
 		if($(this).data('noloop') || ($(this).data('minforloop') && slides.length<$(this).data('minforloop')) || ($(this).width()>1.2*slides.width()*slides.length)) options.loop = false;
+		if($(this).hasClass("thumbs__slider")) options.direction = 'vertical';
 
 		//if($(this).data("arrows")){
 			options.prevButton = p.find(".swiper-arrow--prev");

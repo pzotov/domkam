@@ -644,6 +644,9 @@ img {
 	background-color: #242133;
 	height: auto;
 }
+.slider_small .slider__slide {
+	height: 340px;
+}
 .slider__content1 {
 	display: block;
 	width: 100%;
@@ -666,6 +669,67 @@ img {
 	width: 50%;
 	height: 100%;
 	overflow: hidden;
+}
+.slider_small .slider__bullets {
+	margin-bottom: -13px;
+}
+
+.slider__thumbs {
+}
+
+.thumbs {
+	height: 0;
+	position: relative;
+}
+.thumbs__wrap {
+	position: absolute;
+	z-index: 1;
+	width: 90px;
+	bottom: 0;
+	right: 0;
+	height: 340px;
+	padding: 28px 0;
+	overflow: hidden;
+}
+.thumbs__slider {
+	width: 90px;
+	height: 284px;
+}
+.thumbs__slide {
+	width: 90px;
+	height: 74px;
+	padding: 3px 0;
+	overflow: hidden;
+	text-align: center;
+}
+.thumbs__slide img {
+	max-width: 100%;
+	max-height: 100%;
+}
+.thumbs__arrow {
+	display: block;
+	width: 90px;
+	height: 28px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAQAAACRI2S5AAAAaklEQVR4AXXOGQCEYBDF8XEbt9zGLbfccstt3XLLbd0+t9xy+7X3vX+Z+72JCJ2KH0j9NVlsxq9xaVYZ0gamt/Fw6/bX3RUs8jaewFNXaqDpIsy3cb0/dG8/Vz9xcOco4xdGMMd/lOG9swPdyWyDJ86UjgAAAABJRU5ErkJggg==) 50% 50% no-repeat;
+	margin: 0;
+	border: 0 none;
+	top: auto;
+	opacity: .5;
+}
+.thumbs__arrow:before {
+	display: none;
+}
+.thumbs__arrow_prev {
+	transform: scaleY(-1);
+	bottom: auto;
+	top: 0;
+}
+.thumbs__arrow:hover {
+	background-color: transparent;
+	opacity: 1;
 }
 
 /* Общие элементы секций */
