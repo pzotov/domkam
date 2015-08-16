@@ -275,3 +275,12 @@ select {
   color: #bfbfbf;
   font-size: 13px;
 }
+
+.form_auth {
+  max-width: 400px;
+  margin: auto;
+}
+
+.fancybox-inner .form_auth {
+  padding: 48px 48px 30px;
+}

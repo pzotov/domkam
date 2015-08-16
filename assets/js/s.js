@@ -299,7 +299,7 @@ $(function(){
 	/**
 	 *
 	 */
-	$(".project__order-button, .application__title").click(function(e){
+	$(".project__order-button, .application__title, .prices__order a").click(function(e){
 		var zayavka = $(".zayavka");
 		if(zayavka.length){
 			e.preventDefault();
