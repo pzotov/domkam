@@ -65,3 +65,6 @@
 	line-height: 26px;
 	margin-bottom: 16px;
 }
+.content iframe {
+	max-width: 100%;
+}

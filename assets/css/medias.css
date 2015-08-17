@@ -295,6 +295,14 @@
 		width: 100%;
 		padding: 0;
 	}
+
+	.benefits {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.benefits__item {
+		width: 50%;
+	}
 }
 
 /* мобильные */
@@ -582,5 +590,9 @@
 	}
 	.dostavka__box-wrap_left {
 		margin-bottom: 30px;
+	}
+
+	.benefits__item {
+		width: 100%;
 	}
 }
