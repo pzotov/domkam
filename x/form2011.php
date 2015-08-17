@@ -20,8 +20,7 @@
 
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 <script type="text/javascript">
-	var map = null;
-	ymaps.ready(function(){
+	function maps_init(){
 		map = new ymaps.Map('map-box', {
 			center: [55.76, 37.64], // Москва
 			zoom: 10

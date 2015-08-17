@@ -1870,7 +1870,7 @@ img {
 	overflow-y: auto;
 }
 .selectlist__items {
-
+	width: 322px;
 }
 .selectlist__item {
 	height: 85px;
