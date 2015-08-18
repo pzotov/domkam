@@ -15,7 +15,7 @@
 
 <div class='nc-field'><?= nc_file_field('QR', "size='50'", ($class_id ? $class_id : $classID), 1) ?></div>
 
-<div class="nc-field" id="map-box" style="height:300px;"></div>
+<!--<div class="nc-field" id="map-box" style="height:300px;"></div>
 
 
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
@@ -29,7 +29,7 @@
 		});
 	});
 </script>
-
+-->
 <div class='nc-field'><?= nc_float_field('Lat', "maxlength='12' size='12'", ( $class_id ? $class_id : $classID), 1) ?></div>
 
 <div class='nc-field'><?= nc_float_field('Lon', "maxlength='12' size='12'", ( $class_id ? $class_id : $classID), 1) ?></div>

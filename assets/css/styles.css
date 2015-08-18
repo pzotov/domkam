@@ -222,6 +222,7 @@ img {
 .menu__item {
 	display: table-cell;
 	height: 90px;
+	position: relative;
 }
 .menu__item-a {
 	display: block;
@@ -239,6 +240,7 @@ img {
 	transition: border linear .2s;
 	vertical-align: top;
 }
+.menu__item-a_open,
 .menu__item-a_active,
 .menu__item-a:hover {
 	border-bottom-width: 5px;
@@ -253,6 +255,36 @@ img {
 }
 .menu__others {
 	display: none;
+}
+.dropdown {
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	top: 100%;
+	min-width: 100%;
+	display: none;
+}
+.dropdown_shown {
+	display: block;
+}
+.dropdown__items {
+	background-color: #fff;
+	border: 1px solid #e6e6e6;
+	border-bottom: 0 none;
+}
+.dropdown__item {
+	position: relative;
+}
+.dropdown__item-a {
+	display: block;
+	border-bottom: 1px solid #e6e6e6;
+	text-transform: uppercase;
+	line-height: 20px;
+	padding: 15px;
+	text-align: left;
+	color: #000;
+	text-decoration: none;
+	font-weight: 600;
 }
 
 .search {
@@ -970,6 +1002,9 @@ img {
 	padding: 0;
 	border: 0 none;
 }
+.stones__box .form__select {
+	width: auto;
+}
 .stones__header {
 	display: table;
 	margin: -55px auto 40px;
@@ -1208,6 +1243,13 @@ img {
 	display: inline-block;
 	float: none;
 }
+.text__header {
+	text-align: center;
+	font-size: 18px;
+	text-transform: uppercase;
+	margin-bottom: 30px;
+	font-weight: bold;
+}
 
 .zayavka {
 	background-color: #f1f1f3;
@@ -1414,6 +1456,9 @@ img {
 	background-color: #f1f1f3;
 	padding: 40px 0 20px;
 }
+.application_white {
+	background-color: #fff;
+}
 .application__header {
 	font-size: 18px;
 	line-height: 24px;
@@ -1443,10 +1488,9 @@ img {
 	transform: scale(1.1);
 }
 .application__image {
+	display: block;
 	float: left;
-	width: 100px;
-	height: 100px;
-	margin: 0 20px 10px 0;
+	margin: 0 20px 20px 0;
 }
 .application__title {
 	display: block;
@@ -1718,9 +1762,11 @@ img {
 	line-height: 24px;
 	font-weight: bold;
 	text-transform: uppercase;
+	text-align: center;
+	height: 48px;
 }
 .dostavka__box-wrap_right .dostavka__header {
-	margin-bottom: 30px;
+	/*margin-bottom: 30px;*/
 }
 .dostavka__text {
 }
@@ -1740,11 +1786,25 @@ img {
 	display: table;
 	margin: 0 auto;
 }
+.dostavka__images {
+	margin: 10px -55px;
+}
+.dostavka__image {
+	display: block;
+	float: left;
+	width: 50%;
+}
+.dostavka__image img {
+	width: 100%;
+}
 
 
 .advantages {
 	padding: 50px 0 20px;
 	background-color: #f1f1f3;
+}
+.advantages_white {
+	background-color: #fff;
 }
 .advantages__header {
 	text-align: center;
@@ -1995,3 +2055,26 @@ img {
 	height: 100px;
 	vertical-align: middle;
 }
+.pages {
+	padding: 20px 0;
+}
+.pages__item {
+	display: block;
+	float: left;
+	width: 36px;
+	height: 36px;
+	text-align: center;
+	line-height: 32px;
+	border: 2px solid #f4ae8f;
+	color: #000;
+	text-decoration: none;
+	font-weight: bold;
+	margin-right: 10px;
+}
+.pages__item:hover,
+.pages__item_active {
+	color: #fff;
+	background-color: #f26522;
+	border-color: #f26522;
+}
+

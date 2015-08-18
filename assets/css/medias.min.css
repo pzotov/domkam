@@ -139,6 +139,27 @@
     display: block;
   }
 
+  .dropdown {
+    min-width: 0;
+    top: 45px;
+    left: auto;
+    right: 0;
+    height: 0;
+    /*right: 100%;*/
+    box-shadow: 0 2px 2px rgba(0,0,0,.5);
+    -webkit-transition: all 0s;
+    transition: all 0s;
+    display: block;
+    overflow: hidden;
+  }
+
+  .dropdown_shown {
+    /*right: 0;*/
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    height: auto;
+  }
+
   .fake-footer {
     display: none;
   }
@@ -370,6 +391,10 @@
 
   .contacts__right {
     width: 50%;
+  }
+
+  .zcontacts__qr {
+    display: none;
   }
 }
 

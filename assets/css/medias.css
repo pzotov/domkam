@@ -112,6 +112,24 @@
 	.menu__others {
 		display: block;
 	}
+	.dropdown {
+		min-width: 0;
+		top: 45px;
+		left: auto;
+		right: 0;
+		height: 0;
+		/*right: 100%;*/
+		box-shadow: 0 2px 2px rgba(0,0,0,.5);
+		transition: all 0s;
+		display: block;
+		overflow: hidden;
+	}
+	.dropdown_shown {
+		/*right: 0;*/
+		transition: all .3s;
+		height: auto;
+	}
+
 	.fake-footer {
 		display: none;
 	}
@@ -122,7 +140,6 @@
 	.breadcrumbs {
 		padding: 14px 15px;
 	}
-
 	.slider,
 	.slider__slide {
 		height: 410px;
@@ -138,7 +155,6 @@
 	.slider__bullets {
 		padding-left: 50px;
 	}
-
 	.slider_small {
 		height: auto;
 	}
@@ -151,7 +167,6 @@
 	.thumbs {
 		display: none;
 	}
-
 	.stones__box-wrap {
 		padding: 0 5px;
 	}
@@ -167,14 +182,12 @@
 		padding: 0;
 		margin-top: -87px;
 	}
-
 	.cat-info {
 		display: none;
 	}
 	.cats__items-wrap {
 		width: 100%;
 	}
-
 	.form_inline .form__label {
 		float: none;
 		margin: 0 0 6px 0;
@@ -186,7 +199,6 @@
 		float: none;
 		width: 100%;
 	}
-
 	.text__column_3,
 	.text__column_4 {
 		width: 50%;
@@ -194,7 +206,6 @@
 	.text__column_3:nth-child(3n) {
 		width: 100%;
 	}
-
 	.zayavka {
 		padding: 45px;
 	}
@@ -206,14 +217,12 @@
 	.zayavka__left {
 		margin-bottom: 40px;
 	}
-
 	.subs__item {
 		width: 33.33%;
 	}
 	.subs__image {
 		width: 100%;
 	}
-
 	.projects {
 		padding-left: 15px;
 		padding-right: 15px;
@@ -223,11 +232,9 @@
 		width: 50%;
 		padding-right: 0;
 	}
-
 	.swiper-arrow {
 		display: none;
 	}
-
 	.project {
 		padding-left: 15px;
 		padding-right: 15px;
@@ -250,11 +257,9 @@
 	.project__arrow {
 		display: none;
 	}
-
 	.clients__bullets {
 		display: block;
 	}
-
 	.application {
 		padding-left: 15px;
 		padding-right: 15px;
@@ -264,12 +269,10 @@
 		float: none;
 		padding: 0;
 	}
-
 	.stone {
 		padding-left: 15px;
 		padding-right: 15px;
 	}
-
 	.advantages {
 		padding-left: 15px;
 		padding-right: 15px;
@@ -281,12 +284,10 @@
 		padding-left: 0;
 		padding-right: 0;
 	}
-
 	.dostavka {
 		padding-left: 15px;
 		padding-right: 15px;
 	}
-
 	.elements {
 		padding-left: 15px;
 		padding-right: 15px;
@@ -295,7 +296,6 @@
 		width: 100%;
 		padding: 0;
 	}
-
 	.benefits {
 		padding-left: 15px;
 		padding-right: 15px;
@@ -303,7 +303,6 @@
 	.benefits__item {
 		width: 50%;
 	}
-
 	.contacts {
 		padding-left: 15px;
 		padding-right: 15px;
@@ -315,7 +314,9 @@
 	.contacts__right {
 		width: 50%;
 	}
-
+	.zcontacts__qr {
+		display: none;
+	}
 }
 
 /* мобильные */
