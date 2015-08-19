@@ -47,8 +47,7 @@ th {
 	border: 1px solid #ccc;
 }
 
-h1,
-h2 {
+h1 {
 	margin-bottom: 40px;
 	font-size: 24px;
 	text-transform: uppercase;
@@ -57,8 +56,7 @@ h2 {
 	padding: 0 25px;
 	text-align: center;
 }
-h1:after,
-h2:after {
+h1:after {
 	content: '';
 	display: block;
 	width: 60px;
@@ -69,7 +67,7 @@ h2:after {
 	margin-left: -30px;
 }
 
-h3 {
+h2, h3 {
 	margin: 30px 0;
 	font-size: 18px;
 	text-transform: uppercase;
