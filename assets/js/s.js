@@ -123,6 +123,17 @@ $(function(){
 		}
 	}).trigger("resize");
 
+	$(window).load(function(){
+		if($(this).width()>768) {
+			//выравниваем высоту половинок в блоке "доставка, монтаж, фотографии"
+			$(".dostavka").each(function () {
+				var hl = $(".dostavka__box-wrap_left .dostavka__box", this).outerHeight(),
+					hr = $(".dostavka__box-wrap_right .dostavka__box", this).outerHeight();
+				$(".dostavka__box", this).outerHeight(Math.max(hl, hr));
+			});
+		}
+	});
+
 	/**
 	 * Показать/скрыть меню по кнопке в мобильной версии
 	 */
