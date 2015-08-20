@@ -294,6 +294,7 @@ $(function(){
 				if(!popup.hasClass("stones__popup_hover")) popup.hide();
 			}, 500);
 		});
+		initStonePreviews();
 
 		function initStonePreviews(){
 			$(".stones__item_preview", catalog).mouseenter(function(e){
@@ -308,7 +309,26 @@ $(function(){
 					.html('<p align="center"><img src="/assets/images/loading.gif" width="64" height="64" alt="Подождите..." /></p>')
 					//.appendTo(this)
 					.show()
-					.load($(this).attr("href")+"?isNaked=1&nc_ctpl=" + ($(this).hasClass("stones__item_plitka") ? 2052 : 2030))
+					.load($(this).attr("href")+"?isNaked=1&nc_ctpl=" + ($(this).hasClass("stones__item_plitka") ? 2052 : 2030), function(){
+						$(".plitka-order").each(function(){
+							var form = this;
+							$(".plitka-order__submit", this).click(function(e){
+								var comment = 'Интересует: ' + $(form).data("name");
+								$("[type=checkbox]:checked", form).each(function(){
+									comment += '\n' + $(this).val();
+								});
+								var zayavka = $(".zayavka");
+								if(zayavka.length){
+									e.preventDefault();
+									$("[name=f_Text]", zayavka).val(comment);
+									$("html, body").animate({
+										scrollTop: zayavka.offset().top
+									}, 500);
+								}
+
+							});
+						});
+					})
 				;
 			}).mouseleave(function(){
 				//console.log("item leave");
