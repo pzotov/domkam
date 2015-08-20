@@ -7,12 +7,13 @@
 .content p:last-child {
 	margin-bottom: 0;
 }
-.content ul,
 .content ol {
 	padding-left:3em;
 }
 .content ul li {
-	list-style:circle inside;
+	list-style: none;
+	background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIiB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCI+PHBhdGggZmlsbD0iI2YyNjUyMiIgZD0iTTYuMTM0IDguMjkzbC0uNzMyLjY5Ny0uNzMyLS42OTcuMDAzLS4wMDNMLjAxIDMuODA0bC43My0uNjk4TDUuNCA3LjU4OCAxMy4yNi4wMTNsLjczMi42OTctNy44NiA3LjU4LjAwNC4wMDN6Ii8+PC9zdmc+) 7px 7px no-repeat;
+	padding-left: 33px;
 }
 .content ol li {
 	list-style:decimal inside;

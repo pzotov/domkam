@@ -1393,6 +1393,30 @@ img {
 .stone_popup .container {
 	padding: 0;
 }
+.stone__groups {
+	float: left;
+	width: 50%;
+	padding-top: 20px;
+}
+.stone__about {
+	display: block;
+	float: right;
+	margin-top: 40px;
+	height: 40px;
+	line-height: 36px;
+	border: 2px solid #f4ae8f;
+	padding: 0 20px;
+	text-transform: uppercase;
+	color: #000;
+	text-decoration: none;
+	font-weight: bold;
+	transition: all .2s;
+}
+.stone__about:hover {
+	color: #fff;
+	background-color: #f26522;
+	border-color: #f26522;
+}
 
 .related {
 	width: 48%;
@@ -2173,4 +2197,22 @@ img {
 }
 
 .projects-map {
+}
+.projects-map__map {
+	height: 400px;
+}
+.projects-map__preview {
+	max-width: 170px;
+	max-height: 130px;
+}
+
+.news {}
+.news__row {
+	display: block;
+	font-size: 18px;
+	line-height: 1.5;
+	font-weight: bold;
+	margin-bottom: 1.5em;
+	text-transform: uppercase;
+	text-decoration: none;
 }

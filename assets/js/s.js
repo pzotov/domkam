@@ -269,7 +269,8 @@ $(function(){
 	 * Список камней в каталоге
 	 */
 	$(".stones_catalog").each(function(){
-		var blocks = $(".stones__blocks", this),
+		var catalog = this,
+			blocks = $(".stones__blocks", this),
 			form = $(".stones__form", this),
 			popup = $('<div class="stones__popup" />').appendTo("body").hide();
 
@@ -278,6 +279,7 @@ $(function(){
 			$.get(form.attr("action"), form.serialize()+'&isNaked=1', function(res){
 				blocks.html(res);
 				initSwiper(".stones__blocks");
+				initStonePreviews();
 				$.fancybox.hideLoading();
 			});
 		});
@@ -292,27 +294,30 @@ $(function(){
 				if(!popup.hasClass("stones__popup_hover")) popup.hide();
 			}, 500);
 		});
-		$(".stones__item_preview", this).mouseenter(function(e){
-			if($(window).width()<=768) return true;
-			//console.log("item enter");
-			popup
-				.css({
-					left: $(this).offset().left + 90, //e.pageX,
-					top: $(this).offset().top + 90
-				})
-				.addClass("stones__popup_hover")
-				.html('<p align="center"><img src="/assets/images/loading.gif" width="64" height="64" alt="Подождите..." /></p>')
-				//.appendTo(this)
-				.show()
-				.load($(this).attr("href")+"?isNaked=1&nc_ctpl=2030")
-			;
-		}).mouseleave(function(){
-			//console.log("item leave");
-			popup.removeClass("stones__popup_hover");
-			setTimeout(function(){
-				if(!popup.hasClass("stones__popup_hover")) popup.hide();
-			}, 500);
-		});
+
+		function initStonePreviews(){
+			$(".stones__item_preview", catalog).mouseenter(function(e){
+				if($(window).width()<=768) return true;
+				//console.log("item enter");
+				popup
+					.css({
+						left: $(this).offset().left + 90, //e.pageX,
+						top: $(this).offset().top + 90
+					})
+					.addClass("stones__popup_hover")
+					.html('<p align="center"><img src="/assets/images/loading.gif" width="64" height="64" alt="Подождите..." /></p>')
+					//.appendTo(this)
+					.show()
+					.load($(this).attr("href")+"?isNaked=1&nc_ctpl=" + ($(this).hasClass("stones__item_plitka") ? 2052 : 2030))
+				;
+			}).mouseleave(function(){
+				//console.log("item leave");
+				popup.removeClass("stones__popup_hover");
+				setTimeout(function(){
+					if(!popup.hasClass("stones__popup_hover")) popup.hide();
+				}, 500);
+			});
+		}
 	});
 
 	/**
