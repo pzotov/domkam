@@ -575,7 +575,9 @@ function initSwiper(prefix){
 	$(prefix + " .swiper").each(function() {
 		var p = $(this).parent(),
 			slides = $(".swiper-slide", this);
-		if($(".swiper-slide", this).length<2) {
+		if(slides.length<2) {
+			if(slides.hasClass("slider__slide"))
+				slides.addClass("swiper-slide-active");
 			p.find(".swiper-arrow").hide();
 			return;
 		}
