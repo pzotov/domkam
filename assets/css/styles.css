@@ -1219,6 +1219,7 @@ img {
 	display: block;
 	float: left;
 	margin: 0 30px 30px 0;
+	max-width: 370px;
 }
 .text__image img {
 	max-width: 100%;

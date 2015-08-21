@@ -206,6 +206,10 @@
 	.text__column_3:nth-child(3n) {
 		width: 100%;
 	}
+	.text__image {
+		max-width: 48%;
+	}
+	
 	.zayavka {
 		padding: 45px;
 	}
@@ -540,6 +544,8 @@
 	}
 	.text__image {
 		float: none;
+		max-width: 100%;
+		width: 100%;
 		margin: 0 0 30px 0;
 	}
 
