@@ -163,3 +163,11 @@
 	}
 ?>
 </ul>
+
+<div class="nc-field"><?= nc_date_field('News_Date', '', ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class="nc-field"><?= nc_file_field('News_Picture', '', ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class="nc-field"><?= nc_date_field('Action_Date', '', ($class_id ? $class_id : $classID), 1) ?></div>
+
+<div class="nc-field"><?= nc_file_field('Action_Picture', '', ($class_id ? $class_id : $classID), 1) ?></div>

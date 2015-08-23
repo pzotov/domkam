@@ -1050,6 +1050,20 @@ img {
 	color: #000;
 	text-decoration: none;
 	padding: 10px 10px 0;
+	position: relative;
+}
+.stones__label {
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	top: 30px;
+	font-weight: bold;
+}
+.stones__label_news {
+	color: #0d0;
+}
+.stones__label_action {
+	color: #d00;
 }
 .stones_in-project .stones__item {
 	float: left;
@@ -1220,6 +1234,10 @@ img {
 	float: left;
 	margin: 0 30px 30px 0;
 	max-width: 370px;
+}
+.text__image_right {
+	float: right;
+	margin: 0 0 30px 30px;
 }
 .text__image img {
 	max-width: 100%;
@@ -2216,4 +2234,8 @@ img {
 	margin-bottom: 1.5em;
 	text-transform: uppercase;
 	text-decoration: none;
+}
+
+.reg {
+	padding: 40px 0;
 }
