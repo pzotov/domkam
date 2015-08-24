@@ -46,7 +46,7 @@
 	</select>
 </div>
 
-<div class='nc-field'><?= nc_bool_field('InStock', "", ($class_id ? $class_id : $classID ), 1) ?></div>
+<div class='nc-field'><?= nc_float_field('InStock', "size='12'", ($class_id ? $class_id : $classID ), 1) ?></div>
 
 <div class='nc-field'><?= nc_float_field('Price', "maxlength='12' size='12'", ($class_id ? $class_id : $classID), 1) ?></div>
 
