@@ -568,6 +568,17 @@ $(function(){
 			}
 		}
 	});
+
+	$(".liquid").each(function(){
+		var liquid = this;
+		$(".liquid__button").mouseenter(function(){
+			$(liquid).addClass("liquid_open");
+		});
+		$(".liquid__close").click(function(e){
+			e.preventDefault();
+			$(liquid).removeClass("liquid_open");
+		});
+	});
 });
 
 function initSwiper(prefix){

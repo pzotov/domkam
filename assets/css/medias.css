@@ -146,6 +146,7 @@
 	.slider,
 	.slider__slide {
 		height: 410px;
+		background-size: auto 100%;
 	}
 	.slider__bg {
 		right: 50%;
@@ -354,6 +355,10 @@
 	.services__item.services__item {
 		width: 33%;
 	}
+
+	.liquid {
+		display: none;
+	}
 }
 
 /* мобильные */
@@ -550,6 +555,10 @@
 		max-width: 100%;
 		width: 100%;
 		margin: 0 0 30px 0;
+	}
+	.text__preview {
+		width: 48%;
+		margin-right: 2%;
 	}
 
 

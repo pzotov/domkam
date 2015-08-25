@@ -258,7 +258,7 @@ img {
 }
 .dropdown {
 	position: absolute;
-	z-index: 1;
+	z-index: 2;
 	left: 0;
 	top: 100%;
 	min-width: 100%;
@@ -1254,7 +1254,7 @@ img {
 	margin: 0 30px 30px 0;
 }
 .text__preview img {
-	max-width: 170px;
+	max-width: 100%;
 }
 .text__gallery_after {
 	text-align: center;
@@ -1585,17 +1585,17 @@ img {
 }
 
 .subs {
-	padding: 50px 0;
+	padding: 30px 0;
 	background-color: #f1f1f3;
 }
 .subs_white {
 	background-color: #fff;
 }
 .subs__items {
+	text-align: center;
 }
 .subs__item {
-	display: block;
-	float: left;
+	display: inline-block;
 	width: 194px;
 	height: 230px;
 	padding: 0 12px;
@@ -1948,13 +1948,14 @@ img {
 	padding-left: 15px;
 }
 /* Торцевые профили для подоконников из натурального камня и каменных столешниц */
-.elements__group-wrap_39db25ebae6e75679ef008e6a1de7973 {
+.elements__group-wrap_93_1 {
 	width: 67%;
 }
 /* Торцевые профили из мрамора */
-.elements__group-wrap_617a12ca6b63ba901252098cdf4c558e {
+.elements__group-wrap_93_2 {
 	width: 33%;
 }
+
 .elements__group {
 	padding: 0 15px 15px;
 	border: 3px solid #e6e6e6;
@@ -2091,6 +2092,13 @@ img {
 .prices__price {
 }
 .prices__order {
+}
+.prices__old-price {
+	text-decoration: line-through;
+	opacity: .8;
+}
+.prices__action-price {
+	font-weight: bold;
 }
 
 .benefits {
@@ -2250,4 +2258,87 @@ img {
 
 .reg {
 	padding: 40px 0;
+}
+
+
+.liquid {
+	position: fixed;
+	left: -200px;
+	z-index: 3;
+	top: 50%;
+	margin-top: -150px;
+	box-shadow: 2px 2px 5px rgba(0,0,0,.5);
+	width: 248px;
+	border-radius: 0 4px 4px 0;
+	overflow: hidden;
+	transition: all .5s;
+}
+.liquid_open {
+	left: 0;
+}
+.liquid__close,
+.liquid__close:hover {
+	display: none;
+	position: absolute;
+	right: 2px;
+	top: 2px;
+	color: #fff;
+	font-size: 11px;
+	z-index: 1;
+}
+.liquid_open .liquid__close {
+	display: block;
+}
+.liquid__wrap {
+	position: relative;
+	width: 200px;
+	height: 300px;
+	overflow-x: visible;
+	overflow-y: auto;
+	background-color: #fff;
+}
+.liquid__items {
+}
+.liquid__item {
+	padding: 20px;
+	text-align: center;
+}
+.liquid__image {
+	display: block;
+	margin-bottom: 10px;
+}
+.liquid__image img {
+	max-width: 150px;
+}
+.liquid__name {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 10px;
+	font-size: 15px;
+}
+.liquid__old-price {
+}
+.liquid__label {
+	color: #f26522;
+}
+.liquid__action-price {
+}
+.liquid__in-stock {
+}
+.liquid__button {
+	position: absolute;
+	bottom: 0;
+	left: 248px;
+	display: block;
+	width: 300px;
+	height: 48px;
+	font-weight: 600;
+	transform: rotate(-90deg);
+	transform-origin: 0 100%;
+	background-color: #f26522;
+	text-align: center;
+	line-height: 48px;
+	font-size: 36px;
+	color: #fff;
+	text-shadow: -1px 1px 1px #000;
 }
