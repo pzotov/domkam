@@ -63,6 +63,9 @@
 .content h3:first-child {
 	margin-top: 0;
 }
+.content h3 {
+	font-size: 16px;
+}
 .content h4 {
 	text-align: center;
 	font-size: 16px;
@@ -71,4 +74,11 @@
 }
 .content iframe {
 	max-width: 100%;
+}
+
+.content img[align=left] {
+	margin: 0 20px 20px 0;
+}
+.content img[align=right] {
+	margin: 0 0 20px 20px;
 }

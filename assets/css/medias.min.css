@@ -52,6 +52,10 @@
   .slider__content {
     width: 45%;
   }
+
+  .stones__box .form__select {
+    font-size: 13px;
+  }
 }
 
 /* только десктопы */

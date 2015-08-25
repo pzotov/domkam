@@ -22,6 +22,211 @@ function __log($text){
 	if($__log) fwrite($__log, date("[Y-m-d H:i:s] ").$text."\n");
 }
 
+function importCatalog(){
+	if(!$_FILES['xls'] || $_FILES['xls']['error'])
+		return array('error' => 'Файл не загружен');
+
+	$result = array(
+		'ok' => true,
+		'error' => false
+	);
+	global $nc_core, $db;
+	require_once $nc_core->INCLUDE_FOLDER.'lib/excel/PHPExcel.php';
+
+	try {
+		$file_type = PHPExcel_IOFactory::identify($_FILES['xls']['tmp_name']);
+		$reader = PHPExcel_IOFactory::createReader($file_type);
+		$ea = $reader->load($_FILES['xls']['tmp_name']);
+
+		$ews = $ea->getSheet(0);
+		$max_row = $ews->getHighestRow();
+		$max_col = $ews->getHighestColumn();
+
+		$sub_id = null;
+		$cc_id = null;
+		for($row=1; $row<=$max_row; $row++){
+			$_data = $ews->rangeToArray('a'.$row.':'.$max_col.$row, NULL, TRUE, FALSE);
+			$data = $_data[0];
+			$colors = array();
+			$groups = array();
+
+			if(!$data[0] && trim($data[1]) && !$data[2]){
+				//Строка с названием раздела
+				$sub_name = trim($data[1]);
+				list($sub_id, $cc_id) = $db->get_row("SELECT s.Subdivision_ID,cc.Sub_Class_ID
+										FROM Subdivision s
+										LEFT JOIN Sub_Class cc ON cc.Subdivision_ID=s.Subdivision_ID
+										WHERE s.Subdivision_Name='".mysql_real_escape_string(trim($data[1]))."' AND cc.Class_ID=2006
+										GROUP BY cc.Sub_Class_ID
+										ORDER BY cc.Checked DESC, cc.Priority
+										", ARRAY_N);
+				$colors = array();
+				if($_colors = $db->get_results("SELECT Message_ID,ShortName FROM Message2008 WHERE Subdivision_ID={$sub_id}", ARRAY_A)){
+					foreach($_colors as $c){
+						$colors[mb_strtolower($c['ShortName'])] = $c['Message_ID'];
+					}
+				}
+				$groups = array();
+				if($_groups = $db->get_results("SELECT Message_ID,ShortName FROM Message2009 WHERE Subdivision_ID={$sub_id}", ARRAY_A)){
+					foreach($_groups as $c){
+						$groups[mb_strtolower($c['ShortName'])] = $c['Message_ID'];
+					}
+				}
+				//Пропускаем строку с заголовками колонок
+				$row++;
+			} else if($data[0] && $data[1] && $sub_id) {
+				//строка с камнем
+				$a = array(
+					'Article' => $data[0],
+					'Name' => $data[1],
+					'EnglishName' => $data[2],
+					'Color_ID' => $colors[$data[3]],
+					'Group_ID' => $groups[$data[4]],
+					'H1' => $data[5],
+					'Text1' => $data[6],
+					'Text2' => $data[7],
+					'Param1' => $data[8],
+					'Param2' => $data[9],
+					'Param3' => $data[10],
+					'Param4' => $data[11],
+					'Param5' => $data[12],
+					'Param6' => $data[13],
+					'Param7' => $data[14]
+				);
+				if($stone_id = $db->get_var("SELECT Message_ID FROM Message2006 WHERE Article='".mysql_real_escape_string(trim($data[0]))."' LIMIT 1")){
+					update_row("Message2006", $a, "Message_ID=".$stone_id);
+				} else {
+					$a['Subdivision_ID'] = $sub_id;
+					$a['Sub_Class_ID'] = $cc_id;
+					$a['Checked'] = 1;
+					$a['Keyword'] = translit($a['Name']);
+					insert_row("Message2006", $a);
+				}
+			}
+		}
+
+		die('ok');
+	} catch (Exception $e) {
+		$result['error'] = $e->getMessage();
+	}
+
+	return $result;
+}
+/**
+ * @param bool|true $pure - выгружать только разделы с товарами
+ */
+function exportCatalog(){
+	global $nc_core, $db;
+	require_once $nc_core->INCLUDE_FOLDER.'lib/excel/PHPExcel.php';
+
+	$items = $db->get_results("SELECT a.*,s.Subdivision_Name, c.ShortName Color_Name, g.ShortName Group_Name
+								FROM Message2006 a
+								LEFT JOIN Subdivision s ON s.Subdivision_ID=a.Subdivision_ID
+								LEFT JOIN Message2008 c ON c.Message_ID=a.Color_ID
+								LEFT JOIN Message2009 g ON g.Message_ID=a.Group_ID
+								GROUP BY a.Message_ID
+								ORDER BY s.Priority,s.Subdivision_ID,a.Priority,a.Message_ID
+								", ARRAY_A);
+
+	$ea = new \PHPExcel();
+	$ea->getProperties()
+		->setTitle('Каталог')
+	;
+	$ews = $ea->getSheet(0);
+	$ews->setTitle('Каталог');
+
+	$ews->getColumnDimension('A')->setWidth(10);
+	$ews->getColumnDimension('B')->setWidth(20);
+	$ews->getColumnDimension('C')->setWidth(20);
+	$ews->getColumnDimension('D')->setWidth(15);
+	$ews->getColumnDimension('E')->setWidth(15);
+	$ews->getColumnDimension('F')->setWidth(30);
+	$ews->getColumnDimension('G')->setWidth(50);
+	$ews->getColumnDimension('H')->setWidth(50);
+
+	$row = 1;
+	$prev_sub = null;
+	foreach($items as $item){
+		if($prev_sub!=$item['Subdivision_Name']){
+			if($prev_sub) $row +=3;
+
+			$ews->setCellValue('b'.$row, $item['Subdivision_Name']);
+			$ews
+				->getStyle('a'.$row.':bb'.$row)
+				->getFill()->setFillType(\PHPExcel_Style_Fill::FILL_SOLID)
+				->getStartColor()
+				->setARGB('00ffff00');
+			$ews
+				->getStyle('a'.$row.':bb'.$row)
+				->applyFromArray(array(
+					'font' => array(
+						'bold' => true,
+						'size' => 15
+					)
+				));
+			$prev_sub = $item['Subdivision_Name'];
+			$row++;
+
+			$ews->setCellValue('a'.$row, 'Артикул');
+			$ews->setCellValue('b'.$row, 'Русское название');
+			$ews->setCellValue('c'.$row, 'Английское название');
+			$ews->setCellValue('d'.$row, 'Цвет');
+			$ews->setCellValue('e'.$row, 'Группа');
+			$ews->setCellValue('f'.$row, 'Заголовок H1');
+			$ews->setCellValue('g'.$row, 'Краткое описание камня');
+			$ews->setCellValue('h'.$row, 'Описание камня под фото и параметрами');
+			$ews->setCellValue('i'.$row, 'объемный вес, кг/м3');
+			$ews->setCellValue('j'.$row, 'удельная плотность, г/см3');
+			$ews->setCellValue('k'.$row, 'водопоглощение, %');
+			$ews->setCellValue('l'.$row, 'пористость, %');
+			$ews->setCellValue('m'.$row, 'истираемость, г/см2');
+			$ews->setCellValue('n'.$row, 'морозостойкость, циклов');
+			$ews->setCellValue('o'.$row, 'предел прочности при сжатии, кг/см2 (МПа)');
+
+			$ews
+				->getStyle('a'.$row.':bb'.$row)
+				->applyFromArray(array(
+					'font' => array(
+						'bold' => true
+					)
+				));
+			$row++;
+		}
+
+		$ews->setCellValue('a'.$row, $item['Article']);
+		$ews->setCellValue('b'.$row, $item['Name']);
+		$ews->setCellValue('c'.$row, $item['EnglishName']);
+		$ews->setCellValue('d'.$row, $item['Color_Name']);
+		$ews->setCellValue('e'.$row, $item['Group_Name']);
+		$ews->setCellValue('f'.$row, $item['H1']);
+		$ews->setCellValue('g'.$row, $item['Text1']);
+		$ews->setCellValue('h'.$row, $item['Text2']);
+		$ews->setCellValue('i'.$row, $item['Param1']);
+		$ews->setCellValue('j'.$row, $item['Param2']);
+		$ews->setCellValue('k'.$row, $item['Param3']);
+		$ews->setCellValue('l'.$row, $item['Param4']);
+		$ews->setCellValue('m'.$row, $item['Param5']);
+		$ews->setCellValue('n'.$row, $item['Param6']);
+		$ews->setCellValue('o'.$row, $item['Param7']);
+
+		$ews->getStyle('g'.$row)->getAlignment()->setWrapText(true);
+		$ews->getStyle('h'.$row)->getAlignment()->setWrapText(true);
+
+		$row++;
+	}
+
+	$ews->getStyle('a1:bb'.$row)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
+
+	$writer = \PHPExcel_IOFactory::createWriter($ea, 'Excel2007');
+
+	//$writer->setIncludeCharts(true);
+	$writer->save($nc_core->DOCUMENT_ROOT.'/x/catalog.xlsx');
+
+	//$writer->save('php://output');
+	return '/x/catalog.xlsx';
+}
+
+
 function saveStonesInProject($message){
 	global $db;
 	$db->query("DELETE FROM Project_Stone_Rel WHERE Project_ID=".$message);
