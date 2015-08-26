@@ -579,16 +579,22 @@ $(function(){
 		});
 	});
 
-	var lm0 = 0;
+	//var lm0 = 0;
 	$(".lmenu1").each(function(){
-		var h = $(this).outerHeight();
-		if(h>lm0) lm0 = h;
+		//var h = $(this).outerHeight();
+		//if(h>lm0) lm0 = h;
 		$(this).hide().parent().mouseenter(function(){
 			$(".lmenu1", this).show();
+			$(this).closest(".lmenu").css({
+				"min-height": $(".lmenu1", this).outerHeight() + 20
+			});
 		}).mouseleave(function(){
 			$(".lmenu1", this).hide();
+			$(this).closest(".lmenu").css({
+				"min-height": 0
+			});
 		});
-		$(".lmenu").height(lm0);
+		//$(".lmenu").height(lm0);
 	});
 
 });

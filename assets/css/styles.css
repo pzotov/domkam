@@ -1065,9 +1065,19 @@ img {
 }
 .stones__label_news {
 	color: #0d0;
+	width: 35px;
+	height: 35px;
+	background: url(../images/new.png) 0 0/35px 35px no-repeat;
+	overflow: hidden;
+	text-indent: 35px;
 }
 .stones__label_action {
 	color: #d00;
+	width: 40px;
+	height: 25px;
+	background: url(../images/akciya_mini.png) 0 0/40px 25px no-repeat;
+	overflow: hidden;
+	text-indent: 40px;
 }
 .stones_in-project .stones__item {
 	float: left;
@@ -1600,6 +1610,7 @@ img {
 }
 .subs__item {
 	display: inline-block;
+	vertical-align: top;
 	width: 194px;
 	height: 230px;
 	padding: 0 12px;
@@ -1953,11 +1964,11 @@ img {
 }
 /* Торцевые профили для подоконников из натурального камня и каменных столешниц */
 .elements__group-wrap_93_1 {
-	width: 67%;
+	width: 72%;
 }
 /* Торцевые профили из мрамора */
 .elements__group-wrap_93_2 {
-	width: 33%;
+	width: 28%;
 }
 
 .elements__group {
@@ -1966,11 +1977,12 @@ img {
 }
 .elements__group-header {
 	display: table;
-	margin: -24px auto 30px;
+	margin: -13px auto 30px;
 	text-align: center;
 	text-transform: uppercase;
 	font-size: 18px;
 	line-height: 24px;
+	height: 48px;
 	padding: 0 20px;
 	background-color: #fff;
 	font-weight: bold;
@@ -2356,6 +2368,7 @@ img {
 
 
 .lmenu {
+	display: none;
 	background-color: #fff;
 	width: 730px;
 	box-shadow: 2px 2px 8px rgba(0,0,0, .7);
@@ -2384,12 +2397,14 @@ img {
 .lmenu__item-a_active {
 	color: #f26522;
 }
+
 .lmenu1 {
-	/*display: none;*/
+	display: none;
 	position: absolute;
 	left: 201px;
 	top: 0;
 	width: 530px;
+	min-height: 100%;
 }
 .lmenu1__items {
 	padding: 10px 10px 0;
@@ -2425,78 +2440,4 @@ img {
 .lmenu2__item-a {
 	display: block;
 	font-size: 12px;
-}
-.lmenu1__item {
-}
-.lmenu1__item-a {
-}
-.lmenu1__item-a_active {
-}
-.lmenu2 {
-}
-.lmenu2__items {
-}
-.lmenu2__item {
-}
-.lmenu2__item-a {
-}
-.lmenu2__item {
-}
-.lmenu2__item-a {
-}
-.lmenu2__item-a_active {
-}
-.lmenu1__item {
-}
-.lmenu1__item-a {
-}
-.lmenu2 {
-}
-.lmenu2__items {
-}
-.lmenu2__item {
-}
-.lmenu2__item-a {
-}
-.lmenu2__item {
-}
-.lmenu2__item-a {
-}
-.lmenu1__item {
-}
-.lmenu1__item-a {
-}
-.lmenu2 {
-}
-.lmenu2__items {
-}
-.lmenu2__item {
-}
-.lmenu2__item-a {
-}
-.lmenu2__item {
-}
-.lmenu2__item-a {
-}
-.lmenu2__item {
-}
-.lmenu2__item-a {
-}
-.lmenu2__item {
-}
-.lmenu2__item-a {
-}
-.lmenu2__item {
-}
-.lmenu2__item-a {
-}
-.lmenu1__item {
-}
-.lmenu1__item-a {
-}
-.lmenu2 {
-}
-.lmenu2__items {
-}
-.lmenu2__item {
 }

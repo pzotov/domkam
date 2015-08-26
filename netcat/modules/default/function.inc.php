@@ -33,11 +33,13 @@ function updateUSDRate(){
 	$localfile = $nc_core->DOCUMENT_ROOT."/x/cbr.xml";
 	if(!file_exists($localfile) || filemtime($localfile)<time()-43200){
 		if($rates_xml = file_get_contents(strftime("http://www.cbr.ru/scripts/XML_daily.asp?date_req=%d%%2F%m%%2F%Y"))){
+			file_put_contents($localfile, $rates_xml);
 			$rates = json_decode(json_encode(simplexml_load_string($rates_xml)),true);
 			foreach($rates['Valute'] as $v){
 				if($v['NumCode']==840) {
+					$val = trim(str_replace(',', '.', $v['Value']));
 					update_row("Catalogue", array(
-						"USD" => trim(str_replace(',', '.', round($v['Value']*1.01,2)))
+						"USD" => trim(str_replace(',', '.', round($val*1.01,2)))
 					), "Catalogue_ID=1");
 					return;
 				}
@@ -338,15 +340,16 @@ function importPlitka(){
 }
 
 function exportPlitka(){
-	global $nc_core, $db;
+	global $nc_core, $db, $sub;
 	require_once $nc_core->INCLUDE_FOLDER.'lib/excel/PHPExcel.php';
 
 	$items = $db->get_results("SELECT a.*,
 								s.Subdivision_Name,
-								stone.Name, stone.EnglishName
+								stone.Name Stone_Name, stone.EnglishName
 								FROM Message2035 a
 								LEFT JOIN Subdivision s ON s.Subdivision_ID=a.Subdivision_ID
 								LEFT JOIN Message2006 stone ON stone.Message_ID=a.Stone_ID
+								WHERE a.Subdivision_ID={$sub}
 								GROUP BY a.Message_ID
 								ORDER BY s.Priority,s.Subdivision_ID,stone.Priority,stone.Message_ID,a.Priority,a.Message_ID
 								", ARRAY_A);
@@ -364,6 +367,7 @@ function exportPlitka(){
 	$ews->getColumnDimension('d')->setWidth(15);
 	$ews->getColumnDimension('e')->setWidth(15);
 	$ews->getColumnDimension('f')->setWidth(15);
+	$ews->getColumnDimension('g')->setWidth(15);
 
 	$row = 1;
 	$prev_sub = null;
@@ -394,6 +398,7 @@ function exportPlitka(){
 			$ews->setCellValue('d'.$row, 'Вид обработки');
 			$ews->setCellValue('e'.$row, 'Наличие');
 			$ews->setCellValue('f'.$row, 'Цена');
+			$ews->setCellValue('g'.$row, 'Цена по акции');
 
 			$ews
 				->getStyle('a'.$row.':bb'.$row)
@@ -411,6 +416,7 @@ function exportPlitka(){
 		$ews->setCellValue('d'.$row, $item['ManufacturingStr']);
 		$ews->setCellValue('e'.$row, $item['InStock']);
 		$ews->setCellValue('f'.$row, $item['Price']);
+		$ews->setCellValue('f'.$row, $item['PriceAction']);
 
 		$row++;
 	}
