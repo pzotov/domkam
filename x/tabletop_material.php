@@ -6,7 +6,7 @@ $material = htmlspecialchars(stripslashes($_GET['material']), ENT_QUOTES);
 
 ?>
 <form class="form form_tabletop-material">
-	<div class="form__header">Материал столешницы</div>
+	<div class="form__header">Материал <?= htmlspecialchars($_GET['name'], ENT_QUOTES) ?></div>
 	<div class="form__row">
 		<div class="form__label">Выберите материал из каталога</div>
 		<div class="form__select form__select_material">Выберите, пожалуйста</div>

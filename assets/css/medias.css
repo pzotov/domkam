@@ -132,6 +132,9 @@
 		transition: all .3s;
 		height: auto;
 	}
+	.dropdown__item-a {
+		white-space: normal;
+	}
 
 	.fake-footer {
 		display: none;

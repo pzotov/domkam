@@ -441,7 +441,9 @@ $(function(){
 	 */
 	$(".form_tabletop").each(function(){
 		var material = $("[name=f_Material]", this),
-			profile = $("[name=f_Torets]", this);
+			profile = $("[name=f_Torets]", this),
+			name = material.data('name')
+			;
 		$("#tabletop__material", this).click(function(e){
 			//e.preventDefault();
 			tabletopMaterial1(material.val());
@@ -477,7 +479,7 @@ $(function(){
 
 		function tabletopMaterial1(materials){
 			$.fancybox({
-				href: '/x/tabletop_material.php?material=' + encodeURIComponent(materials),
+				href: '/x/tabletop_material.php?material=' + encodeURIComponent(materials) + '&name=' + encodeURIComponent(name),
 				type: 'ajax',
 				padding: $(window).width()>480 ? 50 : 15,
 				afterShow: function(){
@@ -570,15 +572,25 @@ $(function(){
 	});
 
 	$(".liquid").each(function(){
-		var liquid = this;
-		$(".liquid__button").mouseenter(function(){
-			$(liquid).addClass("liquid_open");
-		});
-		$(".liquid__close").click(function(e){
-			e.preventDefault();
-			$(liquid).removeClass("liquid_open");
+		$(this).mouseenter(function(){
+			$(this).addClass("liquid_open");
+		}).mouseleave(function(){
+			$(this).removeClass("liquid_open");
 		});
 	});
+
+	var lm0 = 0;
+	$(".lmenu1").each(function(){
+		var h = $(this).outerHeight();
+		if(h>lm0) lm0 = h;
+		$(this).hide().parent().mouseenter(function(){
+			$(".lmenu1", this).show();
+		}).mouseleave(function(){
+			$(".lmenu1", this).hide();
+		});
+		$(".lmenu").height(lm0);
+	});
+
 });
 
 function initSwiper(prefix){
@@ -608,7 +620,17 @@ function initSwiper(prefix){
 			options.prevButton = p.find(".swiper-arrow--prev");
 			options.nextButton = p.find(".swiper-arrow--next");
 		//}
-		$(this).swiper(options);
+		if($(this).hasClass("thumbs__slider")) {
+			options.slideToClickedSlide = true;
+		}
+
+		var slider = $(this).swiper(options);
+
+		if($(this).hasClass("thumbs__slider")){
+			var main_slider = $(this).closest(".slider").find(".slider__wrap").first().data("swiper");
+			main_slider.params.control = slider;
+			slider.params.control = main_slider;
+		}
 	});
 }
 

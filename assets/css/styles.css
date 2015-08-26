@@ -696,6 +696,10 @@ img {
 	padding: 100px 50px;
 	line-height: 22px;
 }
+.slider__text1 .slider__header {
+	font-size: 18px;
+	line-height: 24px;
+}
 .slider__image {
 	display: block;
 	float: left;
@@ -2317,6 +2321,7 @@ img {
 	font-size: 15px;
 }
 .liquid__old-price {
+	text-decoration: line-through;
 }
 .liquid__label {
 	color: #f26522;
@@ -2341,4 +2346,157 @@ img {
 	font-size: 36px;
 	color: #fff;
 	text-shadow: -1px 1px 1px #000;
+}
+.liquid__all {
+	display: block;
+	margin: 5px;
+	text-align: center;
+	font-weight: bold;
+}
+
+
+.lmenu {
+	background-color: #fff;
+	width: 730px;
+	box-shadow: 2px 2px 8px rgba(0,0,0, .7);
+}
+.lmenu__items {
+	display: block;
+	float: left;
+	width: 200px;
+	border-right: 1px solid #e6e6e6;
+	position: relative;
+}
+.lmenu__item {
+}
+.lmenu__item-a {
+	display: block;
+	border-bottom: 1px solid #e6e6e6;
+	text-transform: uppercase;
+	line-height: 20px;
+	padding: 15px;
+	text-align: left;
+	color: #000;
+	text-decoration: none;
+	font-weight: 600;
+}
+.lmenu__item-a:hover,
+.lmenu__item-a_active {
+	color: #f26522;
+}
+.lmenu1 {
+	/*display: none;*/
+	position: absolute;
+	left: 201px;
+	top: 0;
+	width: 530px;
+}
+.lmenu1__items {
+	padding: 10px 10px 0;
+}
+.lmenu1__item {
+	display: block;
+	float: left;
+	width: 33.33%;
+	padding-bottom: 10px;
+}
+.lmenu1__item:nth-child(3n+1) {
+	clear: both;
+}
+.lmenu1__item-a {
+	display: block;
+	font-size: 13px;
+	line-height: 16px;
+	text-align: left;
+	color: #000;
+	text-decoration: none;
+	font-weight: 600;
+}
+.lmenu1__item-a {
+}
+.lmenu2 {
+}
+.lmenu2__items {
+	padding: 5px 0 5px 15px;
+}
+.lmenu2__item {
+	padding: 4px 0;
+}
+.lmenu2__item-a {
+	display: block;
+	font-size: 12px;
+}
+.lmenu1__item {
+}
+.lmenu1__item-a {
+}
+.lmenu1__item-a_active {
+}
+.lmenu2 {
+}
+.lmenu2__items {
+}
+.lmenu2__item {
+}
+.lmenu2__item-a {
+}
+.lmenu2__item {
+}
+.lmenu2__item-a {
+}
+.lmenu2__item-a_active {
+}
+.lmenu1__item {
+}
+.lmenu1__item-a {
+}
+.lmenu2 {
+}
+.lmenu2__items {
+}
+.lmenu2__item {
+}
+.lmenu2__item-a {
+}
+.lmenu2__item {
+}
+.lmenu2__item-a {
+}
+.lmenu1__item {
+}
+.lmenu1__item-a {
+}
+.lmenu2 {
+}
+.lmenu2__items {
+}
+.lmenu2__item {
+}
+.lmenu2__item-a {
+}
+.lmenu2__item {
+}
+.lmenu2__item-a {
+}
+.lmenu2__item {
+}
+.lmenu2__item-a {
+}
+.lmenu2__item {
+}
+.lmenu2__item-a {
+}
+.lmenu2__item {
+}
+.lmenu2__item-a {
+}
+.lmenu1__item {
+}
+.lmenu1__item-a {
+}
+.lmenu2 {
+}
+.lmenu2__items {
+}
+.lmenu2__item {
 }

@@ -22,6 +22,11 @@ function __log($text){
 	if($__log) fwrite($__log, date("[Y-m-d H:i:s] ").$text."\n");
 }
 
+function listValue($id){
+	global $db;
+	return $db->get_var("SELECT Name FROM Message2032 WHERE Message_ID=".intval($id));
+}
+
 function updateUSDRate(){
 	global $nc_core;
 
