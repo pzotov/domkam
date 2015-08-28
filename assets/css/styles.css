@@ -2411,6 +2411,7 @@ img {
 	font-weight: 600;
 }
 .lmenu__item-a:hover,
+.lmenu__item-a_open,
 .lmenu__item-a_active {
 	color: #f26522;
 }

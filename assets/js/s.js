@@ -48,13 +48,23 @@ $(function(){
 
 			$(".dropdown__items").hide();
 			var $lmenu = $(".lmenu");
-			
+
 			$(".dropdown").each(function(){
 				$(this).parent().find(".menu__item-a").first().off("click");
 				$(this).parent().off("mouseenter mouseleave").mouseenter(function(){
 					$lmenu.appendTo($(".dropdown", this).first());
-					$lmenu.find(".lmenu__item_" + $(this).data("id")).trigger("mouseenter");
+					var related_lmenu = $lmenu.find(".lmenu__item_" + $(this).data("id"));
+
+					$(".lmenu__item-a").removeClass("lmenu__item-a_open");
+					$(".lmenu__item-a", related_lmenu).first().addClass("lmenu__item-a_open");
+					$(".lmenu1").hide();
+					$(".lmenu1", related_lmenu).show();
 					$(".dropdown", this).first().addClass("dropdown_shown");
+
+					$lmenu.css({
+						"min-height": $(".lmenu1", related_lmenu).outerHeight() + 20
+					});
+
 					$(".menu__item-a", this).first().addClass("menu__item-a_open");
 				}).mouseleave(function(){
 					$lmenu.appendTo("body");
@@ -616,11 +626,13 @@ $(function(){
 		//var h = $(this).outerHeight();
 		//if(h>lm0) lm0 = h;
 		$(this).hide().parent().mouseenter(function(){
+			$(".lmenu__item-a", this).first().addClass("lmenu__item-a_open");
 			$(".lmenu1", this).show();
 			$(this).closest(".lmenu").css({
 				"min-height": $(".lmenu1", this).outerHeight() + 20
 			});
 		}).mouseleave(function(){
+			$(".lmenu__item-a", this).first().removeClass("lmenu__item-a_open");
 			$(".lmenu1", this).hide();
 			$(this).closest(".lmenu").css({
 				"min-height": 0
