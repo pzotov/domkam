@@ -555,6 +555,7 @@ $(function(){
 	 * После показа форм внутри fancybox нужно добавить к ним posting,
 	 * а также настроить поля для ввода телефона
 	 */
+	$(".expand_image").addClass("fancybox").attr("rel", "gallery");
 	$(".fancybox").fancybox({
 		padding: 2,
 		afterLoad: function(){

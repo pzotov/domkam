@@ -254,12 +254,35 @@ function importPlitka(){
 
 	$result = array(
 		'ok' => true,
-		'error' => false
+		'error' => ''
 	);
-	global $nc_core, $db;
+	global $nc_core, $db, $sub, $cc, $classID;
+	$cc_id = $db->get_var("SELECT Sub_Class_ID FROM Sub_Class WHERE Subdivision_ID={$sub} AND Sub_Class_ID!={$cc} AND Class_ID={$classID} ORDER BY Priority LIMIT 1");
+
+	$stones = array();
+	if($_stones = $db->get_results("SELECT Message_ID,Name FROM Message2006", ARRAY_A)){
+		foreach($_stones as $s){
+			$stones[mb_strtolower(trim($s['Name']))] = $s['Message_ID'];
+		}
+	} else return array('error' => 'нет камней');
+
+	$sizes = array();
+	if($_sizes = $db->get_results("SELECT Message_ID,Name FROM Message2036", ARRAY_A)){
+		foreach($_sizes as $s){
+			$sizes[trim($s['Name'])] = $s['Message_ID'];
+		}
+	}
+	//return array('error' => print_r($sizes, true));
+	$mans = array();
+	if($_mans = $db->get_results("SELECT Message_ID,Name FROM Message2037", ARRAY_A)){
+		foreach($_mans as $s){
+			$mans[trim($s['Name'])] = $s['Message_ID'];
+		}
+	}
+
 	require_once $nc_core->INCLUDE_FOLDER.'lib/excel/PHPExcel.php';
 
-	return $result;
+	//return $result;
 
 	try {
 		$file_type = PHPExcel_IOFactory::identify($_FILES['xls']['tmp_name']);
@@ -270,66 +293,45 @@ function importPlitka(){
 		$max_row = $ews->getHighestRow();
 		$max_col = $ews->getHighestColumn();
 
-		$sub_id = null;
-		$cc_id = null;
 		for($row=1; $row<=$max_row; $row++){
 			$_data = $ews->rangeToArray('a'.$row.':'.$max_col.$row, NULL, TRUE, FALSE);
 			$data = $_data[0];
-			$colors = array();
-			$groups = array();
 
 			if(!$data[0] && trim($data[1]) && !$data[2]){
 				//Строка с названием раздела
-				$sub_name = trim($data[1]);
-				list($sub_id, $cc_id) = $db->get_row("SELECT s.Subdivision_ID,cc.Sub_Class_ID
-										FROM Subdivision s
-										LEFT JOIN Sub_Class cc ON cc.Subdivision_ID=s.Subdivision_ID
-										WHERE s.Subdivision_Name='".mysql_real_escape_string(trim($data[1]))."' AND cc.Class_ID=2006
-										GROUP BY cc.Sub_Class_ID
-										ORDER BY cc.Checked DESC, cc.Priority
-										", ARRAY_N);
-				$colors = array();
-				if($_colors = $db->get_results("SELECT Message_ID,ShortName FROM Message2008 WHERE Subdivision_ID={$sub_id}", ARRAY_A)){
-					foreach($_colors as $c){
-						$colors[mb_strtolower($c['ShortName'])] = $c['Message_ID'];
-					}
-				}
-				$groups = array();
-				if($_groups = $db->get_results("SELECT Message_ID,ShortName FROM Message2009 WHERE Subdivision_ID={$sub_id}", ARRAY_A)){
-					foreach($_groups as $c){
-						$groups[mb_strtolower($c['ShortName'])] = $c['Message_ID'];
-					}
-				}
+
 				//Пропускаем строку с заголовками колонок
 				$row++;
-			} else if($data[0] && $data[1] && $sub_id) {
-				//строка с камнем
+				continue;
+			} else if($data[0] && $data[1]) {
+				//строка с плиткой
+				$data[2] = mb_strtolower(trim($data[2]));
+				if(!isset($stones[$data[2]])){
+					$result['error'] .= 'Камень &laquo;'.$data[2].'&raquo; не найден в базе<br>';
+					continue;
+				}
 				$a = array(
 					'Article' => $data[0],
 					'Name' => $data[1],
-					'EnglishName' => $data[2],
-					'Color_ID' => $colors[$data[3]],
-					'Group_ID' => $groups[$data[4]],
-					'H1' => $data[5],
-					'Text1' => $data[6],
-					'Text2' => $data[7],
-					'Param1' => $data[8],
-					'Param2' => $data[9],
-					'Param3' => $data[10],
-					'Param4' => $data[11],
-					'Param5' => $data[12],
-					'Param6' => $data[13],
-					'Param7' => $data[14]
+					'Stone_ID' => $stones[trim($data[2])],
+					'Size' => $sizes[trim($data[3])],
+					'SizeStr' => $data[3],
+					'Manufacturing' => $mans[trim($data[4])],
+					'ManufacturingStr' => $data[4],
+					'InStock' => str_replace(",", ".", $data[5]),
+					'Price' => str_replace(",", ".", $data[6]),
+					'PriceAction' => str_replace(",", ".", $data[7])
 				);
-				if($stone_id = $db->get_var("SELECT Message_ID FROM Message2006 WHERE Article='".mysql_real_escape_string(trim($data[0]))."' LIMIT 1")){
-					update_row("Message2006", $a, "Message_ID=".$stone_id);
+				if($id = $db->get_var("SELECT Message_ID FROM Message2035 WHERE Sub_Class_ID={$cc_id} AND Article='".mysql_real_escape_string(trim($data[0]))."' LIMIT 1")){
+					update_row("Message2035", $a, "Message_ID=".$id);
 				} else {
-					$a['Subdivision_ID'] = $sub_id;
+					$a['Subdivision_ID'] = $sub;
 					$a['Sub_Class_ID'] = $cc_id;
 					$a['Checked'] = 1;
 					$a['Keyword'] = translit($a['Name']);
-					insert_row("Message2006", $a);
+					insert_row("Message2035", $a);
 				}
+				//$result['error'] .= $db->last_query."\n";
 			}
 		}
 	} catch (Exception $e) {
@@ -364,10 +366,11 @@ function exportPlitka(){
 	$ews->getColumnDimension('a')->setWidth(10);
 	$ews->getColumnDimension('b')->setWidth(20);
 	$ews->getColumnDimension('c')->setWidth(20);
-	$ews->getColumnDimension('d')->setWidth(15);
+	$ews->getColumnDimension('d')->setWidth(20);
 	$ews->getColumnDimension('e')->setWidth(15);
 	$ews->getColumnDimension('f')->setWidth(15);
 	$ews->getColumnDimension('g')->setWidth(15);
+	$ews->getColumnDimension('h')->setWidth(15);
 
 	$row = 1;
 	$prev_sub = null;
@@ -393,12 +396,13 @@ function exportPlitka(){
 			$row++;
 
 			$ews->setCellValue('a'.$row, 'Артикул');
-			$ews->setCellValue('b'.$row, 'Название');
-			$ews->setCellValue('c'.$row, 'Размер');
-			$ews->setCellValue('d'.$row, 'Вид обработки');
-			$ews->setCellValue('e'.$row, 'Наличие');
-			$ews->setCellValue('f'.$row, 'Цена');
-			$ews->setCellValue('g'.$row, 'Цена по акции');
+			$ews->setCellValue('b'.$row, 'Название плитки');
+			$ews->setCellValue('c'.$row, 'Название камня');
+			$ews->setCellValue('d'.$row, 'Размер');
+			$ews->setCellValue('e'.$row, 'Вид обработки');
+			$ews->setCellValue('f'.$row, 'Наличие');
+			$ews->setCellValue('g'.$row, 'Цена');
+			$ews->setCellValue('h'.$row, 'Цена по акции');
 
 			$ews
 				->getStyle('a'.$row.':bb'.$row)
@@ -412,11 +416,12 @@ function exportPlitka(){
 
 		$ews->setCellValue('a'.$row, $item['Article']);
 		$ews->setCellValue('b'.$row, $item['Name']);
-		$ews->setCellValue('c'.$row, $item['SizeStr']);
-		$ews->setCellValue('d'.$row, $item['ManufacturingStr']);
-		$ews->setCellValue('e'.$row, $item['InStock']);
-		$ews->setCellValue('f'.$row, $item['Price']);
-		$ews->setCellValue('f'.$row, $item['PriceAction']);
+		$ews->setCellValue('c'.$row, $item['Stone_Name']);
+		$ews->setCellValue('d'.$row, $item['SizeStr']);
+		$ews->setCellValue('e'.$row, $item['ManufacturingStr']);
+		$ews->setCellValue('f'.$row, $item['InStock']);
+		$ews->setCellValue('g'.$row, $item['Price']);
+		$ews->setCellValue('h'.$row, $item['PriceAction']);
 
 		$row++;
 	}
@@ -430,6 +435,172 @@ function exportPlitka(){
 
 	//$writer->save('php://output');
 	return '/x/ostatki.xlsx';
+}
+
+function importTovary(){
+	if(!$_FILES['xls'] || $_FILES['xls']['error'])
+		return array('error' => 'Файл не загружен');
+
+	$result = array(
+		'ok' => true,
+		'error' => ''
+	);
+	global $nc_core, $db;
+
+	require_once $nc_core->INCLUDE_FOLDER.'lib/excel/PHPExcel.php';
+
+	//return $result;
+
+	$sub_id = null;
+	$cc_id = null;
+
+	try {
+		$file_type = PHPExcel_IOFactory::identify($_FILES['xls']['tmp_name']);
+		$reader = PHPExcel_IOFactory::createReader($file_type);
+		$ea = $reader->load($_FILES['xls']['tmp_name']);
+
+		$ews = $ea->getSheet(0);
+		$max_row = $ews->getHighestRow();
+		$max_col = $ews->getHighestColumn();
+
+		for($row=1; $row<=$max_row; $row++){
+			$_data = $ews->rangeToArray('a'.$row.':'.$max_col.$row, NULL, TRUE, FALSE);
+			$data = $_data[0];
+
+			if(!$data[0] && trim($data[1]) && !$data[2]){
+				//Строка с названием раздела
+				$sub_name = trim($data[1]);
+				list($sub_id, $cc_id) = $db->get_row("SELECT s.Subdivision_ID,cc.Sub_Class_ID
+										FROM Subdivision s
+										LEFT JOIN Sub_Class cc ON cc.Subdivision_ID=s.Subdivision_ID
+										WHERE s.Subdivision_Name='".mysql_real_escape_string(trim($data[1]))."' AND cc.Class_ID=2056 AND cc.Class_Template_ID=0
+										GROUP BY cc.Sub_Class_ID
+										ORDER BY cc.Checked DESC, cc.Priority
+										", ARRAY_N);
+				//Пропускаем строку с заголовками колонок
+				$row++;
+				continue;
+			} else if($data[0] && $data[1] && $sub_id) {
+				//строка с товаром
+				$data[2] = mb_strtolower(trim($data[2]));
+				if(!isset($stones[$data[2]])){
+					$result['error'] .= 'Камень &laquo;'.$data[2].'&raquo; не найден в базе<br>';
+					continue;
+				}
+				$a = array(
+					'Article' => $data[0],
+					'Name' => $data[1],
+					'Description' => $data[2],
+					'InStock' => str_replace(",", ".", trim($data[3])),
+					'Price' => str_replace(",", ".", trim($data[4])),
+					'PriceUSD' => str_replace(",", ".", trim($data[5]))
+				);
+				if($id = $db->get_var("SELECT Message_ID FROM Message2056 WHERE Sub_Class_ID={$cc_id} AND Article='".mysql_real_escape_string(trim($data[0]))."' LIMIT 1")){
+					update_row("Message2056", $a, "Message_ID=".$id);
+				} else {
+					$a['Subdivision_ID'] = $sub_id;
+					$a['Sub_Class_ID'] = $cc_id;
+					$a['Checked'] = 1;
+					$a['Keyword'] = translit($a['Name']);
+					insert_row("Message2056", $a);
+				}
+				//$result['error'] .= $db->last_query."\n";
+			}
+		}
+	} catch (Exception $e) {
+		$result['error'] = $e->getMessage();
+	}
+
+	return $result;
+}
+
+function exportTovary(){
+	global $nc_core, $db, $sub;
+	require_once $nc_core->INCLUDE_FOLDER.'lib/excel/PHPExcel.php';
+
+	$items = $db->get_results("SELECT a.*,
+								s.Subdivision_Name
+								FROM Message2056 a
+								LEFT JOIN Subdivision s ON s.Subdivision_ID=a.Subdivision_ID
+								GROUP BY a.Message_ID
+								ORDER BY s.Priority,s.Subdivision_ID,a.Priority,a.Message_ID
+								", ARRAY_A);
+
+	$ea = new \PHPExcel();
+	$ea->getProperties()
+		->setTitle('Товары')
+	;
+	$ews = $ea->getSheet(0);
+	$ews->setTitle('Товары');
+
+	$ews->getColumnDimension('a')->setWidth(10);
+	$ews->getColumnDimension('b')->setWidth(20);
+	$ews->getColumnDimension('c')->setWidth(20);
+	$ews->getColumnDimension('d')->setWidth(20);
+	$ews->getColumnDimension('e')->setWidth(15);
+	$ews->getColumnDimension('f')->setWidth(15);
+	$ews->getColumnDimension('g')->setWidth(15);
+	$ews->getColumnDimension('h')->setWidth(15);
+
+	$row = 1;
+	$prev_sub = null;
+	foreach($items as $item){
+		if($prev_sub!=$item['Subdivision_Name']){
+			if($prev_sub) $row +=3;
+
+			$ews->setCellValue('b'.$row, $item['Subdivision_Name']);
+			$ews
+				->getStyle('a'.$row.':bb'.$row)
+				->getFill()->setFillType(\PHPExcel_Style_Fill::FILL_SOLID)
+				->getStartColor()
+				->setARGB('00ffff00');
+			$ews
+				->getStyle('a'.$row.':bb'.$row)
+				->applyFromArray(array(
+					'font' => array(
+						'bold' => true,
+						'size' => 15
+					)
+				));
+			$prev_sub = $item['Subdivision_Name'];
+			$row++;
+
+			$ews->setCellValue('a'.$row, 'Артикул');
+			$ews->setCellValue('b'.$row, 'Наименование');
+			$ews->setCellValue('c'.$row, 'Описание');
+			$ews->setCellValue('d'.$row, 'Наличие');
+			$ews->setCellValue('e'.$row, 'Цена');
+			$ews->setCellValue('f'.$row, 'Цена в у.е.');
+
+			$ews
+				->getStyle('a'.$row.':bb'.$row)
+				->applyFromArray(array(
+					'font' => array(
+						'bold' => true
+					)
+				));
+			$row++;
+		}
+
+		$ews->setCellValue('a'.$row, $item['Article']);
+		$ews->setCellValue('b'.$row, $item['Name']);
+		$ews->setCellValue('c'.$row, $item['Description']);
+		$ews->setCellValue('d'.$row, $item['InStock']);
+		$ews->setCellValue('e'.$row, $item['Price']);
+		$ews->setCellValue('f'.$row, $item['PriceUSD']);
+
+		$row++;
+	}
+
+	$ews->getStyle('a1:bb'.$row)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
+
+	$writer = \PHPExcel_IOFactory::createWriter($ea, 'Excel2007');
+
+	//$writer->setIncludeCharts(true);
+	$writer->save($nc_core->DOCUMENT_ROOT.'/x/tovary.xlsx');
+
+	//$writer->save('php://output');
+	return '/x/tovary.xlsx';
 }
 
 

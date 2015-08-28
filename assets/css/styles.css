@@ -258,7 +258,7 @@ img {
 }
 .dropdown {
 	position: absolute;
-	z-index: 2;
+	z-index: 3;
 	left: 0;
 	top: 100%;
 	min-width: 100%;
@@ -1963,10 +1963,14 @@ img {
 	padding-left: 15px;
 }
 /* Торцевые профили для подоконников из натурального камня и каменных столешниц */
+.elements__group-wrap_317_1,
+.elements__group-wrap_306_1,
 .elements__group-wrap_93_1 {
 	width: 72%;
 }
 /* Торцевые профили из мрамора */
+.elements__group-wrap_317_2,
+.elements__group-wrap_306_2,
 .elements__group-wrap_93_2 {
 	width: 28%;
 }
@@ -1974,6 +1978,7 @@ img {
 .elements__group {
 	padding: 0 15px 15px;
 	border: 3px solid #e6e6e6;
+	position: relative;
 }
 .elements__group-header {
 	display: table;
@@ -1987,9 +1992,14 @@ img {
 	background-color: #fff;
 	font-weight: bold;
 }
-.elements__slider {
+.elements__arrow {}
+.elements__arrow_prev {
+	left: -18px;
 }
-.swiper {
+.elements__arrow_next {
+	right: -18px;
+}
+.elements__slider {
 }
 .elements__slides {
 }
@@ -2440,4 +2450,48 @@ img {
 .lmenu2__item-a {
 	display: block;
 	font-size: 12px;
+}
+
+.results {
+}
+.form_results {
+	display: table;
+	width: 100%;
+	margin-bottom: 30px;
+}
+.results__form-row {
+	display: table-row;
+}
+.results__input-box {
+	display: table-cell;
+}
+.results__button-box {
+	display: table-cell;
+	width: 150px;
+	padding-left: 30px;
+}
+.results__items {
+	padding-left: 3em;
+}
+.results__item {
+	list-style: outside decimal;
+	line-height: 1.5;
+	margin-bottom: 15px;
+}
+.results__title {
+	font-size: 16px;
+}
+.matched {
+}
+.results__context {
+}
+.matched {
+}
+.matched {
+}
+.matched {
+}
+.matched {
+}
+.results__item {
 }
