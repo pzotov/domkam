@@ -447,6 +447,11 @@
   .liquid {
     display: none;
   }
+
+  .results {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 
 /* мобильные */

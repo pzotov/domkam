@@ -26,37 +26,38 @@ $(function(){
 		rewided = false,
 		$links = $(".links"),
 		$wrapper = $(".wrapper"),
-		$menu__others = $(".menu__others");
-	/**
-	 * В зависимости от размера экрана переносим меню дополнительных ссылок
-	 * в блок с основным меню или в основную страницу, меняя при этом класс
-	 * для разного отображения
-	 */
+		$menu__others = $(".menu__others"),
+		$info = $(".links2_info");
+
+	if($info.length){
+		$info.insertAfter(".links__item-a_info");
+	}
+
 	$(window).resize(function(){
 		var ww = $(window).width();
-		if(ww>768 || menu_shown) {
-			$menu.show();
-			$menu_spans
-				.css("width", "auto")
-				.each(function(){
-					$(this).width($(this).parent().width());
-				});
-			rewided = true;
-		} else {
-			$menu.hide();
-		}
+		/**
+		 * В зависимости от размера экрана переносим меню дополнительных ссылок
+		 * в блок с основным меню или в основную страницу, меняя при этом класс
+		 * для разного отображения
+		 */
 		if(ww>768){
 			$links
 				.removeClass("links_menu")
 				.addClass("links_float")
 				.appendTo($wrapper);
 
+			$(".dropdown__items").hide();
+			var $lmenu = $(".lmenu");
+			
 			$(".dropdown").each(function(){
 				$(this).parent().find(".menu__item-a").first().off("click");
 				$(this).parent().off("mouseenter mouseleave").mouseenter(function(){
+					$lmenu.appendTo($(".dropdown", this).first());
+					$lmenu.find(".lmenu__item_" + $(this).data("id")).trigger("mouseenter");
 					$(".dropdown", this).first().addClass("dropdown_shown");
 					$(".menu__item-a", this).first().addClass("menu__item-a_open");
 				}).mouseleave(function(){
+					$lmenu.appendTo("body");
 					$(".dropdown", this).first().removeClass("dropdown_shown");
 					$(".menu__item-a", this).first().removeClass("menu__item-a_open");
 				});
@@ -67,6 +68,7 @@ $(function(){
 				.removeClass("links_float")
 				.appendTo($menu__others);
 
+			$(".dropdown__items").show();
 			$(".dropdown").each(function(){
 				$(this).parent().off("mouseenter mouseleave");
 				$(this).parent().find(".menu__item-a").first().off("click").click(function(e){
@@ -83,6 +85,26 @@ $(function(){
 				});
 			});
 		}
+		/**
+		 * выравниваем пункты меню
+		 */
+		if(ww>768 || menu_shown) {
+			$menu.show();
+			$menu_spans
+				.css("width", "auto")
+				//.removeAttr("style")
+				.each(function () {
+					$(this).data("width", $(this).parent().width());
+				})
+				.each(function () {
+					$(this).width($(this).data("width"));
+				})
+			;
+			rewided = true;
+		} else {
+			$menu.hide();
+		}
+
 		if(ww<=480){
 			$(".cats__items-wrap").each(function(){
 				$(".cats__items", this).addClass("swiper-wrapper");
@@ -132,6 +154,7 @@ $(function(){
 				$(".dostavka__box", this).outerHeight(Math.max(hl, hr));
 			});
 		}
+		//$(window).trigger("resize");
 	});
 
 	/**
@@ -556,6 +579,14 @@ $(function(){
 	 * а также настроить поля для ввода телефона
 	 */
 	$(".expand_image").addClass("fancybox").attr("rel", "gallery");
+	$(".links2__item-a_zvonok").each(function(){
+		$(this)
+			.addClass("fancybox fancybox.ajax")
+			.data("fancybox-title", $(this).html())
+			.data("fancybox-href", $(this).attr("href") + "?isNaked=1&f_FromPage=" + encodeURIComponent(location.href));
+		;
+	});
+
 	$(".fancybox").fancybox({
 		padding: 2,
 		afterLoad: function(){

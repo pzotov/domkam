@@ -281,6 +281,7 @@ select {
   margin: auto;
 }
 
-.fancybox-inner .form_auth {
+.fancybox-inner .form_auth,
+.fancybox-inner .form_zvonok {
   padding: 48px 48px 30px;
 }
