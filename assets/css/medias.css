@@ -99,6 +99,7 @@
 	.menu__item {
 		display: block;
 		height: 51px;
+		position: relative;
 	}
 	.menu__item-a {
 		float: none;

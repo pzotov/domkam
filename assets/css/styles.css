@@ -222,7 +222,7 @@ img {
 .menu__item {
 	display: table-cell;
 	height: 90px;
-	position: relative;
+	/*position: relative;*/
 }
 .menu__item-a {
 	display: block;
@@ -267,6 +267,9 @@ img {
 }
 .dropdown_shown {
 	display: block;
+}
+.dropdown_lmenu {
+	right: 0;
 }
 .dropdown__items {
 	background-color: #fff;
@@ -2384,8 +2387,9 @@ img {
 .lmenu {
 	display: none;
 	background-color: #fff;
-	width: 730px;
+	width: 100%;
 	box-shadow: 2px 2px 8px rgba(0,0,0, .7);
+	position: relative;
 }
 .dropdown .lmenu {
 	display: block;
@@ -2395,7 +2399,7 @@ img {
 	float: left;
 	width: 200px;
 	border-right: 1px solid #e6e6e6;
-	position: relative;
+	/*position: relative;*/
 }
 .lmenu__item {
 }
@@ -2421,7 +2425,7 @@ img {
 	position: absolute;
 	left: 201px;
 	top: 0;
-	width: 530px;
+	right: 0;
 	min-height: 100%;
 }
 .lmenu1__items {

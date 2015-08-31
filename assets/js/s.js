@@ -50,12 +50,12 @@ $(function(){
 			var $lmenu = $(".lmenu"),
 				lmenu_width = $lmenu.outerWidth();
 
-			$(".dropdown").each(function(){
+			$(".dropdown").addClass("dropdown_lmenu").each(function(){
 				$(this).parent().find(".menu__item-a").first().off("click");
 				$(this).parent().off("mouseenter mouseleave").mouseenter(function(){
 					$lmenu.appendTo($(".dropdown", this).first());
-					if($(this).offset().left + lmenu_width>ww-15) $lmenu.css("margin-left", ww - 15 - ($(this).offset().left + lmenu_width));
-					else $lmenu.css("margin-left", 0);
+					//if($(this).offset().left + lmenu_width>ww-15) $lmenu.css("margin-left", ww - 15 - ($(this).offset().left + lmenu_width));
+					//else $lmenu.css("margin-left", 0);
 
 					var related_lmenu = $lmenu.find(".lmenu__item_" + $(this).data("id"));
 
@@ -83,7 +83,7 @@ $(function(){
 				.appendTo($menu__others);
 
 			$(".dropdown__items").show();
-			$(".dropdown").each(function(){
+			$(".dropdown").removeClass("dropdown_lmenu").each(function(){
 				$(this).parent().off("mouseenter mouseleave");
 				$(this).parent().find(".menu__item-a").first().off("click").click(function(e){
 					e.preventDefault();
