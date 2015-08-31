@@ -310,6 +310,28 @@ function importPlitka(){
 					$result['error'] .= 'Камень &laquo;'.$data[2].'&raquo; не найден в базе<br>';
 					continue;
 				}
+				if(!isset($sizes[trim($data[4])])){
+					$sizes[trim($data[4])] = insert_row("Message2036", array(
+						"Subdivision_ID" => 6,
+						"Sub_Class_ID" => 96,
+						"Priority" => intval($db->get_var("SELECT MAX(Priority) FROM Message2036"))+1,
+						"Checked" => 1,
+						"Name" => trim($data[4])
+					));
+					//$result['error'] .= 'Размер плитки &laquo;'.$data[4].'&raquo; не найден в базе<br>';
+					//continue;
+				}
+				if(!isset($mans[trim($data[5])])){
+					$mans[trim($data[5])] = insert_row("Message2037", array(
+						"Subdivision_ID" => 6,
+						"Sub_Class_ID" => 97,
+						"Priority" => intval($db->get_var("SELECT MAX(Priority) FROM Message2037"))+1,
+						"Checked" => 1,
+						"Name" => trim($data[5])
+					));
+//					$result['error'] .= 'Вид обработки &laquo;'.$data[5].'&raquo; не найден в базе<br>';
+//					continue;
+				}
 				$a = array(
 					'Article' => $data[0],
 					'Name' => $data[1],
@@ -328,10 +350,12 @@ function importPlitka(){
 					$a['Subdivision_ID'] = $sub;
 					$a['Sub_Class_ID'] = $cc_id;
 					$a['Checked'] = 1;
-					$a['Keyword'] = translit($a['Name']);
+					$a['Keyword'] = translit($a['Article'].'-'.$a['Name']);
+					$a['Priority'] = intval($db->get_var("SELECT MAX(Priority) FROM Message2035 WHERE Sub_Class_ID={$cc_id}"))+1;
 					insert_row("Message2035", $a);
 				}
-				//$result['error'] .= $db->last_query."\n";
+//				$result['error'] .= $db->last_query."<br>";
+//				$result['error'] .= $db->last_error."<br>";
 			}
 		}
 	} catch (Exception $e) {

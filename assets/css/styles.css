@@ -2435,14 +2435,15 @@ img {
 	display: block;
 	float: left;
 	width: 33.33%;
-	padding: 10px;
+	padding: 10px 10px 10px 30px;
+	background: url(../images/blank.gif) 2px 9px no-repeat;
 }
 .lmenu1__item:nth-child(3n+1) {
 	clear: both;
 }
 .lmenu1__item-a {
 	display: block;
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 16px;
 	text-align: left;
 	color: #000;
@@ -2461,7 +2462,7 @@ img {
 }
 .lmenu2__item-a {
 	display: block;
-	font-size: 12px;
+	/*font-size: 12px;*/
 }
 
 .results {
