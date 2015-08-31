@@ -2420,6 +2420,16 @@ img {
 	color: #f26522;
 }
 
+.lmenu__item-a_163,
+.lmenu__item-a_164,
+.lmenu__item-a_165,
+.lmenu__item-a_167,
+.lmenu__item-a_168,
+.lmenu__item-a_169 {
+	padding: 10px 10px 10px 30px;
+	text-transform: none;
+}
+
 .lmenu1 {
 	display: none;
 	position: absolute;

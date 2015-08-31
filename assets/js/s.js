@@ -57,7 +57,8 @@ $(function(){
 					//if($(this).offset().left + lmenu_width>ww-15) $lmenu.css("margin-left", ww - 15 - ($(this).offset().left + lmenu_width));
 					//else $lmenu.css("margin-left", 0);
 
-					var related_lmenu = $lmenu.find(".lmenu__item_" + $(this).data("id"));
+					var menu__url = $(".menu__item-a", this).first().attr("href"),
+						related_lmenu = $lmenu.find(".lmenu__item-a[href='" + menu__url + "']").first().parent();
 
 					$(".lmenu__item-a").removeClass("lmenu__item-a_open");
 					$(".lmenu__item-a", related_lmenu).first().addClass("lmenu__item-a_open");

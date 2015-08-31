@@ -422,7 +422,7 @@ function exportPlitka(){
 
 			$ews->setCellValue('a'.$row, 'Артикул');
 			$ews->setCellValue('b'.$row, 'Название плитки');
-			$ews->setCellValue('c'.$row, 'Артикул камня');
+			$ews->setCellValue('c'.$row, 'Номер камня');
 			$ews->setCellValue('d'.$row, 'Название камня');
 			$ews->setCellValue('e'.$row, 'Размер');
 			$ews->setCellValue('f'.$row, 'Вид обработки');
