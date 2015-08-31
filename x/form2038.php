@@ -26,7 +26,7 @@
 	<select name="f_Stone_ID">
 		<option value="">Выберите</option>
 		<?
-		if($stones = $db->get_results("SELECT s.Subdivision_Name,a.Message_ID,a.Name
+		if($stones = $db->get_results("SELECT s.Subdivision_Name,a.Message_ID,a.Name,a.Article
 				FROM Message2006 a
 				LEFT JOIN Subdivision s ON a.Subdivision_ID=s.Subdivision_ID
 				".($cc_settings['Stone_Sub_ID'] ? 'WHERE a.Subdivision_ID='.$cc_settings['Stone_Sub_ID'] : '')."
@@ -38,7 +38,7 @@
 					echo '<optgroup label="'.$data['Subdivision_Name'].'">';
 					$prev_sub = $data['Subdivision_Name'];
 				}
-				echo '<option value="'.$data['Message_ID'].'"'.($data['Message_ID']==$f_Stone_ID ? " selected" : "").'>'.$data['Name'].'</option>';
+				echo '<option value="'.$data['Message_ID'].'"'.($data['Message_ID']==$f_Stone_ID ? " selected" : "").'>'.$data['Article'].': '.$data['Name'].'</option>';
 			}
 			if($prev_sub) echo '</optgroup>';
 		}

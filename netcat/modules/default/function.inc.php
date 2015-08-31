@@ -260,9 +260,9 @@ function importPlitka(){
 	$cc_id = $db->get_var("SELECT Sub_Class_ID FROM Sub_Class WHERE Subdivision_ID={$sub} AND Sub_Class_ID!={$cc} AND Class_ID={$classID} ORDER BY Priority LIMIT 1");
 
 	$stones = array();
-	if($_stones = $db->get_results("SELECT Message_ID,Name FROM Message2006", ARRAY_A)){
+	if($_stones = $db->get_results("SELECT Message_ID,Article FROM Message2006", ARRAY_A)){
 		foreach($_stones as $s){
-			$stones[mb_strtolower(trim($s['Name']))] = $s['Message_ID'];
+			$stones[mb_strtolower(trim($s['Article']))] = $s['Message_ID'];
 		}
 	} else return array('error' => 'нет камней');
 
@@ -313,14 +313,14 @@ function importPlitka(){
 				$a = array(
 					'Article' => $data[0],
 					'Name' => $data[1],
-					'Stone_ID' => $stones[trim($data[2])],
-					'Size' => $sizes[trim($data[3])],
-					'SizeStr' => $data[3],
-					'Manufacturing' => $mans[trim($data[4])],
-					'ManufacturingStr' => $data[4],
-					'InStock' => str_replace(",", ".", $data[5]),
-					'Price' => str_replace(",", ".", $data[6]),
-					'PriceAction' => str_replace(",", ".", $data[7])
+					'Stone_ID' => $stones[$data[2]],
+					'Size' => $sizes[trim($data[4])],
+					'SizeStr' => $data[4],
+					'Manufacturing' => $mans[trim($data[5])],
+					'ManufacturingStr' => $data[5],
+					'InStock' => str_replace(",", ".", $data[6]),
+					'Price' => str_replace(",", ".", $data[7]),
+					'PriceAction' => str_replace(",", ".", $data[8])
 				);
 				if($id = $db->get_var("SELECT Message_ID FROM Message2035 WHERE Sub_Class_ID={$cc_id} AND Article='".mysql_real_escape_string(trim($data[0]))."' LIMIT 1")){
 					update_row("Message2035", $a, "Message_ID=".$id);
@@ -347,7 +347,7 @@ function exportPlitka(){
 
 	$items = $db->get_results("SELECT a.*,
 								s.Subdivision_Name,
-								stone.Name Stone_Name, stone.EnglishName
+								stone.Article Stone_Article, stone.Name Stone_Name, stone.EnglishName Stone_EnglishName
 								FROM Message2035 a
 								LEFT JOIN Subdivision s ON s.Subdivision_ID=a.Subdivision_ID
 								LEFT JOIN Message2006 stone ON stone.Message_ID=a.Stone_ID
@@ -364,13 +364,14 @@ function exportPlitka(){
 	$ews->setTitle('Остатки');
 
 	$ews->getColumnDimension('a')->setWidth(10);
-	$ews->getColumnDimension('b')->setWidth(20);
-	$ews->getColumnDimension('c')->setWidth(20);
-	$ews->getColumnDimension('d')->setWidth(20);
-	$ews->getColumnDimension('e')->setWidth(15);
+	$ews->getColumnDimension('b')->setWidth(25);
+	$ews->getColumnDimension('c')->setWidth(15);
+	$ews->getColumnDimension('d')->setWidth(25);
+	$ews->getColumnDimension('e')->setWidth(20);
 	$ews->getColumnDimension('f')->setWidth(15);
-	$ews->getColumnDimension('g')->setWidth(15);
+	$ews->getColumnDimension('g')->setWidth(10);
 	$ews->getColumnDimension('h')->setWidth(15);
+	$ews->getColumnDimension('i')->setWidth(15);
 
 	$row = 1;
 	$prev_sub = null;
@@ -397,12 +398,13 @@ function exportPlitka(){
 
 			$ews->setCellValue('a'.$row, 'Артикул');
 			$ews->setCellValue('b'.$row, 'Название плитки');
-			$ews->setCellValue('c'.$row, 'Название камня');
-			$ews->setCellValue('d'.$row, 'Размер');
-			$ews->setCellValue('e'.$row, 'Вид обработки');
-			$ews->setCellValue('f'.$row, 'Наличие');
-			$ews->setCellValue('g'.$row, 'Цена');
-			$ews->setCellValue('h'.$row, 'Цена по акции');
+			$ews->setCellValue('c'.$row, 'Артикул камня');
+			$ews->setCellValue('d'.$row, 'Название камня');
+			$ews->setCellValue('e'.$row, 'Размер');
+			$ews->setCellValue('f'.$row, 'Вид обработки');
+			$ews->setCellValue('g'.$row, 'Наличие');
+			$ews->setCellValue('h'.$row, 'Розничная цена');
+			$ews->setCellValue('i'.$row, 'Цена по акции');
 
 			$ews
 				->getStyle('a'.$row.':bb'.$row)
@@ -416,12 +418,13 @@ function exportPlitka(){
 
 		$ews->setCellValue('a'.$row, $item['Article']);
 		$ews->setCellValue('b'.$row, $item['Name']);
-		$ews->setCellValue('c'.$row, $item['Stone_Name']);
-		$ews->setCellValue('d'.$row, $item['SizeStr']);
-		$ews->setCellValue('e'.$row, $item['ManufacturingStr']);
-		$ews->setCellValue('f'.$row, $item['InStock']);
-		$ews->setCellValue('g'.$row, $item['Price']);
-		$ews->setCellValue('h'.$row, $item['PriceAction']);
+		$ews->setCellValue('c'.$row, $item['Stone_Article']);
+		$ews->setCellValue('d'.$row, $item['Stone_Name'].($item['Stone_EnglishName'] ? ' ('.$item['Stone_EnglishName'].')' : ''));
+		$ews->setCellValue('e'.$row, $item['SizeStr']);
+		$ews->setCellValue('f'.$row, $item['ManufacturingStr']);
+		$ews->setCellValue('g'.$row, $item['InStock']);
+		$ews->setCellValue('h'.$row, $item['Price']);
+		$ews->setCellValue('i'.$row, $item['PriceAction']);
 
 		$row++;
 	}

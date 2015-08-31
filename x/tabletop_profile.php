@@ -6,7 +6,7 @@ $profile = stripslashes($_GET['profile']);
 
 ?>
 <form class="form form_tabletop-profile">
-	<div class="form__header">Выбор торца столешницы</div>
+	<div class="form__header">Выбор торца <?= htmlspecialchars($_GET['name'], ENT_QUOTES) ?></div>
 	<div class="form__row">
 		<?= nc_objects_list(30,93, "nc_ctpl=2034&profile=".urlencode($profile)) ?>
 	</div>

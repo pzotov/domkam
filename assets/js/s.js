@@ -47,12 +47,16 @@ $(function(){
 				.appendTo($wrapper);
 
 			$(".dropdown__items").hide();
-			var $lmenu = $(".lmenu");
+			var $lmenu = $(".lmenu"),
+				lmenu_width = $lmenu.outerWidth();
 
 			$(".dropdown").each(function(){
 				$(this).parent().find(".menu__item-a").first().off("click");
 				$(this).parent().off("mouseenter mouseleave").mouseenter(function(){
 					$lmenu.appendTo($(".dropdown", this).first());
+					if($(this).offset().left + lmenu_width>ww-15) $lmenu.css("margin-left", ww - 15 - ($(this).offset().left + lmenu_width));
+					else $lmenu.css("margin-left", 0);
+
 					var related_lmenu = $lmenu.find(".lmenu__item_" + $(this).data("id"));
 
 					$(".lmenu__item-a").removeClass("lmenu__item-a_open");
@@ -485,7 +489,7 @@ $(function(){
 
 		$("#tabletop__profile", this).click(function(){
 			$.fancybox({
-				href: '/x/tabletop_profile.php?profile=' + encodeURIComponent(profile.val()),
+				href: '/x/tabletop_profile.php?profile=' + encodeURIComponent(profile.val()) + '&name=' + encodeURIComponent(name),
 				type: 'ajax',
 				padding: $(window).width()>480 ? 50 : 15,
 				afterShow: function(){
