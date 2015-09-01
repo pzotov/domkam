@@ -502,6 +502,9 @@ img {
 	background-color: #fff;
 	padding: 4px 20px;
 }
+.links__item_info .links2__items {
+	padding: 14px;
+}
 .links_float .links2__items {
 	border: 3px solid #f26522;
 }
@@ -518,6 +521,7 @@ img {
 	text-decoration: none;
 	text-transform: uppercase;
 	font-weight: bold;
+	white-space: nowrap;
 }
 .links2__item-a:hover {
 	text-decoration: underline;
@@ -866,6 +870,33 @@ img {
 	display: block;
 	padding: 7px;
 }
+.actions__image {
+	display: block;
+	width: 190px;
+	float: left;
+	margin-right: 30px;
+}
+.actions__title {
+	text-align: left;
+	display: block;
+	font-weight: 600;
+	font-size: 18px;
+	margin-bottom: 20px;
+	text-decoration: none;
+	color: #000;
+}
+.actions__info {
+	text-align: left;
+}
+
+
+.links2 .actions {
+	padding: 0;
+}
+.links2 .actions__item {
+	padding: 0;
+	width: 380px;
+}
 .actions__item img {
 	width: 100%;
 }
@@ -1067,24 +1098,24 @@ img {
 	position: absolute;
 	z-index: 1;
 	left: 0;
-	top: 30px;
+	top: 10px;
 	font-weight: bold;
 }
 .stones__label_news {
 	color: #0d0;
-	width: 35px;
-	height: 35px;
-	background: url(../images/new.png) 0 0/35px 35px no-repeat;
+	width: 50px;
+	height: 50px;
+	background: url(../images/new.png) 0 0/50px 50px no-repeat;
 	overflow: hidden;
-	text-indent: 35px;
+	text-indent: 50px;
 }
 .stones__label_action {
 	color: #d00;
-	width: 40px;
-	height: 25px;
-	background: url(../images/akciya_mini.png) 0 0/40px 25px no-repeat;
+	width: 50px;
+	height: 31px;
+	background: url(../images/akciya_mini.png) 0 0/50px 31px no-repeat;
 	overflow: hidden;
-	text-indent: 40px;
+	text-indent: 50px;
 }
 .stones_in-project .stones__item {
 	float: left;
@@ -2439,7 +2470,7 @@ img {
 	min-height: 100%;
 }
 .lmenu1__items {
-	padding: 0 10px;
+	padding: 10px;
 }
 .lmenu1__item {
 	display: block;

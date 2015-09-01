@@ -585,6 +585,12 @@
     /*display: block;*/
   }
 
+  .actions__image {
+    width: 100%;
+    float: none;
+    margin: 0 0 15px;
+  }
+
   .proizv__wrapper img {
     width: auto;
     height: 320px;

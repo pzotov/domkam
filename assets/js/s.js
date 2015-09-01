@@ -67,7 +67,7 @@ $(function(){
 					$(".dropdown", this).first().addClass("dropdown_shown");
 
 					$lmenu.css({
-						"min-height": $(".lmenu1", related_lmenu).outerHeight() + 20
+						"min-height": $(".lmenu1", related_lmenu).outerHeight()
 					});
 
 					$(".menu__item-a", this).first().addClass("menu__item-a_open");
@@ -125,7 +125,7 @@ $(function(){
 				$(".cats__items", this).addClass("swiper-wrapper");
 				$(".cats__item", this)
 					.addClass("swiper-slide")
-					.off("click")
+					.off("mouseenter")
 				;
 				$(this).swiper({
 					loop: true,
@@ -145,14 +145,14 @@ $(function(){
 					cat_info_benefits = cat_info.find(".cat-info__benefits");
 				if(swiper) swiper.destroy(true, true);
 				$(".cats__items", this).removeClass("swiper-wrapper");
-				$(".cats__item", this).on("click", function(e){
-					e.preventDefault();
+				$(".cats__item", this).on("mouseenter", function(e){
+					//e.preventDefault();
 					cat_info.hide();
 					cat_info_title.html($(this).find(".cats__title").html());
 					cat_info_img.attr("src", $(this).find(".cats__image img").attr("src"));
 					cat_info_benefits.html($(this).data("benefits"));
 					cat_info.show();
-				}).first().trigger("click");
+				}).first().trigger("mouseenter");
 			});
 
 			//На десктопах и планшетах параметры камня должны быть справа от картинки
@@ -634,7 +634,7 @@ $(function(){
 			$(".lmenu__item-a", this).first().addClass("lmenu__item-a_open");
 			$(".lmenu1", this).show();
 			$(this).closest(".lmenu").css({
-				"min-height": $(".lmenu1", this).outerHeight() + 20
+				"min-height": $(".lmenu1", this).outerHeight()
 			});
 		}).mouseleave(function(){
 			$(".lmenu__item-a", this).first().removeClass("lmenu__item-a_open");

@@ -780,7 +780,7 @@ function humanDate( $dateField, $showTime = false, $timeSeparator = ", " ){
 	} else return $dateField;
 	if( date("Ymd")==$year.$month.$day ) $dateString = "сегодня";
 	else if( date("Ymd", time()-86400)==$year.$month.$day ) $dateString = "вчера";
-	else $dateString = $day." ".$ru_monthes[$month]." ".$year."";
+	else $dateString = $day." ".$ru_monthes[$month]." ".$year."г.";
 	if( $showTime ) $dateString .= $timeSeparator."{$hours}:{$minutes}";
 	return $dateString;
 }
@@ -857,6 +857,49 @@ function maildump($var){
 	mail("pavel.v.zotov@gmail.com", "maildump", print_r($var, true), "Content-type: text/plain; charset=utf-8\nFrom: domkam@zotov.info");
 }
 
+function subdivisionChecks($selected, $parent_id=0){
+	global $db;
+	$result = '';
+	if(!$parent_id){
+		$result .= '
+		<style>
+			.sub-checks {
+				max-height: 300px;
+				overflow-x: hidden;
+				overflow-y: scroll;
+				bordeR: 1px solid #eee;
+			}
+			.sub-checks__items {
+				list-style: outside none;
+				padding: 5px 0;
+			}
+			.sub-checks__item {
+				display: block;
+				list-style: outside none;
+				padding-left: 1em;
+			}
+		</style>
+		<div class="sub-checks">
+			<ul class="sub-checks__items"><li class="sub-checks__item"><label><input type="checkbox" class="sub-checks__checkbox" onclick="$(\'.sub-checks__checkbox\').removeAttr(\'checked\').removeProp(\'checked\');"> Все разделы</label></li></ul>
+		';
+	}
+	if($subs = $db->get_results("SELECT Subdivision_ID,Subdivision_Name FROM Subdivision WHERE Parent_Sub_ID={$parent_id} ORDER BY Priority, Subdivision_ID", ARRAY_A)){
+		$result .= '<ul class="sub-checks__items">';
+		foreach($subs as $s){
+			$result .= '<li class="sub-checks__item"><label class="sub-checks__label"><input type="checkbox" class="sub-checks__checkbox" name="sub_checks[]" value="'.$s['Subdivision_ID'].'"'.(in_array($s['Subdivision_ID'], $selected) ? ' checked' : '').'> '.$s['Subdivision_Name'].'</label>';
+			$result .= subdivisionChecks($selected, $s['Subdivision_ID']);
+			$result .= '</li>';
+		}
+		$result .= '</ul>';
+	}
+	if(!$parent_id){
+		$result .= '
+		</div>
+		';
+	}
+	return $result;
+}
+
 
 class EventListener {
 	public function __construct () {
@@ -902,3 +945,127 @@ class EventListener {
 }
 
 $listener = new  EventListener();
+
+/*
+	Class for working with ipgeobase.ru geo database.
+
+	Copyright (C) 2013, Vladislav Ross
+
+	This library is free software; you can redistribute it and/or
+	modify it under the terms of the GNU Lesser General Public
+	License as published by the Free Software Foundation; either
+	version 2.1 of the License, or (at your option) any later version.
+
+	This library is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+	Lesser General Public License for more details.
+
+	You should have received a copy of the GNU Lesser General Public
+	License along with this library; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+    E-mail: vladislav.ross@gmail.com
+	URL: https://github.com/rossvs/ipgeobase.php
+
+*/
+/*
+ * @class IPGeoBase
+ * @brief Класс для работы с текстовыми базами ipgeobase.ru
+ * @see example.php
+ *
+ * Определяет страну, регион и город по IP для России и Украины
+ */
+
+class IPGeoBase {
+	private $fhandleCIDR, $fhandleCities, $fSizeCIDR, $fsizeCities;
+
+	/*
+	 * @brief Конструктор
+	 *
+	 * @param CIDRFile файл базы диапазонов IP (cidr_optim.txt)
+	 * @param CitiesFile файл базы городов (cities.txt)
+	 */
+	function __construct($CIDRFile = false, $CitiesFile = false){
+		global $nc_core;
+		if(!$CIDRFile){
+			$CIDRFile = $nc_core->DOCUMENT_ROOT . '/x/geo_files/cidr_optim.txt';
+		}
+		if(!$CitiesFile){
+			$CitiesFile = $nc_core->DOCUMENT_ROOT . '/x/geo_files/cities.txt';
+		}
+		$this->fhandleCIDR = fopen($CIDRFile, 'r') or die("Cannot open $CIDRFile");
+		$this->fhandleCities = fopen($CitiesFile, 'r') or die("Cannot open $CitiesFile");
+		$this->fSizeCIDR = filesize($CIDRFile);
+		$this->fsizeCities = filesize($CitiesFile);
+	}
+
+	/*
+	 * @brief Получение информации о городе по индексу
+	 * @param idx индекс города
+	 * @return массив или false, если не найдено
+	 */
+	private function getCityByIdx($idx){
+		rewind($this->fhandleCities);
+		while (!feof($this->fhandleCities)) {
+			$str = fgets($this->fhandleCities);
+			$arRecord = explode("\t", trim($str));
+			if($arRecord[0] == $idx){
+				return array('city' => $arRecord[1],
+					'region' => $arRecord[2],
+					'district' => $arRecord[3],
+					'lat' => $arRecord[4],
+					'lng' => $arRecord[5]);
+			}
+		}
+		return false;
+	}
+
+	/*
+	 * @brief Получение гео-информации по IP
+	 * @param ip IPv4-адрес
+	 * @return массив или false, если не найдено
+	 */
+	function getRecord($ip){
+		$ip = sprintf('%u', ip2long($ip));
+
+		rewind($this->fhandleCIDR);
+		$rad = floor($this->fSizeCIDR / 2);
+		$pos = $rad;
+		while (fseek($this->fhandleCIDR, $pos, SEEK_SET) != -1) {
+			if($rad){
+				$str = fgets($this->fhandleCIDR);
+			} else {
+				rewind($this->fhandleCIDR);
+			}
+
+			$str = fgets($this->fhandleCIDR);
+
+			if(!$str){
+				return false;
+			}
+
+			$arRecord = explode("\t", trim($str));
+
+			$rad = floor($rad / 2);
+			if(!$rad && ($ip < $arRecord[0] || $ip > $arRecord[1])){
+				return false;
+			}
+
+			if($ip < $arRecord[0]){
+				$pos -= $rad;
+			} elseif($ip > $arRecord[1]) {
+				$pos += $rad;
+			} else {
+				$result = array('range' => $arRecord[2], 'cc' => $arRecord[3]);
+
+				if($arRecord[4] != '-' && $cityResult = $this->getCityByIdx($arRecord[4])){
+					$result += $cityResult;
+				}
+
+				return $result;
+			}
+		}
+		return false;
+	}
+}
