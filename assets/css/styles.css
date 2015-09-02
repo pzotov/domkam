@@ -459,12 +459,35 @@ img {
 	position: absolute;
 	left: 17px;
 	top: 17px;
-	background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTggMEMzLjU4MiAwIDAgMy41OCAwIDhjMCA0LjQxOCAzLjU4MiA4IDggOHM4LTMuNTgyIDgtOGMwLTQuNDItMy41ODItOC04LTh6bTAgMTRjLTMuMzE0IDAtNi0yLjY4Ni02LTZzMi42ODYtNiA2LTYgNiAyLjY4NiA2IDYtMi42ODYgNi02IDZ6TTcgNmgyVjRIN3Yyem0wIDZoMlY3SDd2NXoiLz48L3N2Zz4=) 0 0 no-repeat;
+	background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGJhc2VQcm9maWxlPSJ0aW55IiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCA0ODAgNDgwIj48cGF0aCBkPSJNMzgxLjgzNCAzNjEuMzljNS4wNDUgMCA5LjE3NC00LjEyNCA5LjE3NC05LjE2N3YtMTQuNjU3YzAtNS4wNDgtMy4xNTgtMTEuODQ4LTYuOTg2LTE1LjExIDAgMC01OS44OTMtNTAuODc1LTY0LjM5My0xMzEuOTgzLTUuMzktOTcuMDAzLTU0Ljk4Ni05My4wMTctODAuNzQ0LTkzLjAxN3MtNzUuMzQ4LTMuOTg2LTgwLjc0MiA5My4wMTdjLTQuNTA4IDgxLjEwOC02NC4zOSAxMzEuOTg0LTY0LjM5IDEzMS45ODQtMy44MzUgMy4yNjItNi45ODUgMTAuMDYyLTYuOTg1IDE1LjExdjE0LjY1NmMwIDUuMDQzIDQuMTI0IDkuMTY4IDkuMTczIDkuMTY4aDI4NS44OXpNMjM2LjAyMiA3OS4xODhoNS43MzVsMy4zNjQtLjAxM2M3LjkzIDAgMTYuMTMzLjUzIDI0LjE5IDIuMjM1di03LjE1OGMwLTEwLjAzLTguMjEtMTguMjUtMTguMjU2LTE4LjI1aC0yNC4zMjhjLTEwLjA1IDAtMTguMjYgOC4yMi0xOC4yNiAxOC4yNXY3LjE1OGM4LjA1NS0xLjcwNSAxNi4yNTgtMi4yMzUgMjQuMTg4LTIuMjM1bDMuMzcuMDEzek0yMDIuMzggMzc5LjY0YzAgMTYuNzM3IDEzLjY4NyAzNi4zNjQgMzAuNDIzIDM2LjM2NGgxMi4xNzJjMTYuNzM2IDAgMzAuNDIyLTE5LjYyNyAzMC40MjItMzYuMzYzSDIwMi4zOHoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=) 0 0 no-repeat;
+	/*background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTggMEMzLjU4MiAwIDAgMy41OCAwIDhjMCA0LjQxOCAzLjU4MiA4IDggOHM4LTMuNTgyIDgtOGMwLTQuNDItMy41ODItOC04LTh6bTAgMTRjLTMuMzE0IDAtNi0yLjY4Ni02LTZzMi42ODYtNiA2LTYgNiAyLjY4NiA2IDYtMi42ODYgNi02IDZ6TTcgNmgyVjRIN3Yyem0wIDZoMlY3SDd2NXoiLz48L3N2Zz4=) 0 0 no-repeat;*/
 }
 .links__item-a_add:before {
 	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE1IDE2SDFjLS41NTIgMC0xLS40NDgtMS0xVjFjMC0uNTUyLjQ0OC0xIDEtMWgxMXYyaDNjLjU1MiAwIDEgLjQ0NyAxIDF2MTJjMCAuNTUyLS40NDggMS0xIDF6TTE0IDRoLTJ2OGgtMVYySDJ2MTJoMTJWNHpNNCAxMWg1djFINHYtMXptMC0yaDV2MUg0Vjl6bTAtNWg1djRINFY0eiIvPjwvc3ZnPg==);
 }
 .links__item-a_info:before {
+	animation: animation_info 10s linear infinite;
+}
+@keyframes animation_info {
+	0% { transform: rotate(0deg); }
+	2% { transform: rotate(25deg); }
+	4% { transform: rotate(0deg); }
+	6% { transform: rotate(-25deg); }
+	8% { transform: rotate(0deg); }
+	10% { transform: rotate(35deg); }
+	12% { transform: rotate(0deg); }
+	14% { transform: rotate(-35deg); }
+	16% { transform: rotate(0deg); }
+	18% { transform: rotate(25deg); }
+	20% { transform: rotate(0deg); }
+	22% { transform: rotate(-25deg); }
+	24% { transform: rotate(0deg); }
+	26% { transform: rotate(15deg); }
+	28% { transform: rotate(0deg); }
+	30% { transform: rotate(-15deg); }
+	32% { transform: rotate(0deg); }
+
+	100% { transform: rotate(0deg); }
 }
 .links__item-a_feedback:before {
 	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE2IDExdjFjMCAuNTUyLS40NDggMS0xIDFoLTJ2M2wtNC41LTNIMWMtLjU1MiAwLTEtLjQ0OC0xLTFWMWMwLS41NTMuNDQ4LTEgMS0xaDE0Yy41NTIgMCAxIC40NDcgMSAxdjEwem0tMi05SDJ2OWg2LjVsMi41IDEuNVYxMWgzVjJ6TTUgOUg0VjdoOHYySDV6TTQgNGg4djJINFY0eiIvPjwvc3ZnPg==);
@@ -1069,7 +1092,7 @@ img {
 
 }
 .stones__slider_double {
-	height: 320px;
+	height: 332px;
 }
 .stones__slides {
 }
@@ -1088,7 +1111,7 @@ img {
 }
 .stones__item {
 	display: block;
-	height: 160px;
+	height: 166px;
 	color: #000;
 	text-decoration: none;
 	padding: 10px 10px 0;
@@ -1144,7 +1167,7 @@ img {
 }
 .stones__block-title {
 	display: block;
-	width: 160px;
+	width: 166px;
 	height: 40px;
 	line-height: 40px;
 	transform: rotate(-90deg);

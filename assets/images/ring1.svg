@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" shape-rendering="geometricPrecision"
+     text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
+    <!--<path fill="#fff" d="M9 11H2V4h7v7z"/> -->
+    <path fill="#fff" d="M5 10H3V9c0-1 1-1 1-1V7 6c0-1 1-1 1-1V4v1h1s1 0 1 1v3c1 0 1 1 1 1H5zM5 11v-1c-1 0 0 0 0 0v1s1 0 1-1v1H5z"/>
+    <!-- <path fill="#fff" d="M7 10H3c0-1 1-1 1-1V8 7 6c0-1 1-1 1-1 1 0 1 0 2 1v4z"/> -->
+</svg>

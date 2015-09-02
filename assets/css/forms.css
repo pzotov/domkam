@@ -103,9 +103,14 @@ input, textarea, button, select {
 	padding:0 28px 0 8px;
 	border: 0 none;
 	background-color: transparent;
-	width: 130%;
+	width: 100%;
 	position: relative;
 	z-index: 1;
+}
+@media screen and (min-width:0\0) {
+	.form__select select {
+		width: 130%;
+	}
 }
 .form__subscribe-box {
 	width: 50%;

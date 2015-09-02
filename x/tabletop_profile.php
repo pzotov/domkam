@@ -4,6 +4,9 @@ require_once $ROOT_FOLDER.'connect_io.php';
 
 $profile = stripslashes($_GET['profile']);
 
+if($_GET['name']=="ступени") {
+}
+
 ?>
 <form class="form form_tabletop-profile">
 	<div class="form__header">Выбор торца <?= htmlspecialchars($_GET['name'], ENT_QUOTES) ?></div>

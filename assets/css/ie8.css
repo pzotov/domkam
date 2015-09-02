@@ -28,3 +28,7 @@
 .fancybox-close {
 	background-image: url(../images/png/fancybox_close.png);
 }
+
+.form__select select {
+	width: 130%;
+}
