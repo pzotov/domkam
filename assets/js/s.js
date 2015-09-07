@@ -407,6 +407,15 @@ $(function(){
 			var comment = $(this).data('comment');
 			if(!comment) comment = 'Интересует: ' + $(this).html();
 			$("[name=f_Text]", zayavka).val(comment);
+			if($(this).hasClass("prices__order-a_plitka")){
+				$("[name=f_Razmer]", zayavka).val($(this).data("size"));
+				$("[name=f_Material]", zayavka)
+					.val($(this).data("stone"))
+					.siblings("span").first().html($(this).data("stone"))
+				;
+				$("#tabletop__material", zayavka).attr("checked", "checked");
+			}
+
 			$("html, body").animate({
 				scrollTop: zayavka.offset().top
 			}, 500);
@@ -519,6 +528,10 @@ $(function(){
 			$.fancybox({
 				href: '/x/tabletop_material.php?material=' + encodeURIComponent(materials) + '&name=' + encodeURIComponent(name),
 				type: 'ajax',
+				width: 250,
+				autoWidth: false,
+				autoSize: false,
+				maxHeight: 250,
 				padding: $(window).width()>480 ? 50 : 15,
 				afterShow: function(){
 					$(".form__select_material").click(function(e){
@@ -542,6 +555,10 @@ $(function(){
 			$.fancybox({
 				href: '/x/tabletop_material2.php?material=' + encodeURIComponent(materials),
 				type: 'ajax',
+				width: 350,
+				autoWidth: false,
+				autoSize: false,
+				maxHeight: 420,
 				padding: $(window).width()>480 ? 50 : 15,
 				onCancel: function(){
 					tabletopMaterial1(materials);
