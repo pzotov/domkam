@@ -234,6 +234,7 @@ input, textarea, button, select {
 	margin: auto;
 }
 .fancybox-inner .form_auth,
-.fancybox-inner .form_zvonok {
+.fancybox-inner .form_zvonok,
+.fancybox-inner .form_zayavka {
 	padding: 48px 48px 30px;
 }

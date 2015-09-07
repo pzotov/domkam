@@ -619,6 +619,14 @@ $(function(){
 		;
 	});
 
+	$(".links2__item-a_otpravit-zayavku").each(function(){
+		$(this)
+			.addClass("fancybox fancybox.ajax")
+			.data("fancybox-title", $(this).html())
+			.data("fancybox-href", $(this).attr("href") + "?isNaked=1&nc_ctpl=2066&f_FromPage=" + encodeURIComponent(location.href));
+		;
+	});
+
 	$(".fancybox").fancybox({
 		padding: 2,
 		afterLoad: function(){
@@ -627,6 +635,25 @@ $(function(){
 		afterShow: function(){
 			$(".fancybox-inner .phone-input").mask("+7 (999) 999-99-99");
 			$(".fancybox-inner .form").append('<input type="hidden" name="posting" value="1">');
+
+			/**
+			 * Стилизация поля [type=file]
+			 */
+			$(".fancybox-inner .form__file").each(function(){
+				var input = this,
+					value = null;
+
+				$(this).wrap('<div class="file clearfix" />');
+				var wrapper = $(this).parent()
+				value = $('<div class="file__value form__input" />').appendTo(wrapper);
+				$('<div class="file__button form__button">Выбрать</div>').appendTo(wrapper);
+				$(this).wrap('<div class="file__file" />');
+
+				$(input).change(function(){
+					var val = $(this).val().split(/\\/im);
+					value.html(val[val.length-1]);
+				});
+			});
 		},
 		helpers: {
 			overlay: {
