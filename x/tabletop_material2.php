@@ -1,6 +1,7 @@
 <?php
 require_once '../vars.inc.php';
 require_once $ROOT_FOLDER.'connect_io.php';
+require_once $MODULE_FOLDER.'cache/function.inc.php';
 
 $material = stripslashes($_GET['material']);
 

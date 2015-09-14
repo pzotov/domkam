@@ -528,7 +528,7 @@ $(function(){
 			$.fancybox({
 				href: '/x/tabletop_material.php?material=' + encodeURIComponent(materials) + '&name=' + encodeURIComponent(name),
 				type: 'ajax',
-				width: 250,
+				width: 260,
 				autoWidth: false,
 				autoSize: false,
 				maxHeight: 250,

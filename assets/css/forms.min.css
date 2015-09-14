@@ -141,7 +141,8 @@ select {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAECAQAAADoz+32AAAAMUlEQVR4AWNgWMngxAABTkA2gynDUwZvIMcHSJuBRHUZHjJMBGJdBihQYzjMoA5iAAAJgwhgW9/rHQAAAABJRU5ErkJggg==) 0 0 no-repeat;
 }
 
-.form__select select {
+.form__select select,
+.form__select input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -262,7 +263,7 @@ select {
 }
 
 .form_tabletop-material {
-  width: 250px;
+  width: 260px;
 }
 
 .form_tabletop-material2 {

@@ -24,6 +24,17 @@
 	</select>
 </div>
 
+<?
+	$color2 = explode(",", $f_Color2_ID);
+	$colors = $db->get_results("SELECT Message_ID,Name FROM Message2008 WHERE Subdivision_ID={$sub} ORDER BY Priority", ARRAY_A);
+?>
+<div class='nc-field'>
+	<span class="nc-field-caption">Дополнительные цвета камня:</span>
+	<? foreach($colors as $c){ ?>
+		<label><input type="checkbox" name="color2[]" value="<?= $c['Message_ID'] ?>" <?= @in_array($c['Message_ID'], $color2) ? ' checked' : '' ?>> <?= $c['Name'] ?></label><br>
+	<? } ?>
+</div>
+
 <div class='nc-field'>
 	<span class="nc-field-caption">Группа камня:</span>
 	<select name="f_Group_ID">

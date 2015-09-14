@@ -16,6 +16,38 @@ $ru_monthes = array(
 );
 $day_of_week = array( "воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота" );
 
+/**
+ * @param $toEmail - куда отправлять писбмо из настроек инфоблока
+ * @param $fromEmail - e-mail, который указал посетитель сайта
+ * @return string - возвращает e-mail на который нужно отправить письмо
+ */
+function selectToEmail($toEmail, $fromEmail){
+	global $db, $current_catalogue;
+	$result = $current_catalogue['Email'];
+	//если этот e-mail уже был в заявках, то нужно отправлять на тот же e-mail, что и в прошлый раз
+	if($existEmail = $db->get_var("SELECT toEmail FROM Message2010 WHERE Email='".$db->escape($fromEmail)."' ORDER BY Cretaed DESC LIMIT 1")) $result = $existEmail;
+	//если в настройках инфоблока четко указан адресат, который отвечает за эту форму заявки,
+	// то отправляем ему
+	else if($toEmail) $result = $toEmail;
+	//если нет, то поочередно выбираем отправку на prod1@domkam.ru и на prod2domkam.ru
+	else if(rand(0,1)) $result = "prod1@domkam.ru";
+	else $result = "prod2@domkam.ru";
+
+	return $result;
+}
+
+function userRegion(){
+	$gb = new IPGeoBase();
+	$region = "";
+	if(($data = $gb->getRecord(getenv('REMOTE_ADDR'))) && ($data['city'] || $data['region'])){
+		$region .= "Регион: ".$data['city'];
+		if($data['city'] && $data['region'] ) $region .= ', ';
+		if($data['region']) $region .= $data['region'];
+		$region .= ' (ip-адрес '.getenv('REMOTE_ADDR').')';
+	}
+	return $region;
+}
+
 function __log($text){
 	global $__log, $nc_core;
 	if(!$__log) $__log = fopen($nc_core->DOCUMENT_ROOT.'/x/log.txt', "a");
@@ -711,7 +743,7 @@ function saveAnalogs(){
 }
 
 function imageWatermarked($f_Article){
-	global $nc_core, $classID, $message, $db;
+	global $nc_core, $classID, $message;
 	require_once $nc_core->INCLUDE_FOLDER.'classes/nc_imagetransform.class.php';
 	nc_ImageTransform::createThumb("Picture", "Watermarked", 500, 345, 1, NULL, 100);
 
@@ -726,6 +758,9 @@ function imageWatermarked($f_Article){
 	$size = imagettfbbox(36, 0, $nc_core->DOCUMENT_ROOT.'/x/OpenSans-Semibold.ttf', $f_Article);
 	imagefilledrectangle($dst, 15, 15, 15+$size[2] + 10, 15-$size[7] + 10, $white);
 	imagettftext($dst, 36, 0, 20, 20-$size[7], $black, $nc_core->DOCUMENT_ROOT.'/x/OpenSans-Semibold.ttf', $f_Article);
+
+	$wm = imagecreatefrompng($nc_core->DOCUMENT_ROOT.'/assets/images/watermark.png');
+	imagecopyresampled($dst, $wm, 0, 0, 0, 0, 500, 345, 500, 345);
 
 	imagejpeg($dst, $src_file);
 }
