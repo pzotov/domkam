@@ -541,19 +541,16 @@ function importTovary(){
 				continue;
 			} else if($data[0] && $data[1] && $sub_id) {
 				//строка с товаром
-				$data[2] = mb_strtolower(trim($data[2]));
-				if(!isset($stones[$data[2]])){
-					$result['error'] .= 'Камень &laquo;'.$data[2].'&raquo; не найден в базе<br>';
-					continue;
-				}
 				$a = array(
 					'Article' => $data[0],
 					'Name' => $data[1],
 					'Description' => $data[2],
 					'InStock' => str_replace(",", ".", trim($data[3])),
-					'Price' => str_replace(",", ".", trim($data[4])),
-					'PriceUSD' => str_replace(",", ".", trim($data[5]))
+					'Price' => str_replace('от ', '', str_replace(",", ".", trim($data[4]))),
+					'PriceUSD' => str_replace('от ', '', str_replace(",", ".", trim($data[5]))),
+					'PricePrefix' => (mb_substr(trim($data[4]), 0, 2)=="от" || mb_substr(trim($data[5]), 0, 2)=="от") ? 1 : 0
 				);
+
 				if($id = $db->get_var("SELECT Message_ID FROM Message2056 WHERE Sub_Class_ID={$cc_id} AND Article='".mysql_real_escape_string(trim($data[0]))."' LIMIT 1")){
 					update_row("Message2056", $a, "Message_ID=".$id);
 				} else {
@@ -645,8 +642,8 @@ function exportTovary(){
 		$ews->setCellValue('b'.$row, $item['Name']);
 		$ews->setCellValue('c'.$row, $item['Description']);
 		$ews->setCellValue('d'.$row, $item['InStock']);
-		$ews->setCellValue('e'.$row, $item['Price']);
-		$ews->setCellValue('f'.$row, $item['PriceUSD']);
+		if($item['Price']) $ews->setCellValue('e'.$row, ($item['PricePrefix'] ? 'от ' : '' ).$item['Price']);
+		if($item['PriceUSD']) $ews->setCellValue('f'.$row, ($item['PricePrefix'] ? 'от ' : '' ).$item['PriceUSD']);
 
 		$row++;
 	}
