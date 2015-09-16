@@ -1208,6 +1208,7 @@ img {
 	z-index: 3;
 	background-color: #fff;
 	padding: 40px;
+	width: 660px;
 	max-width: 660px;
 	box-shadow: 0 2px 4px rgba(0,0,0,.35);
 }
@@ -1443,10 +1444,10 @@ img {
 	right: 0;
 	top: 0;
 	bottom: 0;
-	border-top: 15px solid rgba(0,0,0,.3);
-	border-right: 15px solid rgba(0,0,0,.5);
-	border-bottom: 15px solid rgba(255,255,255,.5);
-	border-left: 15px solid rgba(255,255,255,.75);
+	/*border-top: 15px solid rgba(0,0,0,.3);*/
+	/*border-right: 15px solid rgba(0,0,0,.5);*/
+	/*border-bottom: 15px solid rgba(255,255,255,.5);*/
+	/*border-left: 15px solid rgba(255,255,255,.75);*/
 }
 .stone__image img {
 	width: 100%;

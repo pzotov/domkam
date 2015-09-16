@@ -338,16 +338,23 @@ $(function(){
 			$(".stones__item_preview", catalog).mouseenter(function(e){
 				if($(window).width()<=768) return true;
 				//console.log("item enter");
+				var l = $(this).offset().left + 90,
+					t = $(this).offset().top + 90;
+
 				popup
 					.css({
-						left: $(this).offset().left + 90, //e.pageX,
-						top: $(this).offset().top + 90
+						left: l, //e.pageX,
+						top: t
 					})
 					.addClass("stones__popup_hover")
 					.html('<p align="center"><img src="/assets/images/loading.gif" width="64" height="64" alt="Подождите..." /></p>')
 					//.appendTo(this)
 					.show()
 					.load($(this).attr("href")+"?isNaked=1&nc_ctpl=" + ($(this).hasClass("stones__item_plitka") ? 2052 : 2030), function(){
+						if(popup.offset().left + popup.outerWidth()>$(window).width() - 10){
+							l += $(window).width() - 10 - popup.offset().left - popup.outerWidth();
+							popup.css('left', l);
+						}
 						$(".plitka-order").each(function(){
 							var form = this;
 							$(".plitka-order__submit", this).click(function(e){
@@ -358,12 +365,13 @@ $(function(){
 								var zayavka = $(".zayavka");
 								if(zayavka.length){
 									e.preventDefault();
-									$("[name=f_Text]", zayavka).val(comment);
+									var text = $("[name=f_Text]", zayavka),
+										val = text.val() + comment + "\n";
+									text.val(val);
 									$("html, body").animate({
 										scrollTop: zayavka.offset().top
 									}, 500);
 								}
-
 							});
 						});
 					})
@@ -496,6 +504,16 @@ $(function(){
 			tabletopMaterial1(material.val());
 			$(this).prop("checked", "checked");
 		});
+
+		$("#memorial_type").change(function(){
+			var val = $(this).val();
+			if(val=="Фигурный памятник"){
+				$("#eskiz_box").show();
+			} else {
+				$("#eskiz_box").hide();
+
+			}
+		}).trigger("change");
 
 		$("#tabletop__profile", this).click(function(){
 			$.fancybox({

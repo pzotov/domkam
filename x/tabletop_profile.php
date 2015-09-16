@@ -5,13 +5,16 @@ require_once $ROOT_FOLDER.'connect_io.php';
 $profile = stripslashes($_GET['profile']);
 
 if($_GET['name']=="ступени") {
-	$list = nc_objects_list(78,557, "nc_ctpl=2034&profile=".urlencode($profile));
+	$list = nc_objects_list(78, 557, "nc_ctpl=2034&profile=".urlencode($profile));
 	$torets = "торца";
 } else if($_GET['name']=="балясины") {
-	$list = nc_objects_list(77,580, "nc_ctpl=2034&profile=".urlencode($profile));
+	$list = nc_objects_list(77, 580, "nc_ctpl=2034&profile=".urlencode($profile));
 	$torets = "формы";
+} else if($_GET['name']=="памятника") {
+	$list = nc_objects_list(110, 386, "nc_ctpl=2034&profile=".urlencode($profile));
+	$torets = "эскиза";
 } else {
-	$list = nc_objects_list(30,93, "nc_ctpl=2034&profile=".urlencode($profile));
+	$list = nc_objects_list(30, 93, "nc_ctpl=2034&profile=".urlencode($profile));
 	$torets = "торца";
 }
 
