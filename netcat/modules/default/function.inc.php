@@ -291,6 +291,8 @@ function importPlitka(){
 	global $nc_core, $db, $sub, $cc, $classID;
 	$cc_id = $db->get_var("SELECT Sub_Class_ID FROM Sub_Class WHERE Subdivision_ID={$sub} AND Sub_Class_ID!={$cc} AND Class_ID={$classID} ORDER BY Priority LIMIT 1");
 
+	$db->query("DELETE FROM Message{$classID} WHERE Sub_Class_ID={$cc_id}");
+
 	$stones = array();
 	if($_stones = $db->get_results("SELECT Message_ID,Article FROM Message2006", ARRAY_A)){
 		foreach($_stones as $s){
