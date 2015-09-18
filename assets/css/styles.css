@@ -2183,6 +2183,7 @@ img {
 .prices__stock {
 }
 .prices__price {
+	white-space: nowrap;
 }
 .prices__order {
 }
