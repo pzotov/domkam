@@ -30,8 +30,8 @@ function selectToEmail($toEmail, $fromEmail){
 	// то отправляем ему
 	else if($toEmail) $result = $toEmail;
 	//если нет, то поочередно выбираем отправку на prod1@domkam.ru и на prod2domkam.ru
-	else if(rand(0,1)) $result = "prod1@domkam.ru";
-	else $result = "prod2@domkam.ru";
+	else if(rand(0,1)) $result = "prod1@domkam.ru, webmaster@a-r-b.ru";
+	else $result = "prod2@domkam.ru, 136@a-r-b.ru";
 
 	return $result;
 }

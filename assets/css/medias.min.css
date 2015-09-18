@@ -228,6 +228,7 @@
     float: none;
   }
 
+  .stones__box-wrap .stones__slide,
   .stones__slide {
     width: 50%;
   }

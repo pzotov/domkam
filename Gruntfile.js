@@ -108,9 +108,9 @@ module.exports = function (grunt) {
 		ftp_push: {
 			css:{
 				options: {
-					authKey: "hetzner1",
-					host: "zotov.info",
-					dest: "/www/domkam.zotov.info/assets/",
+					authKey: "testsrv49.a-r-b.ru",
+					host: "testsrv49.a-r-b.ru",
+					dest: "/web/assets/",
 					port: 21
 				},
 				files: [{
@@ -121,9 +121,9 @@ module.exports = function (grunt) {
 			},
 			js:{
 				options: {
-					authKey: "hetzner1",
-					host: "zotov.info",
-					dest: "/www/domkam.zotov.info/assets/",
+					authKey: "testsrv49.a-r-b.ru",
+					host: "testsrv49.a-r-b.ru",
+					dest: "/web/assets/",
 					port: 21
 				},
 				files: [{

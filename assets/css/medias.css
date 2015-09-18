@@ -183,9 +183,11 @@
 		padding: 0 5px;
 		float: none;
 	}
+	.stones__box-wrap .stones__slide,
 	.stones__slide {
 		width: 50%;
 	}
+
 	.stones__form {
 		padding: 0;
 		margin-top: -87px;
