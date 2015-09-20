@@ -40,9 +40,9 @@ function userRegion(){
 	$gb = new IPGeoBase();
 	$region = "";
 	if(($data = $gb->getRecord(getenv('REMOTE_ADDR'))) && ($data['city'] || $data['region'])){
-		$region .= "Регион: ".$data['city'];
+		$region .= "Регион: ".iconv('windows-1251', 'utf-8', $data['city']);
 		if($data['city'] && $data['region'] ) $region .= ', ';
-		if($data['region']) $region .= $data['region'];
+		if($data['region']) $region .= iconv('windows-1251', 'utf-8', $data['region']);
 		$region .= ' (ip-адрес '.getenv('REMOTE_ADDR').')';
 	}
 	return $region;
@@ -711,7 +711,10 @@ function makeStoneApplications(){
 }
 
 function quickSubscribe($email){
-
+	$subscriber = nc_subscriber::get_object();
+	$subscriber->subscription_add(1, 0, 0, false, array(
+		"Email" => $email
+	));
 }
 
 function processTextColumns($text){

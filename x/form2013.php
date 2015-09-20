@@ -44,7 +44,7 @@
 				$prev_sub = $c['Subdivision_Name'];
 				echo '<br><strong>'.$prev_sub.'</strong><br>';
 			}
-			echo '<label><input type="checkbox" name="colors[]" value="'.$c['Message_ID'].'"'.(in_array($c['Message_ID'], $selected_groups) ? ' checked' : '').' />
+			echo '<label><input type="checkbox" name="groups[]" value="'.$c['Message_ID'].'"'.(in_array($c['Message_ID'], $selected_groups) ? ' checked' : '').' />
 			'.$c['Name'].'
 			</label><br>';
 		}
