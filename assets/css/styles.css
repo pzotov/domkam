@@ -571,6 +571,7 @@ img {
 	text-align: center;
 	text-decoration: none;
 	color: #000;
+	z-index: 1;
 }
 .swiper-arrow:before {
 	content: '‹';
@@ -2478,7 +2479,7 @@ img {
 .lmenu__items {
 	display: block;
 	float: left;
-	width: 200px;
+	width: 160px;
 	border-right: 1px solid #e6e6e6;
 	/*position: relative;*/
 }
@@ -2514,7 +2515,7 @@ img {
 .lmenu1 {
 	display: none;
 	position: absolute;
-	left: 201px;
+	left: 161px;
 	top: 0;
 	right: 0;
 	min-height: 100%;

@@ -339,8 +339,13 @@ $(function(){
 				if($(window).width()<=768) return true;
 				//console.log("item enter");
 				var l = $(this).offset().left + 90,
-					t = $(this).offset().top + 90;
+					t = $(this).offset().top + 90,
+					w = 660;
 
+				if(l + w>$(window).width() - 10){
+					l += $(window).width() - 10 - l - w;
+					//popup.css('left', l);
+				}
 				popup
 					.css({
 						left: l, //e.pageX,
@@ -351,10 +356,7 @@ $(function(){
 					//.appendTo(this)
 					.show()
 					.load($(this).attr("href")+"?isNaked=1&nc_ctpl=" + ($(this).hasClass("stones__item_plitka") ? 2052 : 2030), function(){
-						if(popup.offset().left + popup.outerWidth()>$(window).width() - 10){
-							l += $(window).width() - 10 - popup.offset().left - popup.outerWidth();
-							popup.css('left', l);
-						}
+
 						$(".plitka-order").each(function(){
 							var form = this;
 							$(".plitka-order__submit", this).click(function(e){
@@ -715,7 +717,7 @@ function initSwiper(prefix){
 	$(prefix + " .swiper").each(function() {
 		var p = $(this).parent(),
 			slides = $(".swiper-slide", this);
-		if(slides.length<2) {
+		if(slides.length<2 || p.width()>slides.length*slides.width()) {
 			if(slides.hasClass("slider__slide"))
 				slides.addClass("swiper-slide-active");
 			p.find(".swiper-arrow").hide();
