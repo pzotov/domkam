@@ -1202,6 +1202,14 @@ img {
 .stones__arrow_next {
 	right: -19px;
 }
+.stones__arrow_inblocks {
+	margin-top: 0;
+	top: 40px;
+}
+.stones__arrow_inblocks.stones__arrow_prev {
+	left: 67px;
+}
+
 .stones__item_preview {
 	position: relative;
 }
