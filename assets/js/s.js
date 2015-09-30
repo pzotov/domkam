@@ -518,6 +518,10 @@ $(function(){
 		}).trigger("change");
 
 		$("#tabletop__profile", this).click(function(){
+			if(!$(this).is(":checked")){
+				$(this).removeAttr("checked").removeProp("checked");
+				return;
+			}
 			$.fancybox({
 				href: '/x/tabletop_profile.php?profile=' + encodeURIComponent(profile.val()) + '&name=' + encodeURIComponent(name),
 				type: 'ajax',
