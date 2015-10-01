@@ -110,7 +110,7 @@ module.exports = function (grunt) {
 				options: {
 					authKey: "testsrv49.a-r-b.ru",
 					host: "testsrv49.a-r-b.ru",
-					dest: "/web/assets/",
+					dest: "/assets/",
 					port: 21
 				},
 				files: [{
@@ -123,7 +123,7 @@ module.exports = function (grunt) {
 				options: {
 					authKey: "testsrv49.a-r-b.ru",
 					host: "testsrv49.a-r-b.ru",
-					dest: "/web/assets/",
+					dest: "/assets/",
 					port: 21
 				},
 				files: [{

@@ -519,7 +519,7 @@ $(function(){
 
 		$("#tabletop__profile", this).click(function(){
 			if(!$(this).is(":checked")){
-				$(this).removeAttr("checked").removeProp("checked");
+				//$(this).removeAttr("checked").removeProp("checked");
 				return;
 			}
 			$.fancybox({
@@ -575,6 +575,7 @@ $(function(){
 				}
 			});
 		}
+
 		function tabletopMaterial2(materials){
 			$.fancybox({
 				href: '/x/tabletop_material2.php?material=' + encodeURIComponent(materials),
