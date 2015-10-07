@@ -710,11 +710,21 @@ function makeStoneApplications(){
 	return NULL;
 }
 
-function quickSubscribe($email){
-	$subscriber = nc_subscriber::get_object();
-	$subscriber->subscription_add(1, 0, 0, false, array(
-		"Email" => $email
-	));
+function quickSubscribe($email, $name = '', $memorials = false){
+	try {
+		$subscriber = nc_subscriber::get_object();
+		$subscriber->subscription_add(1, 0, 0, false, array(
+			"Email" => $email,
+			'FIO' => $name
+		));
+		if($memorials){
+			update_row("User", array(
+				"Memorial_Subscriber" => 1
+			), "Email='" . mysql_real_escape_string($email) . "'");
+		}
+	}catch(\Exception $e){
+		dump($e->GetMessage());
+	}
 }
 
 function processTextColumns($text){

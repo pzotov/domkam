@@ -1210,6 +1210,13 @@ img {
 	left: 67px;
 }
 
+.stones__arrow_slider.stones__arrow_prev {
+	left: 0;
+}
+.stones__arrow_slider.stones__arrow_next {
+	right: 0;
+}
+
 .stones__item_preview {
 	position: relative;
 }

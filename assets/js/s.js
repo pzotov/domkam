@@ -636,7 +636,7 @@ $(function(){
 	 * а также настроить поля для ввода телефона
 	 */
 	$(".expand_image").addClass("fancybox").attr("rel", "gallery");
-	$(".links2__item-a_zvonok").each(function(){
+	$(".links2__item-a_zvonok, .links2__item-a_subscribe").each(function(){
 		$(this)
 			.addClass("fancybox fancybox.ajax")
 			.data("fancybox-title", $(this).html())
