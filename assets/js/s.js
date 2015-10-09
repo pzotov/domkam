@@ -309,8 +309,9 @@ $(function(){
 	$(".stones_catalog").each(function(){
 		var catalog = this,
 			blocks = $(".stones__blocks", this),
-			form = $(".stones__form", this),
-			popup = $('<div class="stones__popup" />').appendTo("body").hide();
+			form = $(".stones__form", this)
+			//popup = $('<div class="stones__popup" />').appendTo("body").hide()
+			;
 
 		$("#s_sort, #s_color, #s_group").change(function(){
 			$.fancybox.showLoading();
@@ -322,69 +323,105 @@ $(function(){
 			});
 		});
 
-		popup.mouseenter(function(){
-			$(this).addClass("stones__popup_hover");
-			//console.log("popup enter");
-		}).mouseleave(function(){
-			//console.log("popup leave");
-			$(this).removeClass("stones__popup_hover");
-			setTimeout(function(){
-				if(!popup.hasClass("stones__popup_hover")) popup.hide();
-			}, 500);
-		});
+		//popup.mouseenter(function(){
+		//	$(this).addClass("stones__popup_hover");
+		//	//console.log("popup enter");
+		//}).mouseleave(function(){
+		//	//console.log("popup leave");
+		//	$(this).removeClass("stones__popup_hover");
+		//	setTimeout(function(){
+		//		if(!popup.hasClass("stones__popup_hover")) popup.hide();
+		//	}, 500);
+		//});
 		initStonePreviews();
 
 		function initStonePreviews(){
-			$(".stones__item_preview", catalog).mouseenter(function(e){
-				if($(window).width()<=768) return true;
-				//console.log("item enter");
-				var l = $(this).offset().left + 90,
-					t = $(this).offset().top + 90,
-					w = 660;
-
-				if(l + w>$(window).width() - 10){
-					l += $(window).width() - 10 - l - w;
-					//popup.css('left', l);
-				}
-				popup
-					.css({
-						left: l, //e.pageX,
-						top: t
-					})
-					.addClass("stones__popup_hover")
-					.html('<p align="center"><img src="/assets/images/loading.gif" width="64" height="64" alt="Подождите..." /></p>')
-					//.appendTo(this)
-					.show()
-					.load($(this).attr("href")+"?isNaked=1&nc_ctpl=" + ($(this).hasClass("stones__item_plitka") ? 2052 : 2030), function(){
-
-						$(".plitka-order").each(function(){
-							var form = this;
-							$(".plitka-order__submit", this).click(function(e){
-								var comment = 'Интересует: ' + $(form).data("name");
-								$("[type=checkbox]:checked", form).each(function(){
-									comment += '\n' + $(this).val();
-								});
-								var zayavka = $(".zayavka");
-								if(zayavka.length){
-									e.preventDefault();
-									var text = $("[name=f_Text]", zayavka),
-										val = text.val() + comment + "\n";
-									text.val(val);
-									$("html, body").animate({
-										scrollTop: zayavka.offset().top
-									}, 500);
-								}
+			$(".stones__preview-btn", catalog).fancybox({
+				type: 'ajax',
+				padding: 0,
+				afterLoad: function(){
+					this.content = this.content.replace(/\?isNaked=1/,'');
+					this.content = '<div class="stones__popup">'+this.content+'</div>';
+				},
+				afterShow: function(){
+					$(".plitka-order").each(function(){
+						var form = this;
+						$(".plitka-order__submit", this).click(function(e){
+							var comment = 'Интересует: ' + $(form).data("name");
+							$("[type=checkbox]:checked", form).each(function(){
+								comment += '\n' + $(this).val();
 							});
+							var zayavka = $(".zayavka");
+							if(zayavka.length){
+								e.preventDefault();
+								$.fancybox.close();
+								var text = $("[name=f_Text]", zayavka),
+									val = text.val() + comment + "\n";
+								text.val(val);
+								$("html, body").animate({
+									scrollTop: zayavka.offset().top
+								}, 500);
+							}
 						});
-					})
-				;
-			}).mouseleave(function(){
-				//console.log("item leave");
-				popup.removeClass("stones__popup_hover");
-				setTimeout(function(){
-					if(!popup.hasClass("stones__popup_hover")) popup.hide();
-				}, 500);
+					});
+				},
+				helpers: {
+					overlay: {
+						locked: false
+					}
+				}
+
 			});
+			//$(".stones__item_preview", catalog).mouseenter(function(e){
+			//	if($(window).width()<=768) return true;
+			//	//console.log("item enter");
+			//	var l = $(this).offset().left + 90,
+			//		t = $(this).offset().top + 90,
+			//		w = 660;
+			//
+			//	if(l + w>$(window).width() - 10){
+			//		l += $(window).width() - 10 - l - w;
+			//		//popup.css('left', l);
+			//	}
+			//	popup
+			//		.css({
+			//			left: l, //e.pageX,
+			//			top: t
+			//		})
+			//		.addClass("stones__popup_hover")
+			//		.html('<p align="center"><img src="/assets/images/loading.gif" width="64" height="64" alt="Подождите..." /></p>')
+			//		//.appendTo(this)
+			//		.show()
+			//		.load($(this).attr("href")+"?isNaked=1&nc_ctpl=" + ($(this).hasClass("stones__item_plitka") ? 2052 : 2030), function(){
+			//
+			//			$(".plitka-order").each(function(){
+			//				var form = this;
+			//				$(".plitka-order__submit", this).click(function(e){
+			//					var comment = 'Интересует: ' + $(form).data("name");
+			//					$("[type=checkbox]:checked", form).each(function(){
+			//						comment += '\n' + $(this).val();
+			//					});
+			//					var zayavka = $(".zayavka");
+			//					if(zayavka.length){
+			//						e.preventDefault();
+			//						var text = $("[name=f_Text]", zayavka),
+			//							val = text.val() + comment + "\n";
+			//						text.val(val);
+			//						$("html, body").animate({
+			//							scrollTop: zayavka.offset().top
+			//						}, 500);
+			//					}
+			//				});
+			//			});
+			//		})
+			//	;
+			//}).mouseleave(function(){
+			//	//console.log("item leave");
+			//	popup.removeClass("stones__popup_hover");
+			//	setTimeout(function(){
+			//		if(!popup.hasClass("stones__popup_hover")) popup.hide();
+			//	}, 500);
+			//});
 		}
 	});
 
