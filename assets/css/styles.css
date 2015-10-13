@@ -1753,6 +1753,8 @@ img {
 	margin-bottom: 1.5em;
 	text-transform: uppercase;
 	text-decoration: none;
+	text-align: center;
+	padding: 0 3%;
 }
 .projects__image-box {
 	float: left;
