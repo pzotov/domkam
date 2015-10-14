@@ -738,16 +738,21 @@ $(function(){
 		//if(h>lm0) lm0 = h;
 		$(this).hide().parent().mouseenter(function(){
 			$(".lmenu__item-a", this).first().addClass("lmenu__item-a_open");
+			$(".lmenu1").hide();
+			$(this).closest(".lmenu").css({
+				"min-height": 0
+			});
+
 			$(".lmenu1", this).show();
 			$(this).closest(".lmenu").css({
 				"min-height": $(".lmenu1", this).outerHeight()
 			});
 		}).mouseleave(function(){
 			$(".lmenu__item-a", this).first().removeClass("lmenu__item-a_open");
-			$(".lmenu1", this).hide();
-			$(this).closest(".lmenu").css({
-				"min-height": 0
-			});
+			//$(".lmenu1", this).hide();
+			//$(this).closest(".lmenu").css({
+			//	"min-height": 0
+			//});
 		});
 		//$(".lmenu").height(lm0);
 	});
