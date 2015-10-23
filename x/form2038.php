@@ -50,6 +50,8 @@
 
 <div class='nc-field'><?= nc_float_field('Price', "maxlength='12' size='12'", ($class_id ? $class_id : $classID), 1) ?></div>
 
+<div class='nc-field'><?= nc_float_field('PriceUSD', "maxlength='12' size='12'", ($class_id ? $class_id : $classID), 1) ?></div>
+
 <div class='nc-field'><?= nc_float_field('PriceOpt', "maxlength='12' size='12'", ( $class_id ? $class_id : $classID), 1) ?></div>
 
 <div class='nc-field'><?= nc_float_field('PriceAction', "maxlength='12' size='12'", ( $class_id ? $class_id : $classID), 1) ?></div>
