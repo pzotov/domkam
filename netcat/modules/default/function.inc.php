@@ -17,7 +17,17 @@ $ru_monthes = array(
 $day_of_week = array( "воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота" );
 
 /**
- * @param $toEmail - куда отправлять писбмо из настроек инфоблока
+ * @param $goal_id - номер цели
+ * @param string $type - тип вызова кода цели
+ * @param null $param - дополнительный параметр
+ * @return mixed
+ */
+function goal($goal_id, $type="script", $param=NULL){
+	return nc_objects_list(380, 687, "id={$goal_id}&type={$type}&param={$param}");
+}
+
+/**
+ * @param $toEmail - куда отправлять письмо из настроек инфоблока
  * @param $fromEmail - e-mail, который указал посетитель сайта
  * @return string - возвращает e-mail на который нужно отправить письмо
  */

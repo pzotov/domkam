@@ -725,12 +725,35 @@ $(function(){
 	});
 
 	$(".liquid").each(function(){
-		$(this).mouseenter(function(){
-			$(this).addClass("liquid_open");
-		}).mouseleave(function(){
+		var liquid = this;
+		$(".liquid__button", this).click(function(e){
+			e.preventDefault();
+			$(liquid).addClass("liquid_open");
+		});
+		$(this).mouseleave(function(){
 			$(this).removeClass("liquid_open");
 		});
+		//$(document.body).click(function(e){
+		//	console.log(e.target);
+		//});
 	});
+
+	/*$(".liquid").each(function(){
+		var liquid = $(this);
+		$(".liquid__button", this).click(function(e){
+			e.preventDefault();
+			liquid.addClass('liquid_open');
+			liquid.focus();
+		});
+
+		liquid.on('focus', function(){
+
+		});
+
+		liquid.on('blur', function(){
+			liquid.removeClass('liquid_open');
+		});
+	});*/
 
 	//var lm0 = 0;
 	$(".lmenu1").each(function(){
