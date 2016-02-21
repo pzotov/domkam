@@ -15,6 +15,10 @@
 
 /* узкие экраны*/
 @media (max-width: 1024px){
+	.header__email-box {
+		display: none;
+	}
+	/*
 	.header__phone800 {
 		display: none;
 	}
@@ -22,6 +26,7 @@
 		width: 25%;
 		float: right;
 	}
+	*/
 	.header__slogan {
 		width: 22%;
 	}

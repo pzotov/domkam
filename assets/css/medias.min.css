@@ -19,13 +19,8 @@
 /* узкие экраны*/
 
 @media (max-width: 1024px) {
-  .header__phone800 {
+  .header__email-box {
     display: none;
-  }
-
-  .header__phones_top {
-    width: 25%;
-    float: right;
   }
 
   .header__slogan {

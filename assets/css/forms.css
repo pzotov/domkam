@@ -67,6 +67,7 @@ input, textarea, button, select {
 	padding:0 19px;
 	vertical-align: middle;
 	font-weight: bold;
+	white-space: nowrap;
 }
 .form__button_submit,
 .form__button:hover {

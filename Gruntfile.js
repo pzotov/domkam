@@ -108,8 +108,8 @@ module.exports = function (grunt) {
 		ftp_push: {
 			css:{
 				options: {
-					authKey: "testsrv49.a-r-b.ru",
-					host: "testsrv49.a-r-b.ru",
+					authKey: "domkam.ru",
+					host: "domkam.ru",
 					dest: "/assets/",
 					port: 21
 				},
@@ -121,8 +121,8 @@ module.exports = function (grunt) {
 			},
 			js:{
 				options: {
-					authKey: "testsrv49.a-r-b.ru",
-					host: "testsrv49.a-r-b.ru",
+					authKey: "domkam.ru",
+					host: "domkam.ru",
 					dest: "/assets/",
 					port: 21
 				},

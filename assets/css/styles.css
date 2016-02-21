@@ -88,19 +88,47 @@ img {
 	color: #808080;
 }
 
-.header__email {
+.header__email-box {
 	display: block;
 	float: left;
 	height: 90px;
-	width: 14%;
-	padding: 38px 0 0 30px;
+	width: 18%;
+	padding-top: 10px;
+}
+.header__phone800 {
+	/*display: block;*/
+	/*float: left;*/
+	/*height: 90px;*/
+	/*width: 18%;*/
+	padding: 15px 0 0 30px;
+	font-size: 18px;
+	font-weight: 600;
+	position: relative;
+}
+.header__phone800:before {
+	position: absolute;
+	display: block;
+	content: '';
+	top: 17px;
+	left: 0;
+	width: 15px;
+	height: 16px;
+	background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIiB3aWR0aD0iMTUiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNSAxNiI+PHBhdGggZmlsbD0iI2VhNWUyMCIgZD0iTTE0LjY4OCAxMi40NzRsLS4wOS0uMThjLS4yNTQtLjU4OC0zLjM2NC0xLjQ4LTMuNjE3LTEuNDk4bC0uMTkuMDE3Yy0uMzguMDctLjc5LjQxLTEuNjEgMS4xMDgtLjE2LjE1LS4zOC4xOC0uNTguMDctMS4wNi0uNTgtMi4zNy0xLjc2LTMuMDItMi40OC0uNzEtLjc2LTEuNTYtMi4wMy0xLjk2LTMuMDUtLjA3LS4xOSAwLS40MS4xNS0uNTUuOTItLjgyIDEuMzItMS4yMSAxLjM2LTEuNjRDNS4xNCA0LjAyIDQuNi44NiA0LjA0LjU2TDMuODc1LjQ0Yy0uMzYyLS4yMy0uOTA1LS41Ny0xLjUtLjQ0NC0uMTQ2LjAzNS0uMjkuMDktLjQxNy4xNi0uNC4yNS0xLjM5NS45MjctMS44NDYgMS44MDItLjI3Mi41NTItLjM5OCA1LjU3IDMuNCA5LjggMy43NiA0LjE5NCA4LjQwNyA0LjM3MyA5LjA5NCA0LjIzaC4wMThsLjA1NC0uMDE3Yy45NC0uMzQgMS43MzYtMS4yMSAyLjA0NC0xLjU5LjU2LS42Ni4xOC0xLjQ2LS4wMzYtMS45MXoiLz48L3N2Zz4=) 0 0 no-repeat;
+}
+
+.header__email {
+	/*display: block;*/
+	/*float: left;*/
+	/*height: 90px;*/
+	/*width: 14%;*/
+	padding: 18px 0 0 30px;
 	position: relative;
 }
 .header__email:before {
 	content: '';
 	position: absolute;
 	left: 0;
-	top: 40px;
+	top: 20px;
 	display: block;
 	width: 16px;
 	height: 12px;
@@ -170,26 +198,30 @@ img {
 	line-height: 30px;
 	font-weight: 600;
 }
-.header__phone800 {
-	display: block;
+
+.hcart {
 	float: left;
+	width: 14%;
 	height: 90px;
-	width: 18%;
-	padding: 35px 0 0 30px;
-	font-size: 18px;
-	font-weight: 600;
-	position: relative;
+	padding-top: 15px;
 }
-.header__phone800:before {
-	position: absolute;
+.hcart_empty {
+	padding-top: 35px;
+}
+.hcart__title {
 	display: block;
-	content: '';
-	top: 37px;
-	left: 0;
-	width: 15px;
-	height: 16px;
-	background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIiB3aWR0aD0iMTUiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNSAxNiI+PHBhdGggZmlsbD0iI2VhNWUyMCIgZD0iTTE0LjY4OCAxMi40NzRsLS4wOS0uMThjLS4yNTQtLjU4OC0zLjM2NC0xLjQ4LTMuNjE3LTEuNDk4bC0uMTkuMDE3Yy0uMzguMDctLjc5LjQxLTEuNjEgMS4xMDgtLjE2LjE1LS4zOC4xOC0uNTguMDctMS4wNi0uNTgtMi4zNy0xLjc2LTMuMDItMi40OC0uNzEtLjc2LTEuNTYtMi4wMy0xLjk2LTMuMDUtLjA3LS4xOSAwLS40MS4xNS0uNTUuOTItLjgyIDEuMzItMS4yMSAxLjM2LTEuNjRDNS4xNCA0LjAyIDQuNi44NiA0LjA0LjU2TDMuODc1LjQ0Yy0uMzYyLS4yMy0uOTA1LS41Ny0xLjUtLjQ0NC0uMTQ2LjAzNS0uMjkuMDktLjQxNy4xNi0uNC4yNS0xLjM5NS45MjctMS44NDYgMS44MDItLjI3Mi41NTItLjM5OCA1LjU3IDMuNCA5LjggMy43NiA0LjE5NCA4LjQwNyA0LjM3MyA5LjA5NCA0LjIzaC4wMThsLjA1NC0uMDE3Yy45NC0uMzQgMS43MzYtMS4yMSAyLjA0NC0xLjU5LjU2LS42Ni4xOC0xLjQ2LS4wMzYtMS45MXoiLz48L3N2Zz4=) 0 0 no-repeat;
+	text-decoration: none;
+	font-size: 18px;
+	margin-bottom: 8px;
 }
+.hcart__row {
+	line-height: 1.5;
+}
+.hcart__row_items {
+}
+.hcart__row_sum {
+}
+
 .menu {
 	clear: both;
 	display: block;
@@ -626,19 +658,19 @@ img {
 	position: relative;
 	background-position: 50% 0;
 
-	-webkit-filter: blur(6px);
-	-ms-filter: blur(6px);
-	-moz-filter: blur(6px);
-	-o-filter: blur(6px);
-	filter: blur(6px);
-	filter: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciLz4=);
+	/*-webkit-filter: blur(6px);*/
+	/*-ms-filter: blur(6px);*/
+	/*-moz-filter: blur(6px);*/
+	/*-o-filter: blur(6px);*/
+	/*filter: blur(6px);*/
+	/*filter: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciLz4=);*/
 }
 .slider__slide.swiper-slide-active {
-	-webkit-filter: none;
-	-ms-filter: none;
-	-moz-filter: none;
-	-o-filter: none;
-	filter: none;
+	/*-webkit-filter: none;*/
+	/*-ms-filter: none;*/
+	/*-moz-filter: none;*/
+	/*-o-filter: none;*/
+	/*filter: none;*/
 }
 .slider__bg {
 	display: block;
@@ -2176,6 +2208,9 @@ img {
 .prices {
 	padding: 50px 0;
 }
+.fancybox-inner .prices {
+	padding: 20px 10px;
+}
 .prices__header {
 	font-size: 18px;
 	text-transform: uppercase;
@@ -2234,6 +2269,21 @@ img {
 }
 .prices__action-price {
 	font-weight: bold;
+}
+.prices__remove {
+	width: 30px;
+	text-align: center;
+}
+.prices__remove-a {
+	display: block;
+	color: red;
+	font-size: 18px;
+	text-decoration: none;
+}
+.prices__total {
+	font-size: 18px;
+	padding: 15px;
+	float: left;
 }
 
 .benefits {
@@ -2730,3 +2780,10 @@ img {
 	font-size: 24px;
 	line-height: 30px;
 }
+
+/*добавлено АРБ */
+.links__item-a_garantiya:before {
+	background-image: url('http://www.domkam.ru/images/100garantiya.png');
+}
+/* default */
+.cross-txt { text-decoration:line-through;  }

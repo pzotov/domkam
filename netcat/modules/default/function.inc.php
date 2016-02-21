@@ -387,7 +387,8 @@ function importPlitka(){
 					'InStock' => str_replace(",", ".", $data[6]),
 					'Price' => str_replace(",", ".", $data[7]),
 					'PriceAction' => str_replace(",", ".", $data[8]),
-					'PriceUSD' => str_replace(",", ".", $data[9])
+					'PriceUSD' => str_replace(",", ".", $data[9]),
+					'PriceUSDAction' => str_replace(",", ".", $data[10])
 				);
 				if($id = $db->get_var("SELECT Message_ID FROM Message2035 WHERE Sub_Class_ID={$cc_id} AND Article='".mysql_real_escape_string(trim($data[0]))."' LIMIT 1")){
 					update_row("Message2035", $a, "Message_ID=".$id);
@@ -442,6 +443,7 @@ function exportPlitka(){
 	$ews->getColumnDimension('h')->setWidth(15);
 	$ews->getColumnDimension('i')->setWidth(15);
 	$ews->getColumnDimension('j')->setWidth(15);
+	$ews->getColumnDimension('k')->setWidth(15);
 
 	$row = 1;
 	$prev_sub = null;
@@ -476,6 +478,7 @@ function exportPlitka(){
 			$ews->setCellValue('h'.$row, 'Розничная цена');
 			$ews->setCellValue('i'.$row, 'Цена по акции');
 			$ews->setCellValue('j'.$row, 'Цена в у.е.');
+			$ews->setCellValue('k'.$row, 'Цена по акции в у.е.');
 
 			$ews
 				->getStyle('a'.$row.':bb'.$row)
@@ -497,6 +500,7 @@ function exportPlitka(){
 		$ews->setCellValue('h'.$row, $item['Price']);
 		$ews->setCellValue('i'.$row, $item['PriceAction']);
 		$ews->setCellValue('j'.$row, $item['PriceUSD']);
+		$ews->setCellValue('k'.$row, $item['PriceUSDAction']);
 
 		$row++;
 	}

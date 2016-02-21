@@ -447,7 +447,7 @@ $(function(){
 	/**
 	 *
 	 */
-	$(".project__order-button, .application__title, .prices__order a").click(function(e){
+	$(".project__order-button, .application__title, .prices__order_simple a").click(function(e){
 		var zayavka = $(".zayavka");
 		if(zayavka.length){
 			e.preventDefault();
@@ -466,6 +466,47 @@ $(function(){
 			$("html, body").animate({
 				scrollTop: zayavka.offset().top
 			}, 500);
+		}
+	});
+
+	$(".prices__order_cart a").click(function(e){
+		e.preventDefault();
+		$.fancybox.open({
+			href: '/x/add2cart.php?id=' + $(this).data('id'),
+			type: 'ajax',
+			padding: 2,
+			helpers: {
+				overlay: {
+					locked: false
+				}
+			},
+			afterShow: function(){
+				$(".fancybox-inner .form").submit(function(e){
+					e.preventDefault();
+					$.get($(this).attr("action"), $(this).serialize(), function(res){
+						if(res.status=='ok'){
+							$(".hcart").replaceWith(res.cart);
+							$.fancybox.open({
+								padding: 20,
+								helpers: {
+									overlay: {
+										locked: false
+									}
+								},
+								content: res.notify.text
+							});
+						}
+					}, 'json');
+				});
+			}
+		});
+	});
+
+	$(".prices__remove-a").click(function(e){
+		e.preventDefault();
+		if(confirm("Вы действительно хотите удалить " + $(this).data("name") + " из корзины?")) {
+			$(this).closest("tr").find(".form__input_short").val(0);
+			$(this).closest("form").submit();
 		}
 	});
 
@@ -555,7 +596,7 @@ $(function(){
 		}).trigger("change");
 
 		$("#tabletop__profile", this).click(function(){
-			if(!$(this).is(":checked")){
+			if($(this).attr('type')=='checkbox' && !$(this).is(":checked")){
 				//$(this).removeAttr("checked").removeProp("checked");
 				return;
 			}
@@ -582,7 +623,7 @@ $(function(){
 					}
 				}
 			});
-			$(this).prop("checked", "checked");
+			if($(this).attr('type')=='checkbox') $(this).prop("checked", "checked");
 		});
 
 		function tabletopMaterial1(materials){

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="hetznet1">
+  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="testsrv49.a-r-b.ru">
     <serverData>
       <paths name="hetznet1">
         <serverdata>
@@ -9,6 +9,17 @@
           </mappings>
           <excludedPaths>
             <excludedPath local="true" path="$PROJECT_DIR$/Gruntfile.js" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="testsrv49.a-r-b.ru">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/Gruntfile.js" />
+            <excludedPath local="true" path="$PROJECT_DIR$/.ftpauth" />
           </excludedPaths>
         </serverdata>
       </paths>
